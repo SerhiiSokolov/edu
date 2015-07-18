@@ -7,11 +7,30 @@ public class ClassBase1
 		///////////////////////////////////
 		//1.Если а – четное посчитать а*б, иначе а+б
 		//////////////////////////////////
-		int a=2;
+		int answer;
+		int a=0;
 		int b=2;
-		int answer=testEven(a,b);
-		System.out.println(answer);
+		try
+		{
 
+			answer=testEven(a,b);
+			System.out.println(answer);
+		}
+		catch(IllegalArgumentException errObj)
+		{
+			System.out.print("Error in testEven- "+errObj+".");
+			System.out.println(" Zero not alowed");
+		}
+		finally 
+		{
+			a=2;
+			b=2;
+			answer=testEven(a,b);
+			System.out.println("It is \"finally\" after error with zero in testEven.");
+			System.out.println(answer);
+			System.out.println();
+		}
+		
 		//////////////////////////////////
 		//2.Определить какой четверти принадлежит точка с координатами (х,у)
 		/////////////////////////////////
@@ -19,13 +38,13 @@ public class ClassBase1
 		int y=2;
 		try
 		{
-		answer=testQuarter(x,y);
-		System.out.println(answer);
+			answer=testQuarter(x,y);
+			System.out.println(answer);
 		}
 		catch(IllegalArgumentException errObj)
-		
 		{
-			System.out.println("Error - "+errObj+". Zero not alowed");
+			System.out.print("Error in testEven- "+errObj+".");
+			System.out.println(" Zero not alowed");
 		}
 		finally 
 		{
@@ -33,16 +52,24 @@ public class ClassBase1
 			y=2;
 			answer=testQuarter(x,y);
 			System.out.println("Test \"finally\" after error with zero." +answer);
+			System.out.println();
 		}
 		//////////////////////////////////
 		//3.Найти сумму только положительных из трех чисел
 		//////////////////////////////////
-		x=-2;
-		y=-2;
-		int z=10;
+		x=0;
+		y=0;
+		int z=0;
+		try
+		{
 		answer=sumPositive(x,y,z);
 		System.out.println(answer);
-
+		}
+		catch (IllegalArgumentException errObj)
+		{
+			System.out.print("Error in sumPositive. Three zero are not alowed");
+			System.out.println();
+		}
 		/////////////////////////////////
 		//4.Посчитать выражение макс(а*б*с, а+б+с)+3
 		/////////////////////////////////
@@ -56,12 +83,22 @@ public class ClassBase1
 		//5.Написать программу определения оценки студента по его рейтингу
 		/////////////////////////////////
 		int rating=-10;
+		try
+		{
 		char grade=findGrade(rating);
 		System.out.println(grade);
+		}
+		catch (IllegalArgumentException errObj)
+		{
+			System.out.print("Error in findGrade.");
+			System.out.println("Negativ number ore more then 100 are not alowed.");
+		}
 	}
 
 	public static int testEven(int a, int b)
 	{
+		if (a==0 || b==0)
+			throw new IllegalArgumentException();
 		if (a%2==0) return a*b;
 		else return a+b;
 	}
@@ -86,6 +123,8 @@ public class ClassBase1
 
 	public static int sumPositive(int x, int y, int z)
 	{
+		if (x==0 && y==0 && z==0)
+			throw new IllegalArgumentException();
 		int sum=0;
 		if (x>=0) sum+=x;
 		if (y>=0) sum+=y;
@@ -103,6 +142,8 @@ public class ClassBase1
 
 	public static char findGrade(int x)
 	{
+		if(x<0||x>100)
+			throw new IllegalArgumentException();
 		char grade='F';
 		if(x<20) grade='F';
 		else if (x<40) grade='E';
