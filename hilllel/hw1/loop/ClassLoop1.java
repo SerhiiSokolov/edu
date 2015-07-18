@@ -39,6 +39,18 @@ public class ClassLoop1
 		///////////////////////////////////
 		//5.Посчитать сумму цифр заданного числа
 		///////////////////////////////////
+		chislo=1111111111;
+		sum=findSum(chislo);
+		System.out.println(sum);
+		
+		//////////////////////////////////
+		//6.	Вывести число, которое является зеркальным отображением \
+		//последовательности цифр заданного числа, например, задано число 123, вывести 321
+		//////////////////////////////////
+		chislo=1;
+		System.out.println(chislo);
+		int revers=findRevers(chislo);
+		System.out.println(revers);
 		
 	}
 	
@@ -100,5 +112,28 @@ public class ClassLoop1
 		return temp;
 	}
 	
+	public static int findSum(int x)
+	{
+		int temp=0;
+		while (x/10>0)
+		{
+			temp=temp+x%10;
+			x/=10;
+		} 
+		temp+=x;
+		return temp;
+	}
 	
+	public static int findRevers(int x)
+	{
+		int temp=0;
+		int mnog=10;
+		while (x/10>0)
+		{
+			temp=temp*mnog+x%10;
+			x/=10;
+		} 
+		temp=temp*10+x;
+		return temp;
+	}
 }
