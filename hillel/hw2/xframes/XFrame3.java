@@ -2,6 +2,7 @@ package edu.hillel.hw2.xframes;
 
 import javax.swing.JFrame;
 
+@SuppressWarnings("serial")
 public class XFrame3 extends JFrame
 {
 	public XFrame3() 

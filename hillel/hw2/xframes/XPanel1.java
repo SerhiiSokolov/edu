@@ -1,9 +1,7 @@
 package edu.hillel.hw2.xframes;
 
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -30,13 +28,13 @@ public class XPanel1 extends JPanel
 		btn.setBounds(10, 70, 120, 20);
 		add(btn);
 		
-		btn.addActionListener(new ActionListener() {
-			
+		btn.addActionListener(new ActionListener() 
+		{			
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) 
+			{
 				JOptionPane.showMessageDialog(null, word1.getText()+word2.getText());
 			}
 		});
-
 	}
 }

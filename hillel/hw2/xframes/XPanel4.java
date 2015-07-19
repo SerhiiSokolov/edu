@@ -8,13 +8,13 @@ import javax.swing.JTextField;
 
 
 @SuppressWarnings("serial")
-public class XPanel3 extends JPanel 
+public class XPanel4 extends JPanel 
 {
 	JTextField word1=null;
 	JTextField word2=null;
 	JTextField result=null;
 	JTextField action=null;
-	public XPanel3()
+	public XPanel4()
 	{
 		setLayout(null);
 

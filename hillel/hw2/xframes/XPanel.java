@@ -1,12 +1,12 @@
 package edu.hillel.hw2.xframes;
 
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class XPanel extends JPanel 
 {
 	public XPanel()
