@@ -34,7 +34,7 @@ public class ClassBase1
 		//////////////////////////////////
 		//2.Определить какой четверти принадлежит точка с координатами (х,у)
 		/////////////////////////////////
-		int x=0;
+		int x=2;
 		int y=2;
 		try
 		{
@@ -43,7 +43,7 @@ public class ClassBase1
 		}
 		catch(IllegalArgumentException errObj)
 		{
-			System.out.print("Error in testEven- "+errObj+".");
+			System.out.print("Error in testQuarter- "+errObj+".");
 			System.out.println(" Zero not alowed");
 		}
 		finally 

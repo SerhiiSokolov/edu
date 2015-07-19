@@ -26,8 +26,10 @@ public class ClassLoop1
 		//(рассмотреть вариант последовательного подбора и метод бинарного поиска)
 		///////////////////////////////////
 		x=10000;
-		int square=findSquare(x);
-		System.out.println(square);
+		int square=consistentFindSquare(x);
+		System.out.println("Square from consistent="+square);
+		square=binaryFindSquare(x);
+		System.out.println("Square from binary="+square);
 		
 		///////////////////////////////////
 		//4.Вычислить факториал числа n. n! = 1*2*…*n-1*n;!
@@ -92,7 +94,7 @@ public class ClassLoop1
 		return test;
 	}
 	
-	public static int findSquare(int x)
+	public static int consistentFindSquare(int x)
 	{
 		int temp=0;
 		do 
@@ -102,6 +104,28 @@ public class ClassLoop1
 		return temp-1;
 	}
 
+	/*public static int binaryFindSquare(int x)
+	{
+		int start=0;
+		int stop=x;
+		int square;
+		do 
+		{
+			square=(start+stop)/2;
+			if (square*square>x) 
+			{
+				stop=(start+stop)/2;
+			}
+			else if (square*square<x)
+			{
+				start=(start+stop)/2;
+			}
+			System.out.println("start="+start+", stop="+stop);
+			System.out.println("tempsquare="+square);
+		} while ((stop-start)>2);
+		return square;
+	}*/
+	
 	public static int findFactorial(int x)
 	{
 		int temp=1;

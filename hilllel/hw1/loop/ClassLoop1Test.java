@@ -45,19 +45,19 @@ public class ClassLoop1Test {
 	@Test
 	public void testSquare_1() 
 	{
-		int answer = ClassLoop1.findSquare(9);		
+		int answer = ClassLoop1.consistentFindSquare(9);		
 		assertEquals(3, answer);
 	}
 	@Test
 	public void testSquare_2() 
 	{
-		int answer = ClassLoop1.findSquare(121);		
+		int answer = ClassLoop1.consistentFindSquare(121);		
 		assertEquals(11, answer);
 	}
 	@Test
 	public void testSquare_3() 
 	{
-		int answer = ClassLoop1.findSquare(130);		
+		int answer = ClassLoop1.consistentFindSquare(130);		
 		assertEquals(11, answer);
 	}
 	

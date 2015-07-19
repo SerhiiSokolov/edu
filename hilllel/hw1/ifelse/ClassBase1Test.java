@@ -61,6 +61,10 @@ public class ClassBase1Test {
 		int answer = ClassBase1.testQuarter(-2, -3);		
 		assertEquals(3, answer);
 	}
+	public void testQuater_zero5(){
+		int answer=ClassBase1.testQuarter(0, 5);
+		assertEquals(0, answer);
+	}
 
 	//////////////////////////////////
 	//3.Найти сумму только положительных из трех чисел
