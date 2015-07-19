@@ -3,6 +3,7 @@ package edu.hillel.hw2.xframes;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -10,85 +11,294 @@ import javax.swing.JTextField;
 @SuppressWarnings("serial")
 public class XPanel4 extends JPanel 
 {
-	JTextField word1=null;
-	JTextField word2=null;
-	JTextField result=null;
-	JTextField action=null;
+	static JTextField inputLine=null;
+	static int firstNumber=0;
+	static String action="+";
+	static boolean needClear=false;
 	public XPanel4()
 	{
 		setLayout(null);
 
-		word1=new JTextField();
-		word1.setBounds(10, 10, 120, 20);
-		add(word1);
+		inputLine=new JTextField();
+		inputLine.setBounds(10, 10, 320, 20);
+		add(inputLine);
 
-		word2=new JTextField();
-		word2.setBounds(10, 40, 120, 20);
-		add(word2);
+		JButton btn1=new JButton("1");
+		btn1.setBounds(10,40,50,30);
+		add(btn1);
 
-		action=new JTextField();
-		action.setBounds(60, 70, 20, 20);;
-		add(action);
+		JButton btn2=new JButton("2");
+		btn2.setBounds(70,40,50,30);
+		add(btn2);
 
-		result=new JTextField();
-		result.setBounds(10,100,120,20);
-		add(result);
+		JButton btn3=new JButton("3");
+		btn3.setBounds(130,40,50,30);
+		add(btn3);
 
-		JButton btn=new JButton("=");
-		btn.setBounds(10, 130, 120, 20);
-		add(btn);
+		JButton btn4=new JButton("4");
+		btn4.setBounds(10,80,50,30);
+		add(btn4);
 
-		btn.addActionListener(new ActionListener() 
+		JButton btn5=new JButton("5");
+		btn5.setBounds(70,80,50,30);
+		add(btn5);
+
+		JButton btn6=new JButton("6");
+		btn6.setBounds(130,80,50,30);
+		add(btn6);
+
+		JButton btn7=new JButton("7");
+		btn7.setBounds(10,120,50,30);
+		add(btn7);
+
+		JButton btn8=new JButton("8");
+		btn8.setBounds(70,120,50,30);
+		add(btn8);
+
+		JButton btn9=new JButton("9");
+		btn9.setBounds(130,120,50,30);
+		add(btn9);
+
+		JButton btn0=new JButton("0");
+		btn0.setBounds(70,160,50,30);
+		add(btn0);
+
+		JButton btnPlus=new JButton("+");
+		btnPlus.setBounds(220,40,50,30);
+		add(btnPlus);
+
+		JButton btnMinus=new JButton("-");
+		btnMinus.setBounds(280,40,50,30);
+		add(btnMinus);
+
+		JButton btnMultiply=new JButton("*");
+		btnMultiply.setBounds(220,80,50,30);
+		add(btnMultiply);
+
+		JButton btnDevide=new JButton("/");
+		btnDevide.setBounds(280,80,50,30);
+		add(btnDevide);
+
+		JButton btnCalc=new JButton("=");
+		btnCalc.setBounds(220,120,110,30);
+		add(btnCalc);
+		
+		JButton btnClear=new JButton("C");
+		btnClear.setBounds(220,160,110,30);
+		add(btnClear);
+
+		btn1.addActionListener(new ActionListener() 
 		{
-
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				result.setText(calculate(word1.getText(),word2.getText(),action.getText()));
+				setValue("1");
 			}
-
-
 		});
 
+		btn2.addActionListener(new ActionListener() 
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				setValue("2");
+			}
+		});
+
+		btn3.addActionListener(new ActionListener() 
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				setValue("3");
+			}
+		});
+
+		btn4.addActionListener(new ActionListener() 
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				setValue("4");
+			}
+		});
+
+		btn5.addActionListener(new ActionListener() 
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				setValue("5");
+			}
+		});
+
+		btn6.addActionListener(new ActionListener() 
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				setValue("6");
+			}
+		});
+
+		btn7.addActionListener(new ActionListener() 
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				setValue("7");
+			}
+		});
+
+		btn8.addActionListener(new ActionListener() 
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				setValue("8");
+			}
+		});
+
+		btn9.addActionListener(new ActionListener() 
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				setValue("9");
+			}
+		});
+
+		btn0.addActionListener(new ActionListener() 
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				setValue("0");
+			}
+		});
+		
+		btnPlus.addActionListener(new ActionListener() 
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				setAction("+");
+			}
+		});
+		
+		btnMinus.addActionListener(new ActionListener() 
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				setAction("-");
+			}
+		});
+		
+		btnMultiply.addActionListener(new ActionListener() 
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				setAction("*");
+			}
+		});
+		
+		btnDevide.addActionListener(new ActionListener() 
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				setAction("/");
+			}
+		});
+		
+		btnCalc.addActionListener(new ActionListener() 
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				inputLine.setText(calculate());
+			}
+		});
+		
+		btnClear.addActionListener(new ActionListener() 
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				clearScreen();
+			}
+		});
 	}
-	public static String calculate(String word1, String word2, String action)
+	
+	public static void clearScreen()
 	{
-		int result=0;
-		int x=0, y=0;
-		boolean flag=false;
+		inputLine.setText("");
+	}
+	
+	public static void setValue(String data)
+	{
+		if(needClear)
+		{
+			inputLine.setText("");
+			needClear=false;
+		}
+		inputLine.setText(inputLine.getText()+data);
+	}
+	
+	public static void setFirstNumber()
+	{
 		try
 		{
-			x=Integer.parseInt(word1);
-			y=Integer.parseInt(word2);
-		
-		if (action.equals("+")) 
-		{
-			result=x+y;
-			flag=true;
-		}
-		else if (action.equals("-"))
-		{
-			result=x-y;
-			flag=true;
-		}
-		else if (action.equals("*"))
-		{
-			result=x*y;
-			flag=true;
-		}
-		else if (action.equals("/")) 
-		{
-			result=x/y;
-			flag=true;
-		}
-		//if(!flag) JOptionPane.showInternalMessageDialog(null, "Allowed only \"+ - * /\"");
-		if(!flag) System.out.println("Allowed only \"+ - * /\"");
+		firstNumber=Integer.parseInt(inputLine.getText());
 		}
 		catch (NumberFormatException errObj)
 		{
-			//JOptionPane.showInternalMessageDialog(null, "Field must be digit");
-			System.out.println("ERROR");
 		}
-		return Integer.toString(result);
+	}
+
+	public static void setAction(String value)
+	{
+		setFirstNumber();
+		action=value;
+		inputLine.setText(value);
+		needClear=true;
+	}
+	
+	public static String calculate()
+	{
+		int result=0;
+		int x=0, y=0;
+		try
+		{			
+			x=firstNumber;
+			y=Integer.parseInt(inputLine.getText());
+			if (action.equals("+")) 
+			{
+				result=x+y;
+			}
+			else if (action.equals("-"))
+			{
+				result=x-y;
+			}
+			else if (action.equals("*"))
+			{
+				result=x*y;
+			}
+			else if (action.equals("/")) 
+			{
+				result=x/y;
+			}
+		}
+		catch (NumberFormatException|NullPointerException errObj)
+		{
+		}
+		catch (ArithmeticException errObj)
+		{
+			JOptionPane.showMessageDialog(null, "Cant devide by zero");
+		}		
+		needClear=true;
+		return String.valueOf(result);
 	}
 }

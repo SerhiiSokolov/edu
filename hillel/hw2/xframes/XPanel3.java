@@ -3,6 +3,7 @@ package edu.hillel.hw2.xframes;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -37,7 +38,6 @@ public class XPanel3 extends JPanel
 		JButton btn=new JButton("=");
 		btn.setBounds(10, 130, 120, 20);
 		add(btn);
-
 		btn.addActionListener(new ActionListener() 
 		{
 
@@ -46,7 +46,6 @@ public class XPanel3 extends JPanel
 			{
 				result.setText(calculate(word1.getText(),word2.getText(),action.getText()));
 			}
-
 
 		});
 
@@ -60,34 +59,32 @@ public class XPanel3 extends JPanel
 		{
 			x=Integer.parseInt(word1);
 			y=Integer.parseInt(word2);
-		
-		if (action.equals("+")) 
-		{
-			result=x+y;
-			flag=true;
-		}
-		else if (action.equals("-"))
-		{
-			result=x-y;
-			flag=true;
-		}
-		else if (action.equals("*"))
-		{
-			result=x*y;
-			flag=true;
-		}
-		else if (action.equals("/")) 
-		{
-			result=x/y;
-			flag=true;
-		}
-		//if(!flag) JOptionPane.showInternalMessageDialog(null, "Allowed only \"+ - * /\"");
-		if(!flag) System.out.println("Allowed only \"+ - * /\"");
+
+			if (action.equals("+")) 
+			{
+				result=x+y;
+				flag=true;
+			}
+			else if (action.equals("-"))
+			{
+				result=x-y;
+				flag=true;
+			}
+			else if (action.equals("*"))
+			{
+				result=x*y;
+				flag=true;
+			}
+			else if (action.equals("/")) 
+			{
+				result=x/y;
+				flag=true;
+			}
+			if(!flag) JOptionPane.showMessageDialog(null, "Allowed only \"+ - * /\"");
 		}
 		catch (NumberFormatException errObj)
 		{
-			//JOptionPane.showInternalMessageDialog(null, "Field must be digit");
-			System.out.println("ERROR");
+			JOptionPane.showMessageDialog(null, "Field must be digit");
 		}
 		return Integer.toString(result);
 	}
