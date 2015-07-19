@@ -92,7 +92,7 @@ public class XPanel4 extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				setValue("1");
+				updateValue("1");
 			}
 		});
 
@@ -101,7 +101,7 @@ public class XPanel4 extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				setValue("2");
+				updateValue("2");
 			}
 		});
 
@@ -110,7 +110,7 @@ public class XPanel4 extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				setValue("3");
+				updateValue("3");
 			}
 		});
 
@@ -119,7 +119,7 @@ public class XPanel4 extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				setValue("4");
+				updateValue("4");
 			}
 		});
 
@@ -128,7 +128,7 @@ public class XPanel4 extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				setValue("5");
+				updateValue("5");
 			}
 		});
 
@@ -137,7 +137,7 @@ public class XPanel4 extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				setValue("6");
+				updateValue("6");
 			}
 		});
 
@@ -146,7 +146,7 @@ public class XPanel4 extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				setValue("7");
+				updateValue("7");
 			}
 		});
 
@@ -155,7 +155,7 @@ public class XPanel4 extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				setValue("8");
+				updateValue("8");
 			}
 		});
 
@@ -164,7 +164,7 @@ public class XPanel4 extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				setValue("9");
+				updateValue("9");
 			}
 		});
 
@@ -173,7 +173,7 @@ public class XPanel4 extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				setValue("0");
+				updateValue("0");
 			}
 		});
 		
@@ -237,7 +237,7 @@ public class XPanel4 extends JPanel
 		inputLine.setText("");
 	}
 	
-	public static void setValue(String data)
+	public static void updateValue(String data)
 	{
 		if(needClear)
 		{

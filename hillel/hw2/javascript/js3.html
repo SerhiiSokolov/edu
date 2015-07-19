@@ -1,0 +1,47 @@
+<html>
+<head>
+<title>HW2-3</title>
+</head>
+<body>
+	<input type="text" id="txt1" /><p>
+	<input type="text" id="txt2" /><p>
+	<input type="text" id="txt3" /><p>
+	<input type="text" id="txt4" /><p>
+	<input type="button" value="concat" onclick="calc()"/>
+</body>
+	
+	<script>
+	function calc()
+	{
+		var result=0;
+		var x=0;
+		var y=0;
+		var flag=false;
+		x=+txt1.value;
+		y=+txt3.value;
+
+		if (txt2.value=="+") 
+		{
+			result=x+y;
+			flag=true;
+		}
+		else if (txt2.value=="-")
+		{
+			result=x-y;
+			flag=true;
+		}
+		else if (txt2.value=="*")
+		{
+			result=x*y;
+			flag=true;
+		}
+		else if (txt2.value=="/") 
+		{
+			result=x/y;
+			flag=true;
+		}
+		if(!flag) alert("Allowed only \"+ - * /\"");
+		txt4.value=result;
+	}
+	</script>
+</html>
