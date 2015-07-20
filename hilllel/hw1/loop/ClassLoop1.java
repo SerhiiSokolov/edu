@@ -12,51 +12,51 @@ public class ClassLoop1
 		int countNumberOfEven=countEven(size);
 		System.out.print("Sum="+sum);
 		System.out.println(". Number of even="+countNumberOfEven);
-		
+
 		//////////////////////////////////
 		//2.ѕроверить простое ли число? (число называетс€ простым, если оно делитс€ только само на себ€ и на 1)
 		//////////////////////////////////
-		int x=6;
+		int x=4;
 		boolean primeNumber=testPrime(x);
 		if(primeNumber) System.out.println("x is a prime");
 		else System.out.println("x not prime");
-		
+
 		///////////////////////////////////
 		//3.Ќайти корень натурального числа с точностью до целого 
 		//(рассмотреть вариант последовательного подбора и метод бинарного поиска)
 		///////////////////////////////////
-		x=10000;
+		x=4;
 		int square=consistentFindSquare(x);
 		System.out.println("Square from consistent="+square);
 		//square=binaryFindSquare(x);
-		System.out.println("Square from binary="+square);
-		
+		//System.out.println("Square from binary="+square);
+
 		///////////////////////////////////
 		//4.¬ычислить факториал числа n. n! = 1*2*Е*n-1*n;!
 		///////////////////////////////////
 		int chislo=3;
 		int factorial=findFactorial(chislo);
 		System.out.println(factorial);
-		
+
 		///////////////////////////////////
 		//5.ѕосчитать сумму цифр заданного числа
 		///////////////////////////////////
 		chislo=1111111111;
 		sum=findSum(chislo);
 		System.out.println(sum);
-		
+
 		//////////////////////////////////
 		//6.	¬ывести число, которое €вл€етс€ зеркальным отображением \
 		//последовательности цифр заданного числа, например, задано число 123, вывести 321
 		//////////////////////////////////
-		chislo=1;
+		chislo=10;
 		System.out.println(chislo);
 		int revers=findRevers(chislo);
 		System.out.println(revers);
-		
+
 	}
-	
-	
+
+
 	public static int sumEven(int size)	
 	{
 		int sum=0;
@@ -69,7 +69,7 @@ public class ClassLoop1
 		}
 		return sum;
 	}
-	
+
 	public static int countEven(int size)
 	{
 		int count=0;
@@ -79,29 +79,40 @@ public class ClassLoop1
 		}
 		return count;
 	}
-	
+
 	public static boolean testPrime(int x)
 	{
 		boolean test=true;
-		for(int i=2;i<x;i++)
+		if(x==0) test=false;
+		else if (x==1) test=true;
+		else 
 		{
-			if (x%i==0) 
+			for(int i=2;i<x;i++)
 			{
-				test=false;
-				break;
+				if (x%i==0) 
+				{
+					test=false;
+					break;
+				}
 			}
 		}
 		return test;
 	}
-	
+
 	public static int consistentFindSquare(int x)
 	{
 		int temp=0;
-		do 
+		if (x==0) temp=0;
+		else if (x==1) temp=1;
+		else 
 		{
-			temp++;
-		} while (temp*temp<=x);
-		return temp-1;
+			do 
+			{
+				temp++;
+			} while (temp*temp<=x);
+			temp--;
+		}
+		return temp;
 	}
 
 	/*public static int binaryFindSquare(int x)
@@ -125,17 +136,19 @@ public class ClassLoop1
 		} while ((stop-start)>2);
 		return square;
 	}*/
-	
+
 	public static int findFactorial(int x)
 	{
 		int temp=1;
-		for(int i=2;i<=x;i++)
+		if(x==0||x==1) temp=1;
+		else
 		{
+			for(int i=2;i<=x;i++)
 			temp*=i;
 		}
 		return temp;
 	}
-	
+
 	public static int findSum(int x)
 	{
 		int temp=0;
@@ -147,7 +160,7 @@ public class ClassLoop1
 		temp+=x;
 		return temp;
 	}
-	
+
 	public static int findRevers(int x)
 	{
 		int temp=0;

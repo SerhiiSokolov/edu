@@ -81,62 +81,72 @@ public class ClassFunc1Test {
 	////////////////////////////////////
 	//3.	Вводим строку, которая содержит число, написанное прописью (0-999). Получить само число
 	////////////////////////////////////
-	
-	
-	////////////////////////////////////
-	//4.	Найти расстояние между двумя точками в двумерном декартовом пространстве.
-	////////////////////////////////////
 	@Test
-	public void testFunc3_1() 
+	public void testFunc3_9() 
 	{
 		int answer = ClassFunc1.convert("nine");		
 		assertEquals(9, answer);
 	}
 	
 	@Test
-	public void testFunc3_2() 
+	public void testFunc3_11() 
 	{
 		int answer = ClassFunc1.convert("eleven");		
 		assertEquals(11, answer);
 	}
 	
 	@Test
-	public void testFunc3_3() 
+	public void testFunc3_20() 
 	{
 		int answer = ClassFunc1.convert("twenty");		
 		assertEquals(20, answer);
 	}
 	
 	@Test
-	public void testFunc3_4() 
+	public void testFunc3_29() 
 	{
 		int answer = ClassFunc1.convert("twenty-nine");		
 		assertEquals(29, answer);
 	}
 	@Test
 	
-	public void testFunc3_5() 
+	public void testFunc3_100() 
 	{
 		int answer = ClassFunc1.convert("one hundred");		
 		assertEquals(100, answer);
 	}
 	
-	public void testFunc3_6() 
+	public void testFunc3_201() 
 	{
 		int answer = ClassFunc1.convert("two hundred one");		
 		assertEquals(201, answer);
 	}
 	
-	public void testFunc3_7() 
+	public void testFunc3_411() 
 	{
 		int answer = ClassFunc1.convert("four hundred eleven");		
 		assertEquals(411, answer);
 	}
 	
-	public void testFunc3_8() 
+	public void testFunc3_651() 
 	{
 		int answer = ClassFunc1.convert("six hundred fifty-one");		
 		assertEquals(651, answer);
 	}
 	
+	////////////////////////////////////
+	//4.	Найти расстояние между двумя точками в двумерном декартовом пространстве.
+	////////////////////////////////////
+	@Test
+	public void testFindDistance_0() 
+	{
+		double answer = ClassFunc1.findDistance(0,0,0,0);		
+		assertEquals(0.000, answer, 0.001);
+	}
+	@Test
+	public void testFindDistance_1() 
+	{
+		double answer = ClassFunc1.findDistance(0,1,0,1);		
+		assertEquals(1.41421, answer, 0.001);
+	}
 }

@@ -141,6 +141,22 @@ public class ClassArray1 {
 		{
 			System.out.println("Array length is 0");
 		}
+		
+		/////////////////////////////////////////////
+		//10. Отсортировать массив (Quick, Merge, Shell, Heap)
+		////////////////////////////////////////////
+		//Quick
+		int[] arrayQ={10,9,8,7,6,5,4,3,2,1,0};
+		try
+		{
+			int[] arrayQuick=sortArrayQuick(arrayQ);
+			System.out.println("quick");
+			printArray(arrayQuick);
+		}
+		catch (IllegalArgumentException errObj)
+		{
+			System.out.println("Array length is 0");
+		}
 	}
 
 	public static int findMin(int[] array)
@@ -276,7 +292,8 @@ public class ClassArray1 {
 	public static int[] sortArrayInsert(int[] array)
 	{
 		if (array.length==0) 
-			throw new IllegalArgumentException();int size=array.length, x, j;
+			throw new IllegalArgumentException();
+		int size=array.length, x, j;
 			for(int i=0;i<size;i++)
 			{
 				x=array[i];
@@ -285,6 +302,13 @@ public class ClassArray1 {
 				array[j+1] = x;
 			}
 			return array;
+	}
+	
+	public static int[] sortArrayQuick(int[] array){
+		if (array.length==0) 
+			throw new IllegalArgumentException();
+		Arrays.sort(array);
+		return array;
 	}
 
 	public static int[] arrayExchange(int[] array)

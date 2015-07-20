@@ -450,4 +450,42 @@ public class ClassArray1Test {
 		assertArrayEquals(expecteds, actuals);
 	}
 
+	/////////////////////////////////////////////
+	//10. Отсортировать массив (Quick, Merge, Shell, Heap)
+	////////////////////////////////////////////
+	//Quick
+	public void testSortQuick_1() 
+	{
+		int[] array=new int[]{10,9,8,7,6,5,4,3,2,1};
+		int[] expecteds={1,2,3,4,5,6,7,8,9,10};
+		int[] actuals = ClassArray1.sortArrayQuick(array);	
+		assertArrayEquals(expecteds, actuals);
+	}
+
+	@Test
+	public void testSortQuick_2elements() 
+	{
+		int[] array=new int[]{5,-10};
+		int[] expecteds={-10,5};
+		int[] actuals = ClassArray1.sortArrayQuick(array);		
+		assertArrayEquals(expecteds, actuals);
+	}
+
+	@Test
+	public void testSortQuick_1element() 
+	{
+		int[] array=new int[]{5};
+		int[] expecteds={5};
+		int[] actuals = ClassArray1.sortArrayQuick(array);		
+		assertArrayEquals(expecteds, actuals);
+	}	
+
+	@Test (expected=IllegalArgumentException.class)
+	public void testSortQuick_ZeroSize() 
+	{
+		int[] array=new int[]{};
+		int[] expecteds={};
+		int[] actuals = ClassArray1.sortArrayQuick(array);		
+		assertArrayEquals(expecteds, actuals);
+	}
 }
