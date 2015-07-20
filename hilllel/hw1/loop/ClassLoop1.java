@@ -28,7 +28,7 @@ public class ClassLoop1
 		x=10000;
 		int square=consistentFindSquare(x);
 		System.out.println("Square from consistent="+square);
-		square=binaryFindSquare(x);
+		//square=binaryFindSquare(x);
 		System.out.println("Square from binary="+square);
 		
 		///////////////////////////////////
