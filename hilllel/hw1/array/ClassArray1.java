@@ -141,7 +141,7 @@ public class ClassArray1 {
 		{
 			System.out.println("Array length is 0");
 		}
-		
+
 		/////////////////////////////////////////////
 		//10. Отсортировать массив (Quick, Merge, Shell, Heap)
 		////////////////////////////////////////////
@@ -152,6 +152,17 @@ public class ClassArray1 {
 			int[] arrayQuick=sortArrayQuick(arrayQ);
 			System.out.println("quick");
 			printArray(arrayQuick);
+		}
+		catch (IllegalArgumentException errObj)
+		{
+			System.out.println("Array length is 0");
+		}
+		//Merge
+		int[] arrayMerge={11,9,8,7,6,5,4,3,2,1,0};
+		try
+		{
+			int[] arraySortedMerge=sortMerge(arrayMerge);
+			printArray(arraySortedMerge);
 		}
 		catch (IllegalArgumentException errObj)
 		{
@@ -294,16 +305,16 @@ public class ClassArray1 {
 		if (array.length==0) 
 			throw new IllegalArgumentException();
 		int size=array.length, x, j;
-			for(int i=0;i<size;i++)
-			{
-				x=array[i];
-				for (j=i-1;j>=0&&array[j]>x;j--)
-					array[j+1]=array[j];
-				array[j+1] = x;
-			}
-			return array;
+		for(int i=0;i<size;i++)
+		{
+			x=array[i];
+			for (j=i-1;j>=0&&array[j]>x;j--)
+				array[j+1]=array[j];
+			array[j+1] = x;
+		}
+		return array;
 	}
-	
+
 	public static int[] sortArrayQuick(int[] array){
 		if (array.length==0) 
 			throw new IllegalArgumentException();
@@ -313,6 +324,8 @@ public class ClassArray1 {
 
 	public static int[] arrayExchange(int[] array)
 	{
+		if (array.length==0) 
+			throw new IllegalArgumentException();
 		int middle=array.length/2;;
 		int[] temp1=Arrays.copyOfRange(array,0,middle);
 		if (array.length%2==0) 
@@ -328,6 +341,31 @@ public class ClassArray1 {
 		return array;
 	}
 
+	public static int[] sortMerge(int[] arr) {
+		if (arr.length==0) 
+			throw new IllegalArgumentException();
+		int len = arr.length;
+		if (len < 2) return arr;
+		int middle = len / 2;
+		return merge(sortMerge(Arrays.copyOfRange(arr, 0, middle)),
+				sortMerge(Arrays.copyOfRange(arr, middle, len)));
+	}
+	public static int[] merge(int[] arr_1, int[] arr_2) {
+		int len_1 = arr_1.length, len_2 = arr_2.length;
+		int a = 0, b = 0, len = len_1 + len_2;
+		int[] result = new int[len];
+		for (int i = 0; i < len; i++) {
+			if (b < len_2 && a < len_1) {
+				if (arr_1[a] > arr_2[b]) result[i] = arr_2[b++];
+				else result[i] = arr_1[a++];
+			} else if (b < len_2) {
+				result[i] = arr_2[b++];
+			} else {
+				result[i] = arr_1[a++];
+			}
+		}
+		return result;
+	}
 	public static void printArray(int[] array)
 	{
 		for(int i=0;i<array.length;i++)
