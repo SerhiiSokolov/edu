@@ -60,6 +60,13 @@ public class ClassLoop1Test {
 	//3.Ќайти корень натурального числа с точностью до целого 
 	//(рассмотреть вариант последовательного подбора и метод бинарного поиска)
 	///////////////////////////////////
+	//ћетод перебора
+	@Test  (expected=IllegalArgumentException.class)
+	public void testSquare_Negativ() 
+	{
+		int answer = ClassLoop1.consistentFindSquare(-10);		
+		assertEquals(0, answer);
+	}
 	@Test
 	public void testSquare_0() 
 	{
@@ -90,6 +97,82 @@ public class ClassLoop1Test {
 		int answer = ClassLoop1.consistentFindSquare(130);		
 		assertEquals(11, answer);
 	}
+	
+	//Ѕинарный поиск перебором
+	/*@Test  (expected=IllegalArgumentException.class)
+	public void testSquareBinary_Negativ() 
+	{
+		int answer = ClassLoop1.binaryFindSquare(-10);		
+		assertEquals(0, answer);
+	}
+	@Test
+	public void testSquareBinary_0() 
+	{
+		int answer = ClassLoop1.binaryFindSquare(0);		
+		assertEquals(0, answer);
+	}
+	@Test
+	public void testSquareBinary_1() 
+	{
+		int answer = ClassLoop1.binaryFindSquare(1);		
+		assertEquals(1, answer);
+	}
+	@Test
+	public void testSquareBinary_2() 
+	{
+		int answer = ClassLoop1.binaryFindSquare(2);		
+		assertEquals(1, answer);
+	}
+	@Test
+	public void testSquareBinary_4() 
+	{
+		int answer = ClassLoop1.binaryFindSquare(4);		
+		assertEquals(2, answer);
+	}
+	@Test
+	public void testSquareBinary_130() 
+	{
+		int answer = ClassLoop1.binaryFindSquare(130);		
+		assertEquals(11, answer);
+	}	
+	*/
+	//Ѕинарный поиск перебором через рекурсию
+	@Test  (expected=IllegalArgumentException.class)
+	public void testSquareBinaryRecursion_Negativ() 
+	{
+		int answer = (int)ClassLoop1.binaryFindSquareRec(-10,0,-10);		
+		assertEquals(0, answer);
+	}
+	@Test
+	public void testSquareBinaryRecursion_0() 
+	{
+		int answer = (int)ClassLoop1.binaryFindSquareRec(0,0,0);		
+		assertEquals(0, answer);
+	}
+	@Test
+	public void testSquareBinaryRecursion_1() 
+	{
+		int answer = (int)ClassLoop1.binaryFindSquareRec(1,0,1);		
+		assertEquals(1, answer);
+	}
+	@Test
+	public void testSquareBinaryRecursion_2() 
+	{
+		int answer = (int)ClassLoop1.binaryFindSquareRec(2,0,2);		
+		assertEquals(1, answer);
+	}
+	@Test
+	public void testSquareBinaryRecursion_4() 
+	{
+		int answer = (int)ClassLoop1.binaryFindSquareRec(4,0,4);		
+		assertEquals(2, answer);
+	}
+	@Test
+	public void testSquareBinaryRecursion_130() 
+	{
+		int answer = (int)ClassLoop1.binaryFindSquareRec(130,0,130);		
+		assertEquals(11, answer);
+	}	
 	
 	///////////////////////////////////
 	//4.¬ычислить факториал числа n. n! = 1*2*Е*n-1*n;!

@@ -25,12 +25,20 @@ public class ClassLoop1
 		//3.Найти корень натурального числа с точностью до целого 
 		//(рассмотреть вариант последовательного подбора и метод бинарного поиска)
 		///////////////////////////////////
-		x=4;
-		int square=consistentFindSquare(x);
-		System.out.println("Square from consistent="+square);
-		//square=binaryFindSquare(x);
-		//System.out.println("Square from binary="+square);
-
+		x=2;
+		try
+		{
+			int square=consistentFindSquare(x);
+			System.out.println("Square from consistent="+square);
+			square=binaryFindSquare(x);
+			System.out.println("Square from binary="+square);
+			square=(int)binaryFindSquareRec(x,0,x);
+			System.out.println("Square from binary with recursion="+square);
+		}
+		catch (IllegalArgumentException errObj)
+		{
+			System.out.println("Number<0");
+		}
 		///////////////////////////////////
 		//4.Вычислить факториал числа n. n! = 1*2*…*n-1*n;!
 		///////////////////////////////////
@@ -101,6 +109,8 @@ public class ClassLoop1
 
 	public static int consistentFindSquare(int x)
 	{
+		if (x<0) 
+			throw new IllegalArgumentException();
 		int temp=0;
 		if (x==0) temp=0;
 		else if (x==1) temp=1;
@@ -115,27 +125,36 @@ public class ClassLoop1
 		return temp;
 	}
 
-	/*public static int binaryFindSquare(int x)
+	public static int binaryFindSquare(int x)
 	{
+		if (x<0) 
+			throw new IllegalArgumentException();
 		int start=0;
 		int stop=x;
-		int square;
-		do 
+		long square;
+		if(x==0) square=0;
+		else if(x==1) square=1;
+		else
 		{
-			square=(start+stop)/2;
-			if (square*square>x) 
+			do 
 			{
-				stop=(start+stop)/2;
-			}
-			else if (square*square<x)
-			{
-				start=(start+stop)/2;
-			}
-			System.out.println("start="+start+", stop="+stop);
-			System.out.println("tempsquare="+square);
-		} while ((stop-start)>2);
-		return square;
-	}*/
+
+				square=(start+stop)/2;
+				if (square*square==x) break;
+				else if (square*square>x) 
+				{
+					stop=(start+stop)/2;
+				}
+				else if (square*square<x)
+				{
+					start=(start+stop)/2;
+				}
+			} while ((stop-start)>1);
+		}
+		System.out.println("start="+start+", stop="+stop);
+		if(square*square!=x) square--;
+		return (int)square;
+	}
 
 	public static int findFactorial(int x)
 	{
@@ -144,7 +163,7 @@ public class ClassLoop1
 		else
 		{
 			for(int i=2;i<=x;i++)
-			temp*=i;
+				temp*=i;
 		}
 		return temp;
 	}
@@ -172,5 +191,23 @@ public class ClassLoop1
 		} 
 		temp=temp*10+x;
 		return temp;
+	}
+
+	public static long binaryFindSquareRec(int x, int start, int stop)
+	{
+		if (x<0) 
+			throw new IllegalArgumentException();
+		long square;
+		if(x==0) square=0;
+		else if (x==1) square=1;
+		else
+		{
+			square=(start+stop)/2;
+			if (square*square==x) return square;
+			if((stop-start)==1) return square; 
+			else if(square*square>x) square=binaryFindSquareRec(x,start,(start+stop)/2);
+			else square=binaryFindSquareRec(x,(start+stop)/2,stop);
+		}
+		return square;
 	}
 }
