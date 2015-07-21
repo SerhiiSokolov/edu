@@ -11,7 +11,7 @@ public class ConvertJUTest {
                      + "nine hundred ninety-nine";
         String[] splitedTXT = test1.split(" ");
         long answer = Convert.convertArray(splitedTXT);
-        assertEquals(9.99999999999E11, answer, 0.000);
+        assertEquals(999999999999L, answer);
     }
     @Test
     public void testConvert_2() {
@@ -21,34 +21,27 @@ public class ConvertJUTest {
                      + "eight hundred seventy-one";
         String[] splitedTXT = test1.split(" ");
         long answer = Convert.convertArray(splitedTXT);
-        assertEquals(1.92345690871E11, answer, 0.000);
+        assertEquals(192345690871L, answer);
     }
     @Test
     public void testConvert_3() {
         String test1 = "nine billion one";
         String[] splitedTXT = test1.split(" ");
         long answer = Convert.convertArray(splitedTXT);
-        assertEquals(9.000000001E9, answer, 0.000);
+        assertEquals(9000000001L, answer);
     }
     @Test
     public void testConvert_4() {
         String test1 = "zero";
         String[] splitedTXT = test1.split(" ");
         long answer = Convert.convertArray(splitedTXT);
-        assertEquals(0.00, answer, 0.000);
-    }
-    @Test
-    public void testConvert_5() {
-        String test1 = "";
-        String[] splitedTXT = test1.split(" ");
-        long answer = Convert.convertArray(splitedTXT);
-        assertEquals(0.00, answer, 0.000);
+        assertEquals(0, answer, 0);
     }
     @Test (expected=NullPointerException.class)
-    public void testConvert_6() {
+    public void testConvert_5() {
         String test1=null;
         String[] splitedTXT = test1.split(" ");
         long answer = Convert.convertArray(splitedTXT);
-        assertEquals(0.00, answer, 0.000);
+        assertEquals(0, answer, 0);
     }    
 }
