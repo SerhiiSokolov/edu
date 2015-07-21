@@ -1,16 +1,24 @@
+
 import java.util.Arrays;
 
 public class Convert {
 
     public static void main(String[] args) {
-        //String test1 = "one hundred ninety-two billion three hundred forty-five million six hundred ninety thousand eight hundred seventy-one";
         String test1 = "nine hundred ninety-nine billion nine hundred ninety-nine million nine hundred ninety-nine thousand nine hundred ninety-nine";
+        //String test1 = "one hundred ninety-two billion three hundred forty-five million six hundred ninety thousand eight hundred seventy-one";
         //String test1 = "nine billion one";
-        String[] splitedTXT = test1.split(" ");
-        double digit = convertArray(splitedTXT);
-        System.out.println(digit);
+        //String test1 = "one hundred one";
+        //String test1 = null;
+        try {
+            String[] splitedTXT = test1.split(" ");
+
+            double digit = convertArray(splitedTXT);
+            System.out.println(digit);
+        } catch (NullPointerException errObj) {
+            System.out.println("NullPointerException");
+        }
     }
-    
+
     public static int convert(String test1) {
         int n = 0;
         String[] test2 = test1.split(" ");
@@ -102,12 +110,12 @@ public class Convert {
                     k++;
                 }
                 digit = digit + convert(tempString) * factor;
-                String[] temp1 = Arrays.copyOfRange(array, stop+1, array.length);
+                String[] temp1 = Arrays.copyOfRange(array, stop + 1, array.length);
                 array = temp1;
             }
         }
-        long digit1=0;
-        for (int i = 0; i < array.length; i++) {            
+        long digit1 = 0;
+        for (int i = 0; i < array.length; i++) {
             String tempString = "";
             String[] tempArray = new String[array.length];
             for (int j = 0, k = 0; j < array.length; j++) {
@@ -116,6 +124,6 @@ public class Convert {
             }
             digit1 = convert(tempString);
         }
-        return digit1+digit;
+        return digit1 + digit;
     }
 }
