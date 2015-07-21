@@ -1,4 +1,3 @@
-
 import java.util.Arrays;
 
 public class Convert {
@@ -12,7 +11,7 @@ public class Convert {
         try {
             String[] splitedTXT = test1.split(" ");
 
-            double digit = convertArray(splitedTXT);
+            long digit = convertArray(splitedTXT);
             System.out.println(digit);
         } catch (NullPointerException errObj) {
             System.out.println("NullPointerException");
@@ -65,7 +64,7 @@ public class Convert {
         return sday;
     }
 
-    public static double convertArray(String[] array) {
+    public static long convertArray(String[] array) {
         int start = 0, stop = array.length;
         long factor, digit = 0;
         boolean last = false;
