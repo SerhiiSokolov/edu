@@ -1,4 +1,6 @@
-import conv.Convert;
+package edu.hilllel.hw1.func;
+
+import edu.hilllel.hw1.func.Convert;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

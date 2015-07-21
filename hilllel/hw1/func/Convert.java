@@ -1,3 +1,5 @@
+package edu.hilllel.hw1.func;
+
 import java.util.Arrays;
 
 public class Convert {
@@ -67,16 +69,13 @@ public class Convert {
     public static long convertArray(String[] array) {
         int start = 0, stop = array.length;
         long factor, digit = 0;
-        boolean last = false;
         for (int i = 0; i < array.length; i++) {
             if (array[i].equals("billion")) {
                 stop = i;
                 factor = 1000000000;
-                String[] tempArray = new String[(stop - start)];
                 String tempString = "";
-                for (int j = start, k = 0; j < stop; j++) {
+                for (int j = start; j < stop; j++) {
                     tempString = tempString + String.valueOf(array[j]) + " ";
-                    k++;
                 }
                 digit = digit + convert(tempString) * factor;
                 String[] temp1 = Arrays.copyOfRange(array, stop + 1, array.length);
@@ -88,10 +87,8 @@ public class Convert {
                 factor = 1000000;
                 stop = i;
                 String tempString = "";
-                String[] tempArray = new String[array.length];
-                for (int j = 0, k = 0; j < stop; j++) {
+                for (int j = 0; j < stop; j++) {
                     tempString = tempString + String.valueOf(array[j]) + " ";
-                    k++;
                 }
                 digit = digit + convert(tempString) * factor;
                 String[] temp1 = Arrays.copyOfRange(array, stop + 1, array.length);
@@ -103,10 +100,8 @@ public class Convert {
                 factor = 1000;
                 stop = i;
                 String tempString = "";
-                String[] tempArray = new String[array.length];
-                for (int j = 0, k = 0; j < stop; j++) {
+                for (int j = 0; j < stop; j++) {
                     tempString = tempString + String.valueOf(array[j]) + " ";
-                    k++;
                 }
                 digit = digit + convert(tempString) * factor;
                 String[] temp1 = Arrays.copyOfRange(array, stop + 1, array.length);
@@ -116,10 +111,8 @@ public class Convert {
         long digit1 = 0;
         for (int i = 0; i < array.length; i++) {
             String tempString = "";
-            String[] tempArray = new String[array.length];
-            for (int j = 0, k = 0; j < array.length; j++) {
+            for (int j = 0; j < array.length; j++) {
                 tempString = tempString + String.valueOf(array[j]) + " ";
-                k++;
             }
             digit1 = convert(tempString);
         }

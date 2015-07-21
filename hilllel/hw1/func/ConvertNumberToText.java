@@ -1,3 +1,5 @@
+package edu.hilllel.hw1.func;
+
 
 import static java.lang.Math.abs;
 public class ConvertNumberToText {
