@@ -1,7 +1,9 @@
-package edu.hilllel.hw1.func;
+package edu.hillel.hw1.func;
 
-import edu.hilllel.hw1.func.Convert;
 import org.junit.Test;
+
+import edu.hillel.hw1.func.Convert;
+
 import static org.junit.Assert.*;
 
 public class ConvertJUTest {

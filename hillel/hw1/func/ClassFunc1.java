@@ -1,4 +1,4 @@
-package edu.hilllel.hw1.func;
+package edu.hillel.hw1.func;
 
 public class ClassFunc1 {	
 	public static void main (String[] args){

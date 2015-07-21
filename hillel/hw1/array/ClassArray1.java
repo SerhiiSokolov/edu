@@ -1,4 +1,4 @@
-package edu.hilllel.hw1.array;
+package edu.hillel.hw1.array;
 
 import java.util.Arrays;
 public class ClassArray1 {	

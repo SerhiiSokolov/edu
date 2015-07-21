@@ -1,4 +1,4 @@
-package edu.hilllel.hw1.ifelse;
+package edu.hillel.hw1.ifelse;
 
 public class ClassBase1 
 {

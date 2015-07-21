@@ -1,4 +1,4 @@
-package edu.hilllel.hw1.loop;
+package edu.hillel.hw1.loop;
 
 public class ClassLoop1 
 {

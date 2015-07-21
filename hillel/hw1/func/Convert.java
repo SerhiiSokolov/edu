@@ -1,4 +1,4 @@
-package edu.hilllel.hw1.func;
+package edu.hillel.hw1.func;
 
 import java.util.Arrays;
 
