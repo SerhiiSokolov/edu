@@ -5,45 +5,81 @@ import java.util.Random;
 public class WorkWithArrays 
 {
 	public static void main(String[] args) {
-		////////////////////////////////////
-		//Get array size
-		////////////////////////////////////
 		MainArray array=new MainArray();
-		System.out.println("Array size="+array.getSize());
-		
-		////////////////////////////////////
-		//Init array
-		////////////////////////////////////
-		int initSize=array.getSize();
-		int[] ar=fill(initSize);		
-		array.initArray(ar);
-		array.printArray();
-		array.addStart(110);
-		array.printArray();
-		array.addEnd(120);
-		array.printArray();
-		array.addPos(9, 999);
-		array.printArray();
-		System.out.println(array.delStart());
-		array.printArray();
-		System.out.println(array.delEnd());
-		array.printArray();
-		System.out.println(array.delPos(2));
-		array.printArray();
-		System.out.println("Sort array");
-		array.sort();
-		array.printArray();
-		System.out.println("Revers array");
-		array.revers();
-		array.printArray();
-		System.out.println("HalfRevers array");
-		array.halfRevers();
-		array.printArray();
-		////////////////////////////////////
-		//Clear array
-		////////////////////////////////////
-		array.clearArray();
-		array.printArray();
+		try
+		{
+			////////////////////////////////////
+			//Init array
+			////////////////////////////////////
+			int[] ar={10,30,54,77,11,22,99,3};
+			//int[] ar;
+			array.initArray(ar);
+			array.printArray();
+
+
+			//Get array size
+			System.out.println("Array size="+array.getSize());
+
+			//Add element as first
+			array.addStart(110);
+			array.printArray();
+
+			//Add element as last
+			array.addEnd(120);
+			array.printArray();
+
+			//Add element to position
+			array.addPos(9, 999);
+			array.printArray();
+
+			//Delete first element
+			System.out.println(array.delStart());
+			array.printArray();
+
+			//Delete last element
+			System.out.println(array.delEnd());
+			array.printArray();
+
+			//Delete element from position
+			System.out.println(array.delPos(2));
+			array.printArray();
+
+			//Find min element
+			System.out.println("Min="+array.findMin());
+
+			//Find max element
+			System.out.println("Max="+array.findMax());
+
+			//Find index of min element
+			System.out.println("MinIndex="+array.findMinIndex());
+
+			//Find index of max element
+			System.out.println("MaxIndex="+array.findMaxIndex());
+
+			//Sort array
+			System.out.println("Sort array");
+			array.sort();
+			array.printArray();
+
+			//Revers array
+			System.out.println("Revers array");
+			array.revers();
+			array.printArray();
+
+			//Halfrevers array
+			System.out.println("HalfRevers array");
+			array.halfRevers();
+			array.printArray();
+			////////////////////////////////////
+			//Clear array
+			////////////////////////////////////
+			array.clearArray();
+			array.printArray();
+		}
+		catch (IllegalArgumentException|ArrayIndexOutOfBoundsException errObj)
+		{
+			System.out.println("Error");
+		}
 	}
 	public static int[] fill(int size){
 		int[] array=new int[size];

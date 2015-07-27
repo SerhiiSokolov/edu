@@ -4,22 +4,24 @@ import java.util.Arrays;
 
 public class MainArray 
 {
-	private int size=10;
-	private int[] array=new int[size];
+	//private int size=10;
+	private int[] array;
+	//=new int[size];
 
 	//This method return size of array
 	public int getSize()
 	{
-		return size;
+		if(array==null) throw new IllegalArgumentException();
+		return array.length;
 	}
 
 	//This method initialize array, copy data from passed array
-	public void initArray(int[] array)
+	public void initArray(int[] arr)
 	{
-		this.array=new int[array.length];
-		for(int i=0;i<array.length;i++)
+		array=new int[arr.length];
+		for(int i=0;i<arr.length;i++)
 		{
-			this.array[i]=array[i];
+			array[i]=arr[i];
 		}
 	}
 
@@ -68,6 +70,7 @@ public class MainArray
 		array=tempArray;
 		return startValue;
 	}
+
 	//Method delete last element from array and return his value
 	public int delEnd()
 	{
@@ -88,6 +91,50 @@ public class MainArray
 		return elemenFromPosition;
 	}
 	
+	//Find min element and return his value
+	public int findMin()
+	{
+		int min=array[0];;
+		for (int i=1;i<array.length;i++)
+		{			
+			if(array[i]<min) min=array[i];
+		}
+		return min;
+	}
+
+	//Find max element and return his value
+	public int findMax()
+	{
+		int max=array[0];
+		for (int i=1;i<array.length;i++)
+		{
+			if(array[i]>max) max=array[i];
+		}
+		return max;
+	}
+
+	//Find min element and return his index
+	public int findMinIndex()
+	{
+		int minIndex=0;
+		for (int i=1;i<array.length;i++)
+		{
+			if(array[i]<array[minIndex]) minIndex=i;
+		}
+		return minIndex;
+	}
+
+	//Find min element and return his index
+	public int findMaxIndex()
+	{
+		int maxIndex=0;
+		for (int i=1;i<array.length;i++)
+		{
+			if(array[i]>array[maxIndex]) maxIndex=i;
+		}
+		return maxIndex;
+	}
+	
 	//Sort array with quick algorithm
 	public void sort()
 	{
@@ -103,7 +150,7 @@ public class MainArray
 		{
 			while(array[f]<mid) f++;
 			while(array[l]>mid) l--;
-			
+
 			if(f<=l)
 			{
 				temp=array[f];
@@ -116,7 +163,7 @@ public class MainArray
 		if(f<last) qsort(array, f,last);
 		if(l>first) qsort(array, first, l);
 	}
-	
+
 	//Method revers array
 	public void revers()
 	{
@@ -127,7 +174,7 @@ public class MainArray
 		}
 		array=tempArray;
 	}
-	
+
 	//Change first half array and second half
 	public void halfRevers()
 	{
@@ -144,7 +191,7 @@ public class MainArray
 			System.arraycopy(temp1, 0, array, middle+1, temp1.length);
 		}
 	}
-	
+
 	//Print whole array
 	public void printArray()
 	{
@@ -155,6 +202,11 @@ public class MainArray
 		System.out.println();
 	}
 
+	//Method return array
+	public int[] getArray() {
+		return array;
+	}
+	
 	//Print array from "start" to "stop", include both points 
 	public void printArray(int start, int stop)
 	{
