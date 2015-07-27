@@ -35,6 +35,7 @@ public class MainArray
 	//Add value to zero position
 	public void addStart(int startValue)
 	{
+		if(array==null) throw new IllegalArgumentException();
 		int[] tempArray=new int[array.length+1];
 		tempArray[0]=startValue;
 		for(int i=0;i<array.length;i++)
@@ -47,6 +48,7 @@ public class MainArray
 	//Add value to last position
 	public void addEnd(int endValue)
 	{
+		if(array==null) throw new IllegalArgumentException();
 		int[] tempArray=Arrays.copyOf(array, array.length+1);
 		tempArray[tempArray.length-1]=endValue;
 		array=tempArray;
@@ -55,16 +57,32 @@ public class MainArray
 	//Add element to position
 	public void addPos(int position, int value)
 	{
-		int[] tempArray=new int[array.length+1];
-		System.arraycopy(array, 0, tempArray, 0, position);
-		tempArray[position]=value;
-		System.arraycopy(array, position, tempArray, position+1, array.length-position);
-		array=tempArray;
+		if(position<0||position>array.length+1||array==null) throw new IllegalArgumentException();
+		if (position==array.length) addEnd(value);
+		if (position==0) addStart(value);
+		else
+		{
+			int[] tempArray=new int[array.length+1];
+
+			int i=0;
+			for(i=0;i<=position;i++)
+			{
+				tempArray[i]=array[i];
+			}
+			tempArray[i-1]=value;
+			while (i<tempArray.length)
+			{
+				tempArray[i]=array[i-1];
+				i++;
+			}
+			array=tempArray;
+		}
 	}
 
 	//Method delete zero-element from array and return his value
 	public int delStart()
 	{
+		if(array.length==0||array==null) throw new IllegalArgumentException();
 		int startValue=array[0];
 		int[] tempArray= Arrays.copyOfRange(array, 1, array.length);
 		array=tempArray;
@@ -74,6 +92,7 @@ public class MainArray
 	//Method delete last element from array and return his value
 	public int delEnd()
 	{
+		if(array.length==0||array==null) throw new IllegalArgumentException();
 		int lastValue=array[array.length-1];
 		int[] tempArray= Arrays.copyOfRange(array, 0, array.length-1);
 		array=tempArray;
@@ -83,6 +102,7 @@ public class MainArray
 	//Method delete element from position and return his value
 	public int delPos(int position)
 	{
+		if(position<0||position>array.length-1||array.length==0||array==null) throw new IllegalArgumentException();
 		int elemenFromPosition=array[position];
 		int[] tempArray=new int[array.length-1];
 		System.arraycopy(array, 0, tempArray, 0, position);
@@ -90,10 +110,11 @@ public class MainArray
 		array=tempArray;
 		return elemenFromPosition;
 	}
-	
+
 	//Find min element and return his value
 	public int findMin()
 	{
+		if(array.length==0||array==null) throw new IllegalArgumentException();
 		int min=array[0];;
 		for (int i=1;i<array.length;i++)
 		{			
@@ -105,6 +126,7 @@ public class MainArray
 	//Find max element and return his value
 	public int findMax()
 	{
+		if(array.length==0||array==null) throw new IllegalArgumentException();
 		int max=array[0];
 		for (int i=1;i<array.length;i++)
 		{
@@ -116,6 +138,7 @@ public class MainArray
 	//Find min element and return his index
 	public int findMinIndex()
 	{
+		if(array.length==0||array==null) throw new IllegalArgumentException();
 		int minIndex=0;
 		for (int i=1;i<array.length;i++)
 		{
@@ -127,6 +150,7 @@ public class MainArray
 	//Find min element and return his index
 	public int findMaxIndex()
 	{
+		if(array.length==0||array==null) throw new IllegalArgumentException();
 		int maxIndex=0;
 		for (int i=1;i<array.length;i++)
 		{
@@ -134,13 +158,14 @@ public class MainArray
 		}
 		return maxIndex;
 	}
-	
+
 	//Sort array with quick algorithm
 	public void sort()
 	{
-		qsort(array, 0, array.length-1);
+		if(array==null) throw new IllegalArgumentException();
+		if(array.length>1) qsort(array, 0, array.length-1);
 	}
-	public void qsort(int[] array, int first, int last)
+	private void qsort(int[] array, int first, int last)
 	{
 		int mid=array[(first+last)/2];
 		int f=first;
@@ -167,29 +192,57 @@ public class MainArray
 	//Method revers array
 	public void revers()
 	{
-		int[] tempArray=new int[array.length];
-		for(int i=0; i<array.length;i++)
+		if(array==null) throw new IllegalArgumentException();
+		if(array.length>1)
 		{
-			tempArray[array.length-1-i]=array[i];
+			int[] tempArray=new int[array.length];
+			for(int i=0; i<array.length;i++)
+			{
+				tempArray[array.length-1-i]=array[i];
+			}
+			array=tempArray;
 		}
-		array=tempArray;
 	}
 
 	//Change first half array and second half
 	public void halfRevers()
 	{
-		int middle=array.length/2;;
-		int[] temp1=Arrays.copyOfRange(array,0,middle);
-		if (array.length%2==0) 
+		if(array==null) throw new IllegalArgumentException();
+		if(array.length>1)
 		{
-			System.arraycopy(array, middle, array, 0, temp1.length);
-			System.arraycopy(temp1, 0, array, middle, temp1.length);
+			int middle=array.length/2;;
+			int[] temp1=Arrays.copyOfRange(array,0,middle);
+			if (array.length%2==0) 
+			{
+				System.arraycopy(array, middle, array, 0, temp1.length);
+				System.arraycopy(temp1, 0, array, middle, temp1.length);
+			}
+			else
+			{
+				System.arraycopy(array, middle+1, array, 0, temp1.length);
+				System.arraycopy(temp1, 0, array, middle+1, temp1.length);
+			}
 		}
-		else
-		{
-			System.arraycopy(array, middle+1, array, 0, temp1.length);
-			System.arraycopy(temp1, 0, array, middle+1, temp1.length);
-		}
+	}
+
+	//Method return array
+	public int[] getArray() {
+		return array;
+	}
+
+	//Method return first element
+	public int getStart() {
+		return array[0];
+	}
+
+	//Method return last element
+	public int getEnd() {
+		return array[array.length-1];
+	}
+
+	//Method  return element from position
+	public int getPos(int position) {
+		return array[position];
 	}
 
 	//Print whole array
@@ -202,11 +255,7 @@ public class MainArray
 		System.out.println();
 	}
 
-	//Method return array
-	public int[] getArray() {
-		return array;
-	}
-	
+
 	//Print array from "start" to "stop", include both points 
 	public void printArray(int start, int stop)
 	{
@@ -216,6 +265,4 @@ public class MainArray
 		}
 		System.out.println();
 	}
-
-
 }

@@ -1,7 +1,5 @@
 package edu.hillel.hw3.arrays;
 
-import java.util.Random;
-
 public class WorkWithArrays 
 {
 	public static void main(String[] args) {
@@ -12,10 +10,8 @@ public class WorkWithArrays
 			//Init array
 			////////////////////////////////////
 			int[] ar={10,30,54,77,11,22,99,3};
-			//int[] ar;
 			array.initArray(ar);
 			array.printArray();
-
 
 			//Get array size
 			System.out.println("Array size="+array.getSize());
@@ -29,7 +25,7 @@ public class WorkWithArrays
 			array.printArray();
 
 			//Add element to position
-			array.addPos(9, 999);
+			array.addPos(2, 999);
 			array.printArray();
 
 			//Delete first element
@@ -80,13 +76,5 @@ public class WorkWithArrays
 		{
 			System.out.println("Error");
 		}
-	}
-	public static int[] fill(int size){
-		int[] array=new int[size];
-		Random rand=new Random();
-		for (int i=0;i<size;i++){
-			array[i]=rand.nextInt(100)+1;
-		}
-		return array;
 	}
 }
