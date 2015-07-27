@@ -88,6 +88,63 @@ public class MainArray
 		return elemenFromPosition;
 	}
 	
+	//Sort array with quick algorithm
+	public void sort()
+	{
+		qsort(array, 0, array.length-1);
+	}
+	public void qsort(int[] array, int first, int last)
+	{
+		int mid=array[(first+last)/2];
+		int f=first;
+		int l=last;
+		int temp;
+		do
+		{
+			while(array[f]<mid) f++;
+			while(array[l]>mid) l--;
+			
+			if(f<=l)
+			{
+				temp=array[f];
+				array[f]=array[l];
+				array[l]=temp;
+				f++;
+				l--;
+			}
+		}while(f<l);
+		if(f<last) qsort(array, f,last);
+		if(l>first) qsort(array, first, l);
+	}
+	
+	//Method revers array
+	public void revers()
+	{
+		int[] tempArray=new int[array.length];
+		for(int i=0; i<array.length;i++)
+		{
+			tempArray[array.length-1-i]=array[i];
+		}
+		array=tempArray;
+	}
+	
+	//Change first half array and second half
+	public void halfRevers()
+	{
+		int middle=array.length/2;;
+		int[] temp1=Arrays.copyOfRange(array,0,middle);
+		if (array.length%2==0) 
+		{
+			System.arraycopy(array, middle, array, 0, temp1.length);
+			System.arraycopy(temp1, 0, array, middle, temp1.length);
+		}
+		else
+		{
+			System.arraycopy(array, middle+1, array, 0, temp1.length);
+			System.arraycopy(temp1, 0, array, middle+1, temp1.length);
+		}
+	}
+	
 	//Print whole array
 	public void printArray()
 	{

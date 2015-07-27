@@ -15,7 +15,8 @@ public class QuickSort {
 
 	public static void qsort(int[]array, int first, int last){
 		int mid=array[(first+last)/2];
-		int f=first, l=last;
+		int f=first;
+		int l=last;
 		int temp;
 		do{
 			while(array[f]<mid) f++;
