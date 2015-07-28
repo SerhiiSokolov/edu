@@ -10,6 +10,7 @@ public class WorkWithArrays
 			//Init array
 			////////////////////////////////////
 			int[] ar={10,30,54,77,11,22,99,3};
+			//int[] ar={10,11};
 			array.initArray(ar);
 			array.printArray();
 
@@ -29,11 +30,11 @@ public class WorkWithArrays
 			array.printArray();
 
 			//Delete first element
-			System.out.println(array.delStart());
+			System.out.println("Deleted first element="+array.delStart());
 			array.printArray();
 
 			//Delete last element
-			System.out.println(array.delEnd());
+			System.out.println("Deleted end element="+array.delEnd());
 			array.printArray();
 
 			//Delete element from position
@@ -78,3 +79,4 @@ public class WorkWithArrays
 		}
 	}
 }
+
