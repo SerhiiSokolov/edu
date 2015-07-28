@@ -4,9 +4,7 @@ import java.util.Arrays;
 
 public class MainArray 
 {
-	//private int size=10;
 	private int[] array;
-	//=new int[size];
 
 	//This method return size of array
 	public int getSize()
@@ -18,6 +16,7 @@ public class MainArray
 	//This method initialize array, copy data from passed array
 	public void initArray(int[] arr)
 	{
+		if(arr==null) throw new IllegalArgumentException();
 		array=new int[arr.length];
 		for(int i=0;i<arr.length;i++)
 		{
@@ -28,8 +27,12 @@ public class MainArray
 	//Method clear array by making new reference to null-array
 	public void clearArray()
 	{
-		int[] tempArray=new int[0];
-		array=tempArray;
+		if(array==null)array=new int[0];
+		else
+			{
+			int[] tempArray=new int[0];
+			array=tempArray;
+			}
 	}
 
 	//Add value to zero position
@@ -58,7 +61,7 @@ public class MainArray
 	//Add element to position
 	public void addPos(int position, int value)
 	{
-		if(position<0||position>array.length+1||array==null) throw new IllegalArgumentException();
+		if(array==null||position<0||position>array.length+1) throw new IllegalArgumentException();
 		if (position==array.length) addEnd(value);
 		if (position==0) addStart(value);
 		else
@@ -83,7 +86,7 @@ public class MainArray
 	//Method delete zero-element from array and return his value
 	public int delStart()
 	{
-		if(array.length==0||array==null) throw new IllegalArgumentException();
+		if(array==null||array.length==0) throw new IllegalArgumentException();
 		int startValue=array[0];
 		int[] tempArray=new int[array.length-1];
 		for(int i=1;i<array.length;i++) tempArray[i-1]=array[i];
@@ -94,7 +97,7 @@ public class MainArray
 	//Method delete last element from array and return his value
 	public int delEnd()
 	{
-		if(array.length==0||array==null) throw new IllegalArgumentException();
+		if(array==null||array.length==0) throw new IllegalArgumentException();
 		int lastValue=array[array.length-1];
 		int[] tempArray=new int[array.length-1];
 		for(int i=0;i<array.length-1;i++) tempArray[i]=array[i];
@@ -105,7 +108,7 @@ public class MainArray
 	//Method delete element from position and return his value
 	public int delPos(int position)
 	{
-		if(position<0||position>array.length-1||array.length==0||array==null) throw new IllegalArgumentException();
+		if(array==null||array.length==0||position<0||position>array.length-1) throw new IllegalArgumentException();
 		int elemenFromPosition=array[position];
 		int[] tempArray=new int[array.length-1];
 		for(int i=0;i<position;i++) tempArray[i]=array[i];
@@ -117,7 +120,7 @@ public class MainArray
 	//Find min element and return his value
 	public int findMin()
 	{
-		if(array.length==0||array==null) throw new IllegalArgumentException();
+		if(array==null||array.length==0) throw new IllegalArgumentException();
 		int min=array[0];;
 		for (int i=1;i<array.length;i++)
 		{			
@@ -129,7 +132,7 @@ public class MainArray
 	//Find max element and return his value
 	public int findMax()
 	{
-		if(array.length==0||array==null) throw new IllegalArgumentException();
+		if(array==null||array.length==0) throw new IllegalArgumentException();
 		int max=array[0];
 		for (int i=1;i<array.length;i++)
 		{
@@ -141,7 +144,7 @@ public class MainArray
 	//Find min element and return his index
 	public int findMinIndex()
 	{
-		if(array.length==0||array==null) throw new IllegalArgumentException();
+		if(array==null||array.length==0) throw new IllegalArgumentException();
 		int minIndex=0;
 		for (int i=1;i<array.length;i++)
 		{
@@ -153,7 +156,7 @@ public class MainArray
 	//Find min element and return his index
 	public int findMaxIndex()
 	{
-		if(array.length==0||array==null) throw new IllegalArgumentException();
+		if(array==null||array.length==0) throw new IllegalArgumentException();
 		int maxIndex=0;
 		for (int i=1;i<array.length;i++)
 		{
@@ -229,28 +232,37 @@ public class MainArray
 	}
 
 	//Method return array
-	public int[] getArray() {
+	public int[] getArray() 
+	{
+		if(array==null) throw new IllegalArgumentException();
 		return array;
 	}
 
 	//Method return first element
-	public int getStart() {
+	public int getStart() 
+	{
+		if(array==null) throw new IllegalArgumentException();
 		return array[0];
 	}
 
 	//Method return last element
-	public int getEnd() {
+	public int getEnd() 
+	{
+		if(array==null) throw new IllegalArgumentException();
 		return array[array.length-1];
 	}
 
 	//Method  return element from position
-	public int getPos(int position) {
+	public int getPos(int position) 
+	{
+		if(array==null) throw new IllegalArgumentException();
 		return array[position];
 	}
 
 	//Print whole array
 	public void printArray()
 	{
+		if(array==null) throw new IllegalArgumentException();
 		for(int i=0;i<array.length;i++)
 		{
 			System.out.print("["+array[i]+"] ");
@@ -262,6 +274,7 @@ public class MainArray
 	//Print array from "start" to "stop", include both points 
 	public void printArray(int start, int stop)
 	{
+		if(array==null) throw new IllegalArgumentException();
 		for(int i=start;i<=stop;i++)
 		{
 			System.out.print("["+array[i]+"] ");
