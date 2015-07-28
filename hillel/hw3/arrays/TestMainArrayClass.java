@@ -707,5 +707,4 @@ public class TestMainArrayClass {
 		int[] actual=testArray.getArray();
 		assertArrayEquals(ar, actual);
 	}
-
 }
