@@ -49,8 +49,9 @@ public class MainArray
 	public void addEnd(int endValue)
 	{
 		if(array==null) throw new IllegalArgumentException();
-		int[] tempArray=Arrays.copyOf(array, array.length+1);
-		tempArray[tempArray.length-1]=endValue;
+		int[] tempArray=new int[array.length+1];
+		for (int i=0;i<array.length;i++) tempArray[i]=array[i];
+		tempArray[array.length]=endValue;
 		array=tempArray;
 	}
 
@@ -84,7 +85,8 @@ public class MainArray
 	{
 		if(array.length==0||array==null) throw new IllegalArgumentException();
 		int startValue=array[0];
-		int[] tempArray= Arrays.copyOfRange(array, 1, array.length);
+		int[] tempArray=new int[array.length-1];
+		for(int i=1;i<array.length;i++) tempArray[i-1]=array[i];
 		array=tempArray;
 		return startValue;
 	}
@@ -94,7 +96,8 @@ public class MainArray
 	{
 		if(array.length==0||array==null) throw new IllegalArgumentException();
 		int lastValue=array[array.length-1];
-		int[] tempArray= Arrays.copyOfRange(array, 0, array.length-1);
+		int[] tempArray=new int[array.length-1];
+		for(int i=0;i<array.length-1;i++) tempArray[i]=array[i];
 		array=tempArray;
 		return lastValue;
 	}
@@ -105,8 +108,8 @@ public class MainArray
 		if(position<0||position>array.length-1||array.length==0||array==null) throw new IllegalArgumentException();
 		int elemenFromPosition=array[position];
 		int[] tempArray=new int[array.length-1];
-		System.arraycopy(array, 0, tempArray, 0, position);
-		System.arraycopy(array, position+1, tempArray, position, array.length-position-1);
+		for(int i=0;i<position;i++) tempArray[i]=array[i];
+		for(int i=position+1;i<array.length;i++) tempArray[i-1]=array[i];
 		array=tempArray;
 		return elemenFromPosition;
 	}
