@@ -44,6 +44,14 @@ public class TestMainArrayClass {
 		assertArrayEquals(ar, actual);
 	}
 
+	@Test (expected=IllegalArgumentException.class)
+	public void initArrayTest_NullArray() 
+	{
+		int[] ar=null;
+		testArray.initArray(ar);
+		int[] actual=testArray.getArray();
+		assertArrayEquals(ar, actual);
+	}
 
 	///////////////////////////////////////////////
 	//Block testing get size of array
@@ -51,7 +59,7 @@ public class TestMainArrayClass {
 	public void getSizeTest_NullArray() 
 	{
 		int actual=testArray.getSize();
-		assertEquals(0, actual);
+		assertEquals(null, actual);
 	}		
 	@Test
 	public void getSizeTest_ZeroArray() 
@@ -125,6 +133,15 @@ public class TestMainArrayClass {
 		assertEquals(10, actual);
 	}
 
+	@Test (expected=IllegalArgumentException.class)
+	public void addStartTest_NullArray() 
+	{
+		//int[] ar=null;
+		//testArray.initArray(ar);
+		testArray.addStart(10);
+		int actual=testArray.getStart();
+		//assertEquals(ar, actual);
+	}
 	/////////////////////////////////////
 	//Test add last element to array
 	@Test
@@ -162,6 +179,11 @@ public class TestMainArrayClass {
 		testArray.addEnd(10);		
 		int actual=testArray.getEnd();
 		assertEquals(10, actual);
+	}
+	@Test (expected=IllegalArgumentException.class)
+	public void addEndTest_NullArray() 
+	{
+		testArray.addEnd(10);
 	}
 
 	/////////////////////////////////////
@@ -267,7 +289,7 @@ public class TestMainArrayClass {
 		assertEquals(10, actual);
 	}
 	@Test (expected=IllegalArgumentException.class)
-	public void addPosTest_OutOfRangeArray() 
+	public void addPosTest_OutOfRangeArray1() 
 	{
 		int[] ar={};
 		testArray.initArray(ar);
@@ -276,13 +298,26 @@ public class TestMainArrayClass {
 		int actual=testArray.getPos(pos);
 		assertEquals(10, actual);
 	}
-	
-	
+	@Test (expected=IllegalArgumentException.class)
+	public void addPosTest_OutOfRangeArray2() 
+	{
+		int[] ar={};
+		testArray.initArray(ar);
+		int pos=-1;
+		testArray.addPos(pos,10);		
+		int actual=testArray.getPos(pos);
+		assertEquals(10, actual);
+	}	
+	@Test (expected=IllegalArgumentException.class)
+	public void addPosTest_NullArray() 
+	{
+		testArray.addPos(10,10);		
+	}
 
 	///////////////////////////////////////
 	//Test delete first element from array
 	@Test
-	public void delstartTest_ManyArray() 
+	public void delStartTest_ManyArray() 
 	{
 		int[] ar={1,4,5,2,8};
 		testArray.initArray(ar);
@@ -291,7 +326,7 @@ public class TestMainArrayClass {
 		assertEquals(4, actual);
 	}
 	@Test
-	public void delstartTest_TwoArray() 
+	public void delStartTest_TwoArray() 
 	{
 		int[] ar={1,4};
 		testArray.initArray(ar);
@@ -300,7 +335,7 @@ public class TestMainArrayClass {
 		assertEquals(4, actual);
 	}
 	@Test
-	public void delstartTest_OneArray() 
+	public void delStartTest_OneArray() 
 	{
 		int[] ar={1};
 		testArray.initArray(ar);
@@ -309,7 +344,7 @@ public class TestMainArrayClass {
 		assertEquals(0, actual);
 	}
 	@Test (expected=IllegalArgumentException.class)
-	public void delstartTest_ZeroArray() 
+	public void delStartTest_ZeroArray() 
 	{
 		int[] ar={};
 		testArray.initArray(ar);
@@ -317,7 +352,11 @@ public class TestMainArrayClass {
 		int actual=testArray.getSize();
 		assertEquals(0, actual);
 	}
-
+	@Test (expected=IllegalArgumentException.class)
+	public void delStartTest_NullArray() 
+	{
+		testArray.delStart();		
+	}
 
 	///////////////////////////////////////
 	//Test delete last element from array
@@ -356,6 +395,11 @@ public class TestMainArrayClass {
 		testArray.delEnd();		
 		int actual=testArray.getSize();
 		assertEquals(0, actual);
+	}
+	@Test (expected=IllegalArgumentException.class)
+	public void delEndTest_NullArray() 
+	{
+		testArray.delEnd();		
 	}
 
 	///////////////////////////////////////
@@ -396,7 +440,25 @@ public class TestMainArrayClass {
 		int actual=testArray.getSize();
 		assertEquals(0, actual);
 	}
-
+	@Test (expected=IllegalArgumentException.class)
+	public void delPosTest_NullArray() 
+	{
+		testArray.delPos(0);		
+	}
+	@Test (expected=IllegalArgumentException.class)
+	public void delPosTest_OutOfRangeMin() 
+	{
+		int[] ar={1,4};
+		testArray.initArray(ar);
+		testArray.delPos(-1);		
+	}
+	@Test (expected=IllegalArgumentException.class)
+	public void delPosTest_OutOfRangeMax() 
+	{
+		int[] ar={1,4};
+		testArray.initArray(ar);
+		testArray.delPos(10);		
+	}
 	///////////////////////////////////////
 	//Find min number in array
 	@Test
@@ -428,9 +490,14 @@ public class TestMainArrayClass {
 	{
 		int[] ar={};
 		testArray.initArray(ar);
-		int actual=testArray.findMin();
-		assertEquals(1, actual);
+		testArray.findMin();
 	}
+	@Test (expected=IllegalArgumentException.class)
+	public void findMinTest_NullArray() 
+	{
+		testArray.findMin();
+	}
+
 	///////////////////////////////////////
 	//Find max number in array
 	@Test
@@ -464,6 +531,11 @@ public class TestMainArrayClass {
 		testArray.initArray(ar);
 		int actual=testArray.findMax();
 		assertEquals(1, actual);
+	}
+	@Test (expected=IllegalArgumentException.class)
+	public void findMaxTest_NullArray() 
+	{
+		testArray.findMax();
 	}
 
 	///////////////////////////////////////
@@ -500,7 +572,11 @@ public class TestMainArrayClass {
 		int actual=testArray.findMinIndex();
 		assertEquals(1, actual);
 	}
-
+	@Test (expected=IllegalArgumentException.class)
+	public void findMinIndexTest_NullArray() 
+	{
+		testArray.findMinIndex();
+	}
 	///////////////////////////////////////
 	//Find max number in array and return index
 	@Test
@@ -534,6 +610,11 @@ public class TestMainArrayClass {
 		testArray.initArray(ar);
 		int actual=testArray.findMaxIndex();
 		assertEquals(1, actual);
+	}
+	@Test (expected=IllegalArgumentException.class)
+	public void findMaxIndexTest_NullArray() 
+	{
+		testArray.findMaxIndex();		
 	}
 
 	////////////////////////////////////////////
@@ -588,6 +669,11 @@ public class TestMainArrayClass {
 		int[] actual=testArray.getArray();
 		assertArrayEquals(ar, actual);
 	}
+	@Test (expected=IllegalArgumentException.class)
+	public void sortTest_NullArray() 
+	{
+		testArray.sort();
+	}
 
 	////////////////////////////////////////////
 	//Test revers array
@@ -641,9 +727,14 @@ public class TestMainArrayClass {
 		int[] actual=testArray.getArray();
 		assertArrayEquals(ar, actual);
 	}
+	@Test (expected=IllegalArgumentException.class)
+	public void reversTest_NullArray() 
+	{
+		testArray.revers();
+	}
 
 	////////////////////////////////////////////
-	//Test revers array
+	//Test halfrevers array
 	@Test
 	public void halfReversTest_ManyElementsArray1() 
 	{
@@ -689,12 +780,17 @@ public class TestMainArrayClass {
 	{
 		int[] arInit={};
 		testArray.initArray(arInit);
-		testArray.halfRevers();
+	 	testArray.halfRevers();
 		int[] ar={};
 		int[] actual=testArray.getArray();
 		assertArrayEquals(ar, actual);
 	}
-	
+	@Test (expected=IllegalArgumentException.class)
+	public void halfReversTest_NullArray() 
+	{
+		testArray.halfRevers();
+	}
+
 	//////////////////////////////////////////
 	//Test clear array
 	@Test
@@ -706,5 +802,10 @@ public class TestMainArrayClass {
 		int[] ar={};
 		int[] actual=testArray.getArray();
 		assertArrayEquals(ar, actual);
+	}
+	@Test
+	public void clearArrayTest_NullArray() 
+	{
+		testArray.clearArray();
 	}
 }
