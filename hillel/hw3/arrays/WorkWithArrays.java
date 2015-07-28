@@ -73,10 +73,9 @@ public class WorkWithArrays
 			array.clearArray();
 			array.printArray();
 		}
-		catch (IllegalArgumentException|ArrayIndexOutOfBoundsException errObj)
+		catch (IllegalArgumentException|ArrayIndexOutOfBoundsException|NullPointerException errObj)
 		{
 			System.out.println("Error");
 		}
 	}
 }
-
