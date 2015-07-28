@@ -217,7 +217,34 @@ public class MainArray
 		if(array.length>1)
 		{
 			int middle=array.length/2;;
-			int[] temp1=Arrays.copyOfRange(array,0,middle);
+			int[] temp1=new int[array.length];
+			for(int i=0;i<middle;i++)
+			{
+				temp1[i]=array[i];
+			}
+			if (array.length%2==0)
+			{
+				for(int i=0, j=middle; i<middle;i++,j++)
+				{
+					array[i]=array[j];
+				}
+				for(int i=middle, j=0; i<temp1.length;i++, j++)
+				{
+					array[i]=temp1[j];
+				}
+			}
+			else
+			{
+				for(int i=0, j=middle+1; i<middle;i++,j++)
+				{
+					array[i]=array[j];
+				}
+				for(int i=middle+1, j=0; i<temp1.length;i++, j++)
+				{
+					array[i]=temp1[j];
+				}
+			}
+			/*int[] temp1=Arrays.copyOfRange(array,0,middle);
 			if (array.length%2==0) 
 			{
 				System.arraycopy(array, middle, array, 0, temp1.length);
@@ -227,7 +254,7 @@ public class MainArray
 			{
 				System.arraycopy(array, middle+1, array, 0, temp1.length);
 				System.arraycopy(temp1, 0, array, middle+1, temp1.length);
-			}
+			}*/
 		}
 	}
 
