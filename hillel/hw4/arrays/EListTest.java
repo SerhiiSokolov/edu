@@ -6,9 +6,9 @@ import org.junit.Test;
 
 public class EListTest 
 {
-	EList rr = new AList0();
+	//EList rr = new AList0();
 	//EList rr = new AList1();
-	//EList rr = new AList2();
+	EList rr = new AList2();
 
 	//=====================================
 	// size, init, toArray
@@ -190,13 +190,19 @@ public class EListTest
 		int[] act = rr.toArray();
 		assertArrayEquals(exp, act);
 	}
-	/*
-	
-	@Test
-	public void testSet() {
-		fail("Not yet implemented");
+	@Test (expected = IllegalArgumentException.class)
+	public void testSet_outrange() 
+	{
+		int[] ini = {10,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
+		rr.init(ini);
+		rr.set(35,99);
+		assertEquals(20, rr.size());
+		assertEquals(99, rr.get(2));
+		int[] exp = {10,20,99,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
+		int[] act = rr.toArray();
+		assertArrayEquals(exp, act);
 	}
-	 */
+
 	//=====================================
 	// addStart
 	//=====================================
@@ -734,9 +740,9 @@ public class EListTest
 	@Test
 	public void testMaxInd_many2()
 	{	
-		int[] ini = {10,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
+		int[] ini = {10,20,33,77,11,24,19,10,4,19,11,14,99,13,15,16,12,8,19,20};
 		rr.init(ini);
-		assertEquals(3, rr.maxInd());
+		assertEquals(12, rr.maxInd());
 	}
 
 	//=====================================
@@ -783,6 +789,16 @@ public class EListTest
 		rr.init(ini);
 		rr.sort();
 		int[] exp = {10,11,19,20,24,33,77};
+		int[] act = rr.toArray();
+		assertArrayEquals(exp, act);
+	}
+	@Test
+	public void testSort_many2()
+	{	
+		int[] ini = {10,20,33,77,11,24,19,10,4,19,11,14,99,13,15,16,12,8,19,20};
+		rr.init(ini);
+		rr.sort();
+		int[] exp = {4,8,10,10,11,11,12,13,14,15,16,19,19,19,20,20,24,33,77,99};
 		int[] act = rr.toArray();
 		assertArrayEquals(exp, act);
 	}

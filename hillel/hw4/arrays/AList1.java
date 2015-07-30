@@ -83,6 +83,8 @@ public class AList1 implements EList {
 	@Override
 	public void addPos(int pos, int val)
 	{
+		if (pos>index)
+			throw new IllegalArgumentException();
 		if (index>arr.length-1) resize();
 		for (int i = index; i > pos; i--) 
 		{
@@ -260,5 +262,16 @@ public class AList1 implements EList {
 			tmp[i]=arr[i];
 		}
 		arr=tmp;
+	}
+
+	@Override
+	public void printArray() 
+	{
+		if(arr==null) throw new IllegalArgumentException();
+		for(int i=0;i<arr.length;i++)
+		{
+			System.out.print("["+arr[i]+"] ");
+		}
+		System.out.println();
 	}
 }
