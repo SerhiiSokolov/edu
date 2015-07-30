@@ -47,15 +47,18 @@ public class AList1 implements EList {
 	@Override
 	public int get(int pos) 
 	{
+		if(size() == 0||pos<0||pos>index-1)
+			throw new IllegalArgumentException();
 		return arr[pos];
 	}
 
 	@Override
 	public void set(int pos, int val) 
 	{
+		if(size() == 0||pos<0||pos>index-1)
+			throw new IllegalArgumentException();
 		arr[pos] = val;
 	}
-
 
 	@Override
 	public void addStart(int val)
@@ -109,9 +112,8 @@ public class AList1 implements EList {
 	{
 		if(size() == 0)
 			throw new IllegalArgumentException();
-
-		int ret = arr[index-1];
 		index--;
+		int ret = arr[index];
 		arr[index]=0;
 		return ret;
 	}
@@ -119,7 +121,7 @@ public class AList1 implements EList {
 	@Override
 	public int delPos(int pos)
 	{
-		if(size() == 0)
+		if(size() == 0||pos<0||pos>index-1)
 			throw new IllegalArgumentException();
 		int ret = arr[pos];
 
@@ -150,6 +152,8 @@ public class AList1 implements EList {
 	@Override
 	public int max()
 	{
+		if(size() == 0)
+			throw new IllegalArgumentException();
 		int max = arr[0];
 		for (int i = 0; i < index; i++)
 		{
@@ -164,20 +168,28 @@ public class AList1 implements EList {
 	@Override
 	public int minInd()
 	{
+		if(size() == 0)
+			throw new IllegalArgumentException();
 		int min = 0;
 		for (int i=0; i < index ; i++)
 		{
+			System.out.println("index="+index+", i="+i);
+			System.out.println("arr[i]="+arr[i]+", arr[min]="+arr[min]);
 			if (arr[min] > arr[i])
 			{
 				min = i;
 			}
+			
 		}
+		System.out.println("min="+min);
 		return min;
 	}
 
 	@Override
 	public int maxInd()
 	{
+		if(size() == 0)
+			throw new IllegalArgumentException();
 		int max = 0;
 		for (int i=0; i < index; i++)
 		{
@@ -228,6 +240,7 @@ public class AList1 implements EList {
 			arr[index/2+d+i] = tmp;
 		}
 	}
+	
 	private void resize()
 	{
 		int newSize=arr.length+arr.length/3;
@@ -238,6 +251,7 @@ public class AList1 implements EList {
 		}
 		arr=tmp;
 	}
+	
 	private void resize(int newSize)
 	{
 		int[] tmp=new int[newSize];

@@ -6,8 +6,8 @@ import org.junit.Test;
 
 public class EListTest 
 {
-	//EList rr = new AList0();
-	EList rr = new AList1();
+	EList rr = new AList0();
+	//EList rr = new AList1();
 	//EList rr = new AList2();
 
 	//=====================================
@@ -82,18 +82,116 @@ public class EListTest
 	//=====================================
 	// clear
 	//=====================================
+	@Test
+	public void testClear() 
+	{
+		int[] ini = {10,20,33,77,11,24,19};
+		rr.init(ini);
+		assertEquals(7, rr.size());
+		rr.clear();
+		assertEquals(0, rr.size());
+	}
+	
+	//=====================================
+	// Get
+	//=====================================
+		
+	@Test (expected = IllegalArgumentException.class)
+	public void testGet() 
+	{
+
+		int[] ini = {};
+		rr.init(ini);
+		rr.get(0);
+	}
+	@Test
+	public void testGet_1() 
+	{
+
+		int[] ini = {10};
+		rr.init(ini);
+		assertEquals(10, rr.get(0));
+	}
+	@Test
+	public void testGet_2() 
+	{
+
+		int[] ini = {10,20};
+		rr.init(ini);
+		assertEquals(20, rr.get(1));
+	}
+	@Test
+	public void testGet_many() 
+	{
+
+		int[] ini = {10,20,33,77,11,24,19};
+		rr.init(ini);
+		assertEquals(77, rr.get(3));
+	}
+	@Test (expected = IllegalArgumentException.class)
+	public void testGet_many2() 
+	{
+		int[] ini = {10,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
+		rr.init(ini);
+		rr.get(25);
+	}
+	
+	//=====================================
+	// Set
+	//=====================================
+	@Test (expected = IllegalArgumentException.class)
+	public void testSet_0() 
+	{
+		int[] ini = {};
+		rr.init(ini);
+		rr.set(2,99);
+		assertEquals(0, rr.size());
+		assertEquals(0, rr.get(2));
+	}
+	@Test
+	public void testSet_1() 
+	{
+		int[] ini = {10};
+		rr.init(ini);
+		rr.set(0,99);
+		assertEquals(1, rr.size());
+		assertEquals(99, rr.get(0));
+	}
+	@Test
+	public void testSet_2() 
+	{
+		int[] ini = {10,20};
+		rr.init(ini);
+		rr.set(1,99);
+		assertEquals(2, rr.size());
+		assertEquals(99, rr.get(1));
+	}
+	@Test
+	public void testSet_many() 
+	{
+		int[] ini = {10,20,33,77,11,24,19,};
+		rr.init(ini);
+		rr.set(6,99);
+		assertEquals(7, rr.size());
+		assertEquals(99, rr.get(6));
+		int[] exp = {10,20,33,77,11,24,99};
+		int[] act = rr.toArray();
+		assertArrayEquals(exp, act);
+	}
+	@Test
+	public void testSet_many2() 
+	{
+		int[] ini = {10,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
+		rr.init(ini);
+		rr.set(2,99);
+		assertEquals(20, rr.size());
+		assertEquals(99, rr.get(2));
+		int[] exp = {10,20,99,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
+		int[] act = rr.toArray();
+		assertArrayEquals(exp, act);
+	}
 	/*
-
-	@Test
-	public void testClear() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGet() {
-		fail("Not yet implemented");
-	}
-
+	
 	@Test
 	public void testSet() {
 		fail("Not yet implemented");
@@ -438,7 +536,7 @@ public class EListTest
 
 		int[] ini = {10};
 		rr.init(ini);
-		rr.delPos(1);
+		rr.delPos(0);
 		assertEquals(0, rr.size());
 		int[] exp = {};
 		int[] act = rr.toArray();
@@ -524,12 +622,12 @@ public class EListTest
 	//=====================================
 	// Max
 	//=====================================
-	@Test
+	@Test (expected = IllegalArgumentException.class)
 	public void testMax_0()
 	{	
 		int[] ini = {};
 		rr.init(ini);
-		assertEquals(10, rr.max());
+		assertEquals(0, rr.max());
 	}	
 	@Test
 	public void testMax_1()
@@ -564,10 +662,10 @@ public class EListTest
 	//=====================================
 	// MinInd
 	//=====================================
-	@Test
+	@Test (expected = IllegalArgumentException.class)
 	public void testMinInd_0()
 	{	
-		int[] ini = {10};
+		int[] ini = {};
 		rr.init(ini);
 		assertEquals(0, rr.minInd());
 	}	
@@ -576,21 +674,21 @@ public class EListTest
 	{	
 		int[] ini = {10};
 		rr.init(ini);
-		assertEquals(10, rr.minInd());
+		assertEquals(0, rr.minInd());
 	}
 	@Test
 	public void testMinInd_2()
 	{	
 		int[] ini = {10,20};
 		rr.init(ini);
-		assertEquals(10, rr.minInd());
+		assertEquals(0, rr.minInd());
 	}
 	@Test
 	public void testMinInd_many()
 	{	
 		int[] ini = {10,20,33,77,11};
 		rr.init(ini);
-		assertEquals(10, rr.minInd());
+		assertEquals(0, rr.minInd());
 	}
 
 	@Test
@@ -598,22 +696,49 @@ public class EListTest
 	{	
 		int[] ini = {10,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
 		rr.init(ini);
-		assertEquals(4, rr.minInd());
+		assertEquals(8, rr.minInd());
 	}
 
-
-	/*
+	//=====================================
+	// MaxInd
+	//=====================================
+	@Test (expected = IllegalArgumentException.class)
+	public void testMaxInd_0()
+	{	
+		int[] ini = {};
+		rr.init(ini);
+		assertEquals(0, rr.maxInd());
+	}	
+	@Test
+	public void testMaxInd_1()
+	{	
+		int[] ini = {10};
+		rr.init(ini);
+		assertEquals(0, rr.maxInd());
+	}
+	@Test
+	public void testMaxInd_2()
+	{	
+		int[] ini = {10,20};
+		rr.init(ini);
+		assertEquals(1, rr.maxInd());
+	}
+	@Test
+	public void testMaxInd_many()
+	{	
+		int[] ini = {10,20,33,77,11};
+		rr.init(ini);
+		assertEquals(3, rr.maxInd());
+	}
 
 	@Test
-	public void testMinInd() {
-		fail("Not yet implemented");
+	public void testMaxInd_many2()
+	{	
+		int[] ini = {10,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
+		rr.init(ini);
+		assertEquals(3, rr.maxInd());
 	}
 
-	@Test
-	public void testMaxInd() {
-		fail("Not yet implemented");
-	}
-	 */
 	//=====================================
 	// sort
 	//=====================================
