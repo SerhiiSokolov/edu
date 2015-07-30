@@ -9,14 +9,14 @@ public class EListTest
 	//EList rr = new AList0();
 	EList rr = new AList1();
 	//EList rr = new AList2();
-	
+
 	//=====================================
 	// size, init, toArray
 	//=====================================
 	@Test
 	public void testSize_null() 
 	{
-		
+
 		int[] ini = null;
 		rr.init(ini);
 		assertEquals(0, rr.size());
@@ -27,7 +27,7 @@ public class EListTest
 	@Test
 	public void testSize_0() 
 	{
-		
+
 		int[] ini = {};
 		rr.init(ini);
 		assertEquals(0, rr.size());
@@ -38,7 +38,7 @@ public class EListTest
 	@Test
 	public void testSize_1() 
 	{
-		
+
 		int[] ini = {10};
 		rr.init(ini);
 		assertEquals(1, rr.size());
@@ -49,7 +49,7 @@ public class EListTest
 	@Test
 	public void testSize_2() 
 	{
-		
+
 		int[] ini = {10,20};
 		rr.init(ini);
 		assertEquals(2, rr.size());
@@ -60,7 +60,7 @@ public class EListTest
 	@Test
 	public void testSize_many() 
 	{
-		
+
 		int[] ini = {10,20,33,77,11,24,19};
 		rr.init(ini);
 		assertEquals(7, rr.size());
@@ -70,20 +70,19 @@ public class EListTest
 	}
 	@Test
 	public void testSize_many20() 
-	{
-		
+	{		
 		int[] ini = {10,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
 		rr.init(ini);
-		//assertEquals(20, rr.size());
-		//int[] exp = {10,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
-		//int[] act = rr.toArray();
-		//assertArrayEquals(exp, act);
+		assertEquals(20, rr.size());
+		int[] exp = {10,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
+		int[] act = rr.toArray();
+		assertArrayEquals(exp, act);
 	}
 
 	//=====================================
 	// clear
 	//=====================================
-/*
+	/*
 
 	@Test
 	public void testClear() {
@@ -99,14 +98,14 @@ public class EListTest
 	public void testSet() {
 		fail("Not yet implemented");
 	}
-*/
+	 */
 	//=====================================
 	// addStart
 	//=====================================
 	@Test
 	public void testAddStart() 
 	{
-		
+
 		int[] ini = {};
 		rr.init(ini);
 		rr.addStart(99);
@@ -119,7 +118,7 @@ public class EListTest
 	@Test
 	public void testAddStart_1() 
 	{
-		
+
 		int[] ini = {10};
 		rr.init(ini);
 		rr.addStart(99);
@@ -132,7 +131,7 @@ public class EListTest
 	@Test
 	public void testAddStart_2() 
 	{
-		
+
 		int[] ini = {10,20};
 		rr.init(ini);
 		rr.addStart(99);
@@ -145,7 +144,7 @@ public class EListTest
 	@Test
 	public void testAddStart_many() 
 	{
-		
+
 		int[] ini = {10,20,33,77,11,24,19};
 		rr.init(ini);
 		rr.addStart(99);
@@ -155,23 +154,163 @@ public class EListTest
 		int[] act = rr.toArray();
 		assertArrayEquals(exp, act);
 	}
-
-	/*	@Test
-	public void testAddEnd() {
-		fail("Not yet implemented");
+	@Test
+	public void testAddStart_many2() 
+	{
+		int[] ini = {10,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
+		rr.init(ini);
+		rr.addStart(99);
+		assertEquals(21, rr.size());
+		assertEquals(99, rr.get(0));
+		int[] exp = {99,10,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
+		int[] act = rr.toArray();
+		assertArrayEquals(exp, act);
 	}
 
+	//=====================================
+	// addEnd
+	//=====================================
 	@Test
-	public void testAddPos() {
-		fail("Not yet implemented");
-	}*/
+	public void testAddEnd() 
+	{
+
+		int[] ini = {};
+		rr.init(ini);
+		rr.addEnd(99);
+		assertEquals(1, rr.size());
+		assertEquals(99, rr.get(rr.size()-1));
+		int[] exp = {99};
+		int[] act = rr.toArray();
+		assertArrayEquals(exp, act);
+	}
+	@Test
+	public void testAddEnd_1() 
+	{
+
+		int[] ini = {10};
+		rr.init(ini);
+		rr.addEnd(99);
+		assertEquals(2, rr.size());
+		assertEquals(99, rr.get(rr.size()-1));
+		int[] exp = {10,99};
+		int[] act = rr.toArray();
+		assertArrayEquals(exp, act);
+	}
+	@Test
+	public void testAddEnd_2() 
+	{
+
+		int[] ini = {10,20};
+		rr.init(ini);
+		rr.addEnd(99);
+		assertEquals(3, rr.size());
+		assertEquals(99, rr.get(rr.size()-1));
+		int[] exp = {10,20,99};
+		int[] act = rr.toArray();
+		assertArrayEquals(exp, act);
+	}
+	@Test
+	public void testAddEnd_many() 
+	{
+
+		int[] ini = {10,20,33,77,11,24,19};
+		rr.init(ini);
+		rr.addEnd(99);
+		assertEquals(8, rr.size());
+		assertEquals(99, rr.get(rr.size()-1));
+		int[] exp = {10,20,33,77,11,24,19,99};
+		int[] act = rr.toArray();
+		assertArrayEquals(exp, act);
+	}
+	@Test
+	public void testAddEnd_many2() 
+	{
+		int[] ini = {10,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
+		rr.init(ini);
+		rr.addEnd(99);
+		assertEquals(21, rr.size());
+		assertEquals(99, rr.get(rr.size()-1));
+		int[] exp = {10,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20,99};
+		int[] act = rr.toArray();
+		assertArrayEquals(exp, act);
+	}
+
+	//=====================================
+	// addPos
+	//=====================================
+	@Test
+	public void testAddPos_0() 
+	{
+
+		int[] ini = {};
+		rr.init(ini);
+		rr.addPos(0,99);
+		assertEquals(1, rr.size());
+		assertEquals(99, rr.get(0));
+		int[] exp = {99};
+		int[] act = rr.toArray();
+		assertArrayEquals(exp, act);
+	}
+	@Test
+	public void testAddPos_1() 
+	{
+
+		int[] ini = {10};
+		rr.init(ini);
+		rr.addPos(1,99);
+		assertEquals(2, rr.size());
+		assertEquals(99, rr.get(1));
+		int[] exp = {10,99};
+		int[] act = rr.toArray();
+		assertArrayEquals(exp, act);
+	}
+	@Test
+	public void testAddPos_2() 
+	{
+
+		int[] ini = {10,20};
+		rr.init(ini);
+		rr.addPos(1,99);
+		assertEquals(3, rr.size());
+		assertEquals(99, rr.get(1));
+		int[] exp = {10,99,20};
+		int[] act = rr.toArray();
+		assertArrayEquals(exp, act);
+	}
+	@Test
+	public void testAddPos_many() 
+	{
+
+		int[] ini = {10,20,33,77,11,24,19};
+		rr.init(ini);
+		rr.addPos(1,99);
+		assertEquals(8, rr.size());
+		assertEquals(99, rr.get(1));
+		int[] exp = {10,99,20,33,77,11,24,19};
+		int[] act = rr.toArray();
+		assertArrayEquals(exp, act);
+	}
+	@Test
+	public void testAddPos_many2() 
+	{
+
+		int[] ini = {10,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
+		rr.init(ini);
+		rr.addPos(1,99);
+		assertEquals(21, rr.size());
+		assertEquals(99, rr.get(1));
+		int[] exp = {10,99,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
+		int[] act = rr.toArray();
+		assertArrayEquals(exp, act);
+	}
+
 	//=====================================
 	// delStart
 	//=====================================
 	@Test (expected = IllegalArgumentException.class)
 	public void testDelStart_0()
 	{
-		
+
 		int[] ini = {};
 		rr.init(ini);
 		rr.delStart();
@@ -179,7 +318,7 @@ public class EListTest
 	@Test
 	public void testDelStart_1()
 	{
-		
+
 		int[] ini = {10};
 		rr.init(ini);
 		rr.delStart();
@@ -191,7 +330,7 @@ public class EListTest
 	@Test
 	public void testDelStar_2()
 	{
-		
+
 		int[] ini = {10,20};
 		rr.init(ini);
 		rr.delStart();
@@ -203,7 +342,7 @@ public class EListTest
 	@Test
 	public void testDelStart_many()
 	{
-		
+
 		int[] ini = {10,20,33,77,11,24,19};
 		rr.init(ini);
 		rr.delStart();
@@ -212,26 +351,258 @@ public class EListTest
 		int[] act = rr.toArray();
 		assertArrayEquals(exp, act);		
 	}
-/*
 	@Test
-	public void testDelEnd() {
-		fail("Not yet implemented");
+	public void testDelStart_many2()
+	{
+
+		int[] ini = {10,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
+		rr.init(ini);
+		rr.delStart();
+		assertEquals(19, rr.size());
+		int[] exp = {20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
+		int[] act = rr.toArray();
+		assertArrayEquals(exp, act);		
+	}
+
+	//=====================================
+	// delEnd
+	//=====================================
+	@Test (expected = IllegalArgumentException.class)
+	public void testDelEnd_0()
+	{
+		int[] ini = {};
+		rr.init(ini);
+		rr.delEnd();	
+	}@Test
+	public void testDelEnd_1()
+	{
+
+		int[] ini = {10};
+		rr.init(ini);
+		rr.delEnd();
+		assertEquals(0, rr.size());
+		int[] exp = {};
+		int[] act = rr.toArray();
+		assertArrayEquals(exp, act);		
+	}
+	@Test
+	public void testDelEnd_2()
+	{
+
+		int[] ini = {10,20};
+		rr.init(ini);
+		rr.delEnd();
+		assertEquals(1, rr.size());
+		int[] exp = {10};
+		int[] act = rr.toArray();
+		assertArrayEquals(exp, act);		
+	}
+	@Test
+	public void testDelEnd_many()
+	{
+
+		int[] ini = {10,20,33,77,11,24,19};
+		rr.init(ini);
+		rr.delEnd();
+		assertEquals(6, rr.size());
+		int[] exp = {10,20,33,77,11,24};
+		int[] act = rr.toArray();
+		assertArrayEquals(exp, act);		
+	}
+	@Test
+	public void testDelEnd_many2()
+	{
+
+		int[] ini = {10,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
+		rr.init(ini);
+		rr.delEnd();
+		assertEquals(19, rr.size());
+		int[] exp = {10,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19};
+		int[] act = rr.toArray();
+		assertArrayEquals(exp, act);		
+	}
+
+	//=====================================
+	// delPos
+	//=====================================
+	@Test (expected = IllegalArgumentException.class)
+	public void testDelPos_0()
+	{		
+		int[] ini = {};
+		rr.init(ini);
+		rr.delPos(0);	
+	}
+	@Test
+	public void testDelPos_1()
+	{
+
+		int[] ini = {10};
+		rr.init(ini);
+		rr.delPos(1);
+		assertEquals(0, rr.size());
+		int[] exp = {};
+		int[] act = rr.toArray();
+		assertArrayEquals(exp, act);		
+	}
+	@Test
+	public void testDelPos_2()
+	{
+
+		int[] ini = {10,20};
+		rr.init(ini);
+		rr.delPos(0);
+		assertEquals(1, rr.size());
+		int[] exp = {20};
+		int[] act = rr.toArray();
+		assertArrayEquals(exp, act);		
+	}
+	@Test
+	public void testDelPos_many()
+	{
+
+		int[] ini = {10,20,33,77,11,24,19};
+		rr.init(ini);
+		rr.delPos(3);
+		assertEquals(6, rr.size());
+		int[] exp = {10,20,33,11,24,19};
+		int[] act = rr.toArray();
+		assertArrayEquals(exp, act);		
+	}
+	@Test
+	public void testDelPos_many2()
+	{
+
+		int[] ini = {10,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
+		rr.init(ini);
+		rr.delPos(3);
+		assertEquals(19, rr.size());
+		int[] exp = {10,20,33,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
+		int[] act = rr.toArray();
+		assertArrayEquals(exp, act);		
+	}
+
+	//=====================================
+	// Min
+	//=====================================
+	@Test (expected = IllegalArgumentException.class)
+	public void testMin_0()
+	{	
+		int[] ini = {};
+		rr.init(ini);
+		assertEquals(0, rr.min());
+	}	
+	@Test
+	public void testMin_1()
+	{	
+		int[] ini = {10};
+		rr.init(ini);
+		assertEquals(10, rr.min());
+	}
+	@Test
+	public void testMin_2()
+	{	
+		int[] ini = {10,20};
+		rr.init(ini);
+		assertEquals(10, rr.min());
+	}
+	@Test
+	public void testMin_many()
+	{	
+		int[] ini = {10,20,33,77,11};
+		rr.init(ini);
+		assertEquals(10, rr.min());
 	}
 
 	@Test
-	public void testDelPos() {
-		fail("Not yet implemented");
+	public void testMin_many2()
+	{	
+		int[] ini = {10,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
+		rr.init(ini);
+		assertEquals(4, rr.min());
+	}
+
+	//=====================================
+	// Max
+	//=====================================
+	@Test
+	public void testMax_0()
+	{	
+		int[] ini = {};
+		rr.init(ini);
+		assertEquals(10, rr.max());
+	}	
+	@Test
+	public void testMax_1()
+	{	
+		int[] ini = {10};
+		rr.init(ini);
+		assertEquals(10, rr.max());
+	}
+	@Test
+	public void testMax_2()
+	{	
+		int[] ini = {10,20};
+		rr.init(ini);
+		assertEquals(20, rr.max());
+	}
+	@Test
+	public void testMax_many()
+	{	
+		int[] ini = {10,20,33,77,11};
+		rr.init(ini);
+		assertEquals(77, rr.max());
 	}
 
 	@Test
-	public void testMin() {
-		fail("Not yet implemented");
+	public void testMax_many2()
+	{	
+		int[] ini = {10,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
+		rr.init(ini);
+		assertEquals(77, rr.max());
+	}
+
+	//=====================================
+	// MinInd
+	//=====================================
+	@Test
+	public void testMinInd_0()
+	{	
+		int[] ini = {10};
+		rr.init(ini);
+		assertEquals(0, rr.minInd());
+	}	
+	@Test
+	public void testMinInd_1()
+	{	
+		int[] ini = {10};
+		rr.init(ini);
+		assertEquals(10, rr.minInd());
+	}
+	@Test
+	public void testMinInd_2()
+	{	
+		int[] ini = {10,20};
+		rr.init(ini);
+		assertEquals(10, rr.minInd());
+	}
+	@Test
+	public void testMinInd_many()
+	{	
+		int[] ini = {10,20,33,77,11};
+		rr.init(ini);
+		assertEquals(10, rr.minInd());
 	}
 
 	@Test
-	public void testMax() {
-		fail("Not yet implemented");
+	public void testMinInd_many2()
+	{	
+		int[] ini = {10,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
+		rr.init(ini);
+		assertEquals(4, rr.minInd());
 	}
+
+
+	/*
 
 	@Test
 	public void testMinInd() {
@@ -242,14 +613,14 @@ public class EListTest
 	public void testMaxInd() {
 		fail("Not yet implemented");
 	}
-*/
+	 */
 	//=====================================
 	// sort
 	//=====================================
 	@Test
 	public void testSort_0() 
 	{
-		
+
 		int[] ini = {};
 		rr.init(ini);
 		rr.sort();
@@ -260,7 +631,7 @@ public class EListTest
 	@Test
 	public void testSort_1() 
 	{
-		
+
 		int[] ini = {10};
 		rr.init(ini);
 		rr.sort();
@@ -271,7 +642,7 @@ public class EListTest
 	@Test
 	public void testSort_2() 
 	{
-		
+
 		int[] ini = {77,11};
 		rr.init(ini);
 		rr.sort();
@@ -282,7 +653,7 @@ public class EListTest
 	@Test
 	public void testSort_many() 
 	{
-		
+
 		int[] ini = {10,20,33,77,11,24,19};
 		rr.init(ini);
 		rr.sort();
@@ -297,7 +668,7 @@ public class EListTest
 	@Test
 	public void testReverse_0() 
 	{
-		
+
 		int[] ini = {};
 		rr.init(ini);
 		rr.reverse();
@@ -308,7 +679,7 @@ public class EListTest
 	@Test
 	public void testReverse_1() 
 	{
-		
+
 		int[] ini = {10};
 		rr.init(ini);
 		rr.reverse();
@@ -319,7 +690,7 @@ public class EListTest
 	@Test
 	public void testReverse_2() 
 	{
-		
+
 		int[] ini = {10,20};
 		rr.init(ini);
 		rr.reverse();
@@ -330,7 +701,7 @@ public class EListTest
 	@Test
 	public void testReverse_many() 
 	{
-		
+
 		int[] ini = {10,20,33,77,11,24,19};
 		rr.init(ini);
 		rr.reverse();
@@ -345,7 +716,7 @@ public class EListTest
 	@Test
 	public void testHalfReverse_0() 
 	{
-		
+
 		int[] ini = {};
 		rr.init(ini);
 		rr.halfReverse();
@@ -356,7 +727,7 @@ public class EListTest
 	@Test
 	public void testHalfReverse_1() 
 	{
-		
+
 		int[] ini = {10};
 		rr.init(ini);
 		rr.halfReverse();
@@ -367,7 +738,7 @@ public class EListTest
 	@Test
 	public void testHalfReverse_2() 
 	{
-		
+
 		int[] ini = {10,20};
 		rr.init(ini);
 		rr.halfReverse();
@@ -379,7 +750,7 @@ public class EListTest
 	@Test
 	public void testHalfReverse_many_even() 
 	{
-		
+
 		int[] ini = {10,20,33,11,24,19};
 		rr.init(ini);
 		rr.halfReverse();
@@ -391,7 +762,7 @@ public class EListTest
 	@Test
 	public void testHalfReverse_many_odd() 
 	{
-		
+
 		int[] ini = {10,20,33,77,11,24,19};
 		rr.init(ini);
 		rr.halfReverse();
