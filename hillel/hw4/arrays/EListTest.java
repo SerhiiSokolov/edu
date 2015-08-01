@@ -78,7 +78,7 @@ public class EListTest
 		int[] act = rr.toArray();
 		assertArrayEquals(exp, act);
 	}
-
+	
 	//=====================================
 	// clear
 	//=====================================

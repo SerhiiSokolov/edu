@@ -3,7 +3,7 @@ package edu.hillel.hw4.arrays;
 public class AList2 implements EList {
 
 
-	private int[] arr = new int[10];
+	private int[] arr = new int[100];
 	private int start=0;
 	private int end=arr.length;
 	private int middle=arr.length/2;
@@ -26,10 +26,8 @@ public class AList2 implements EList {
 		if (ini.length>arr.length) resize((int)(ini.length*1.3));
 		start=middle-ini.length/2;
 		end=start+ini.length;
-		//System.out.println("start="+start+", end="+end);
 		for (int i = start; i < end; i++) 
 		{
-			//System.out.println("i="+i);
 			arr[i] = ini[i-start];
 		}
 		
