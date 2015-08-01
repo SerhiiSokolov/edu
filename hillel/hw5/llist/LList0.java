@@ -1,42 +1,68 @@
-package edu.hillel.hw4.arrays;
- 	
-public class AList0 implements EList
+package edu.hillel.hw5.llist;
+
+public class LList0 implements EList
 {
 	private int[] arr = {};
-	
+	Node root=new Node();
+
 	@Override
 	public int size()
 	{
-		return arr.length;
-	}
-	
-	@Override
-	public void init(int[] ini)
-	{
-		if(ini == null)
+		int count=0;
+		if(root.getNext()==null) count=0;
+		else
 		{
-			ini = new int[0];
+			Node node=new Node();
+			node.setNext(root.getNext());
+			do
+			{
+				node=node.getNext();
+				count++;
+			}while(node.getNext()!=null);
 		}
-		arr = new int[ini.length];
-		for (int i = 0; i < ini.length; i++) 
-		{
-			arr[i] = ini[i];
-		}
+		return count;
 	}
 
 	@Override
+	public void init(int[] ini)
+	{	
+		if(ini==null||ini.length==0)
+		{
+			//Nothing to do
+		}
+
+		else
+		{
+			root.setNext(new Node());
+
+			Node next=root.getNext();
+			next.setData(ini[0]);
+			for(int i=1;i<ini.length;i++)
+			{
+				Node tempNext=next;
+				next=new Node();
+				next.setData(ini[i]);
+				tempNext.setNext(next);
+			}
+		}
+	}
+
 	public void clear()
 	{
-		init(null);
+		root.setNext(null);;
 	}
-	
+
 	@Override
 	public int[] toArray() 
 	{
-		int[] tmp = new int[arr.length];
-		for (int i = 0; i < arr.length; i++) 
+
+		Node node=new Node();
+		node.setNext(root.getNext());
+		int[] tmp = new int[size()];
+		for (int i = 0; i < tmp.length; i++) 
 		{
-			tmp[i] = arr[i];
+			node=node.getNext();	
+			tmp[i] = node.getData();
 		}
 		return tmp;
 	}
@@ -44,9 +70,18 @@ public class AList0 implements EList
 	@Override
 	public int get(int pos) 
 	{
-		if(size() == 0||pos<0||pos>arr.length)
+		if(size() == 0||pos<0||pos>size())
 			throw new IllegalArgumentException();
-		return arr[pos];
+		int i=-1;
+		Node node=new Node();
+		node.setNext(root.getNext());
+		do
+		{
+			i++;
+			node=node.getNext();
+		}while(i!=pos);
+				
+		return node.getData();
 	}
 
 	@Override
@@ -68,7 +103,7 @@ public class AList0 implements EList
 		}
 		arr = tmp;
 	}
-	
+
 	@Override
 	public void addEnd(int val)
 	{
@@ -80,7 +115,7 @@ public class AList0 implements EList
 		tmp[arr.length] = val;
 		arr = tmp;
 	}
-	
+
 	@Override
 	public void addPos(int pos, int val)
 	{
@@ -96,7 +131,7 @@ public class AList0 implements EList
 		tmp[pos] = val;
 		arr = tmp;
 	}
-	
+
 	@Override
 	public int delStart()
 	{		
@@ -112,13 +147,13 @@ public class AList0 implements EList
 		arr = tmp;
 		return ret;
 	}
-	
+
 	@Override
 	public int delEnd()
 	{
 		if(size() == 0)
 			throw new IllegalArgumentException();
-		
+
 		int ret = arr[arr.length-1];
 		int[] tmp = new int[arr.length-1];
 		for (int i = 0; i < arr.length-1; i++) 
@@ -128,7 +163,7 @@ public class AList0 implements EList
 		arr = tmp;
 		return ret;
 	}
-	
+
 	@Override
 	public int delPos(int pos)
 	{
@@ -136,7 +171,7 @@ public class AList0 implements EList
 			throw new IllegalArgumentException();
 		int ret = arr[pos];
 		int[] tmp = new int[arr.length-1];
-		
+
 		for (int i = 0; i < pos; i++) 
 		{
 			tmp[i] = arr[i];
@@ -148,7 +183,7 @@ public class AList0 implements EList
 		arr = tmp;
 		return ret;
 	}
-	
+
 	@Override
 	public int min()
 	{
@@ -164,7 +199,7 @@ public class AList0 implements EList
 		}
 		return min;
 	}
-	
+
 	@Override
 	public int max()
 	{
@@ -180,7 +215,7 @@ public class AList0 implements EList
 		}
 		return max;
 	}
-	
+
 	@Override
 	public int minInd()
 	{
@@ -196,7 +231,7 @@ public class AList0 implements EList
 		}
 		return min;
 	}
-	
+
 	@Override
 	public int maxInd()
 	{
@@ -212,24 +247,24 @@ public class AList0 implements EList
 		}
 		return max;
 	}
-	
+
 	@Override
 	public void sort()
 	{
-	    for(int i = arr.length-1 ; i > 0 ; i--)
-	    {
-	        for(int j = 0 ; j < i ; j++)
-	        {
-	            if( arr[j] > arr[j+1] )
-	            {
-	                int tmp = arr[j];
-	                arr[j] = arr[j+1];
-	                arr[j+1] = tmp;
-	            }
-	        }
-	    }
+		for(int i = arr.length-1 ; i > 0 ; i--)
+		{
+			for(int j = 0 ; j < i ; j++)
+			{
+				if( arr[j] > arr[j+1] )
+				{
+					int tmp = arr[j];
+					arr[j] = arr[j+1];
+					arr[j+1] = tmp;
+				}
+			}
+		}
 	}
-	
+
 	@Override
 	public void reverse()
 	{
@@ -240,7 +275,7 @@ public class AList0 implements EList
 			arr[arr.length-1-i] = tmp;
 		}
 	}
-	
+
 	@Override
 	public void halfReverse()
 	{	
@@ -251,5 +286,19 @@ public class AList0 implements EList
 			arr[i] = arr[(arr.length)/2+d+i];
 			arr[(arr.length)/2+d+i] = tmp;
 		}
+	}
+	
+	@Override 
+	public String toString()
+	{
+		String s="";
+		Node node=new Node();
+		node.setNext(root.getNext());
+		do
+		{
+			node=node.getNext();
+			s=s+node.getData()+", ";
+		}while(node.getNext()!=null);
+		return s;
 	}
 }
