@@ -226,29 +226,36 @@ public class AList2 implements EList {
 	@Override
 	public void reverse()
 	{
-		for (int i=start; i < (end-start)/2; i++)
+		int first=start;
+		int last=end-1;
+		while(last>first)
 		{
-			int tmp = arr[i];
-			arr[i] = arr[end-1-i];
-			arr[end-1-i] = tmp;
+			int tmp = arr[first];
+			arr[first] = arr[last];
+			arr[last] = tmp;
+			first++;
+			last--;
 		}
 	}
 
 	@Override
 	public void halfReverse()
 	{	
-		int d = (index%2==0)?0:1;
-		for (int i=0; i < (index)/2; i++)
+		int d = (size()%2==0)?0:1;
+		int first=start;
+		int last=(start+end)/2+d;
+		while(last<end)
 		{
-			int tmp = arr[i];
-			arr[i] = arr[index/2+d+i];
-			arr[index/2+d+i] = tmp;
+			int tmp=arr[first];
+			arr[first]=arr[last];
+			arr[last]=tmp;
+			first++;
+			last++;
 		}
 	}
 	
 	private void resize()
 	{		
-		System.out.println("resize arr");
 		int newSize=arr.length+arr.length/3;
 		middle=newSize/2;
 		int[] tmp=new int[newSize];
@@ -258,12 +265,9 @@ public class AList2 implements EList {
 		{
 			tmp[j]=arr[i];
 		}
-		
 		start=(tmp.length-arr.length)/2;
 		end=j;
-		System.out.println("newstart="+start+", newend="+end);
 		arr=tmp;
-		//printArray();
 	}
 	
 	private void resize(int newSize)

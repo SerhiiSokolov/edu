@@ -263,15 +263,4 @@ public class AList1 implements EList {
 		}
 		arr=tmp;
 	}
-
-	@Override
-	public void printArray() 
-	{
-		if(arr==null) throw new IllegalArgumentException();
-		for(int i=0;i<arr.length;i++)
-		{
-			System.out.print("["+arr[i]+"] ");
-		}
-		System.out.println();
-	}
 }

@@ -100,9 +100,12 @@ public class AList0 implements EList
 	@Override
 	public int delStart()
 	{
-		if(size() == 0)
-			throw new IllegalArgumentException();
+		//if(size() == 0)
+		//	throw new IllegalArgumentException();
 		
+		if(size() == 0)
+			throw new ListIsEmptyException();
+
 		int ret = arr[0];
 		int[] tmp = new int[arr.length-1];
 		for (int i = 1; i < arr.length; i++) 

@@ -26,7 +26,6 @@ public interface EList
 	void sort();
 	void reverse();
 	void halfReverse();
-	
-	void printArray();
+
 }
 
