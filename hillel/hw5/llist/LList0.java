@@ -2,18 +2,19 @@ package edu.hillel.hw5.llist;
 
 public class LList0 implements EList
 {
-	private int[] arr = {};
 	Node root=new Node();
-
 	@Override
 	public int size()
 	{
 		int count=0;
 		if(root.getNext()==null) count=0;
+
 		else
 		{
 			Node node=new Node();
+			System.out.println("1:node="+node.getData());
 			node.setNext(root.getNext());
+			System.out.println("2:node="+node.getData());
 			do
 			{
 				node=node.getNext();
@@ -28,7 +29,7 @@ public class LList0 implements EList
 	{	
 		if(ini==null||ini.length==0)
 		{
-			//Nothing to do
+			root.setNext(null);
 		}
 
 		else
@@ -55,13 +56,13 @@ public class LList0 implements EList
 	@Override
 	public int[] toArray() 
 	{
-
 		Node node=new Node();
 		node.setNext(root.getNext());
 		int[] tmp = new int[size()];
 		for (int i = 0; i < tmp.length; i++) 
 		{
-			node=node.getNext();	
+			node=node.getNext();
+			//System.out.println("data="+node.getData());
 			tmp[i] = node.getData();
 		}
 		return tmp;
@@ -71,7 +72,7 @@ public class LList0 implements EList
 	public int get(int pos) 
 	{
 		if(size() == 0||pos<0||pos>size())
-			throw new IllegalArgumentException();
+			throw new ListIsEmptyException();
 		int i=-1;
 		Node node=new Node();
 		node.setNext(root.getNext());
@@ -80,56 +81,90 @@ public class LList0 implements EList
 			i++;
 			node=node.getNext();
 		}while(i!=pos);
-				
+
 		return node.getData();
 	}
 
 	@Override
 	public void set(int pos, int val) 
 	{
-		if(size() == 0||pos<0||pos>arr.length)
-			throw new IllegalArgumentException();
-		arr[pos] = val;
+		if(size() == 0||pos<0||pos>size())
+			throw new ListIsEmptyException();
+		int i=-1;
+		Node node=new Node();
+		node.setNext(root.getNext());
+		do
+		{
+			i++;
+			node=node.getNext();
+		}while(i<pos);
+		node.setData(val);
 	}
 
 	@Override
 	public void addStart(int val)
 	{
-		int[] tmp = new int[arr.length+1];
-		tmp[0] = val;
-		for (int i = 0; i < arr.length; i++) 
+		Node node=new Node();
+		if (root.getNext()==null) 
+			root.setNext(node); 
+		else
 		{
-			tmp[i+1] = arr[i];
+			node.setNext(root.getNext());
+			root.setNext(node);
 		}
-		arr = tmp;
+		node.setData(val);
 	}
 
 	@Override
 	public void addEnd(int val)
 	{
-		int[] tmp = new int[arr.length+1];
-		for (int i = 0; i < arr.length; i++) 
+		Node node=new Node();
+		Node newNode=new Node();
+		if (root.getNext()==null)
 		{
-			tmp[i] = arr[i];
+			root.setNext(node);
+			node.setData(val);
 		}
-		tmp[arr.length] = val;
-		arr = tmp;
+		else
+		{
+			node.setNext(root.getNext());
+			int i=-1;
+			do
+			{
+				i++;
+				node=node.getNext();
+			}while(i<size()-1);
+			newNode.setNext(node.getNext());
+			node.setNext(newNode);
+			newNode.setData(val);
+		}
 	}
 
 	@Override
 	public void addPos(int pos, int val)
 	{
-		int[] tmp = new int[arr.length+1];
-		for (int i = 0; i < pos; i++) 
+		if(pos<0||pos>size())
+			throw new ListIsEmptyException();
+		Node node=new Node();
+		Node newNode=new Node();
+		if (root.getNext()==null)
 		{
-			tmp[i] = arr[i];
+			root.setNext(node);
+			node.setData(val);
 		}
-		for (int i = pos; i < arr.length; i++) 
+		else
 		{
-			tmp[i+1] = arr[i];
+			node.setNext(root.getNext());
+			int i=-1;
+			do
+			{
+				i++;
+				node=node.getNext();
+			}while(i<pos-1);
+			newNode.setNext(node.getNext());
+			node.setNext(newNode);
+			newNode.setData(val);
 		}
-		tmp[pos] = val;
-		arr = tmp;
 	}
 
 	@Override
@@ -138,13 +173,8 @@ public class LList0 implements EList
 		if(size() == 0)
 			throw new ListIsEmptyException();
 
-		int ret = arr[0];
-		int[] tmp = new int[arr.length-1];
-		for (int i = 1; i < arr.length; i++) 
-		{
-			tmp[i-1] = arr[i];
-		}
-		arr = tmp;
+		int ret = root.getNext().getData();
+		root.setNext(root.getNext().getNext());
 		return ret;
 	}
 
@@ -152,35 +182,61 @@ public class LList0 implements EList
 	public int delEnd()
 	{
 		if(size() == 0)
-			throw new IllegalArgumentException();
-
-		int ret = arr[arr.length-1];
-		int[] tmp = new int[arr.length-1];
-		for (int i = 0; i < arr.length-1; i++) 
+			throw new ListIsEmptyException();
+		int ret=0;
+		if(size()==1) 
 		{
-			tmp[i] = arr[i];
+			ret=root.getNext().getData();	
+			root.setNext(null);
 		}
-		arr = tmp;
+		else
+		{
+			Node node=new Node();
+			node.setNext(root.getNext());
+			int i=-1;
+			do
+			{
+				i++;
+				node=node.getNext();
+			}while(i<size()-2);
+			ret = node.getNext().getData();
+			node.setNext(null);
+		}
 		return ret;
 	}
 
 	@Override
 	public int delPos(int pos)
 	{
-		if(size() == 0||pos<0||pos>arr.length)
-			throw new IllegalArgumentException();
-		int ret = arr[pos];
-		int[] tmp = new int[arr.length-1];
+		if(size()==0||pos<0||pos>size())
+			throw new ListIsEmptyException();
+		int ret=0;
+		Node node=new Node();
+		node.setNext(root.getNext());
+		if(size()==1) 
+		{
+			ret=root.getNext().getData();	
+			root.setNext(null);
+		}
+		else
+		{
+			int i=-1;
+			do
+			{
+				i++;
+				node=node.getNext();
+			}while(i<pos-1);
+			ret=node.getNext().getData();
+			if(size()==2) 
+			{
+				root.setNext(node.getNext());
+			}
+			else
+			{
+				node.setNext(node.getNext().getNext());	
+			}
 
-		for (int i = 0; i < pos; i++) 
-		{
-			tmp[i] = arr[i];
 		}
-		for (int i = pos+1; i < arr.length; i++) 
-		{
-			tmp[i-1] = arr[i];
-		}
-		arr = tmp;
 		return ret;
 	}
 
@@ -188,15 +244,15 @@ public class LList0 implements EList
 	public int min()
 	{
 		if(size() == 0)
-			throw new IllegalArgumentException();
-		int min = arr[0];
-		for (int i=0; i < arr.length; i++)
+			throw new ListIsEmptyException();
+		int min = root.getNext().getData();
+		Node node=new Node();
+		node.setNext(root.getNext());
+		do
 		{
-			if (arr[i] < min)
-			{
-				min = arr[i];
-			}
-		}
+			node=node.getNext();
+			if (node.getData()<min) min=node.getData();
+		}while(node.getNext()!=null);
 		return min;
 	}
 
@@ -204,15 +260,15 @@ public class LList0 implements EList
 	public int max()
 	{
 		if(size() == 0)
-			throw new IllegalArgumentException();
-		int max = arr[0];
-		for (int i = 0; i < arr.length; i++)
+			throw new ListIsEmptyException();
+		int max = root.getNext().getData();
+		Node node=new Node();
+		node.setNext(root.getNext());
+		do
 		{
-			if (arr[i] > max)
-			{
-				max = arr[i];
-			}
-		}
+			node=node.getNext();
+			if (node.getData()>max) max=node.getData();
+		}while(node.getNext()!=null);
 		return max;
 	}
 
@@ -220,47 +276,69 @@ public class LList0 implements EList
 	public int minInd()
 	{
 		if(size() == 0)
-			throw new IllegalArgumentException();
-		int min = 0;
-		for (int i=0; i < arr.length; i++)
+			throw new ListIsEmptyException();
+		Node node=new Node();
+		node.setNext(root.getNext());
+		int min = root.getNext().getData();
+		int minInd=0;
+		int i=-1;
+		do
 		{
-			if (arr[min] > arr[i])
+			i++;
+			node=node.getNext();
+			if (node.getData()<min)
 			{
-				min = i;
+				minInd=i;
+				min=node.getData();
 			}
-		}
-		return min;
+		}while(node.getNext()!=null);
+		return minInd;
 	}
 
 	@Override
 	public int maxInd()
 	{
 		if(size() == 0)
-			throw new IllegalArgumentException();
-		int max = 0;
-		for (int i=0; i < arr.length; i++)
+			throw new ListIsEmptyException();
+		Node node=new Node();
+		node.setNext(root.getNext());
+		int max = root.getNext().getData();
+		int maxInd=0;
+		int i=-1;
+		do
 		{
-			if (arr[max] < arr[i])
+			i++;
+			node=node.getNext();
+			if (node.getData()>max)
 			{
-				max = i;
+				maxInd=i;
+				max=node.getData();
 			}
-		}
-		return max;
+		}while(node.getNext()!=null);
+		return maxInd;
 	}
 
 	@Override
 	public void sort()
 	{
-		for(int i = arr.length-1 ; i > 0 ; i--)
+		Node nodeA=new Node();
+		Node nodeB=new Node();
+
+		nodeA.setNext(root.getNext());
+
+		for(int i=0;i<size()-1;i++)
 		{
-			for(int j = 0 ; j < i ; j++)
+			nodeA=nodeA.getNext();	
+			nodeB=nodeA.getNext();
+			for(int j=i+1;j<size();j++)
 			{
-				if( arr[j] > arr[j+1] )
+				if (nodeA.getData()>nodeB.getData())
 				{
-					int tmp = arr[j];
-					arr[j] = arr[j+1];
-					arr[j+1] = tmp;
+					int temp=nodeA.getData();
+					nodeA.setData(nodeB.getData());
+					nodeB.setData(temp);
 				}
+				nodeB=nodeB.getNext();
 			}
 		}
 	}
@@ -268,37 +346,47 @@ public class LList0 implements EList
 	@Override
 	public void reverse()
 	{
-		for (int i=0; i < arr.length/2; i++)
+		Node nodeA=new Node();
+		Node nodeB=new Node();
+
+		nodeA.setNext(root.getNext());
+		int temp=0;
+		for(int i=0;i<size()/2;i++)
 		{
-			int tmp = arr[i];
-			arr[i] = arr[arr.length-1-i];
-			arr[arr.length-1-i] = tmp;
+			nodeA=nodeA.getNext();	
+			nodeB=nodeA.getNext();
+			for(int j=i;j<(size()-i-2);j++)
+			{
+				nodeB=nodeB.getNext();
+			}
+			temp=nodeA.getData();
+			nodeA.setData(nodeB.getData());
+			nodeB.setData(temp);
 		}
 	}
 
 	@Override
 	public void halfReverse()
 	{	
-		int d = (arr.length%2==0)?0:1;
-		for (int i=0; i < (arr.length)/2; i++)
+		int d = (size()%2==0)?0:1;
+		Node nodeA=new Node();
+		Node nodeB=new Node();
+
+		nodeA.setNext(root.getNext());
+		int temp=0;
+		for(int i=0;i<size()/2;i++)
 		{
-			int tmp = arr[i];
-			arr[i] = arr[(arr.length)/2+d+i];
-			arr[(arr.length)/2+d+i] = tmp;
+			nodeA=nodeA.getNext();	
+			nodeB=root.getNext();
+			size();
+			for(int j=0; j<size()/2+d+i;j++)
+			{
+				nodeB=nodeB.getNext();
+			}
+			temp=nodeA.getData();
+			nodeA.setData(nodeB.getData());
+			nodeB.setData(temp);	
 		}
 	}
-	
-	@Override 
-	public String toString()
-	{
-		String s="";
-		Node node=new Node();
-		node.setNext(root.getNext());
-		do
-		{
-			node=node.getNext();
-			s=s+node.getData()+", ";
-		}while(node.getNext()!=null);
-		return s;
-	}
+
 }

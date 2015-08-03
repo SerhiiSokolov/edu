@@ -14,7 +14,6 @@ public class LListTest
 	@Test
 	public void testSize_null() 
 	{
-
 		int[] ini = null;
 		rr.init(ini);
 		assertEquals(0, rr.size());
@@ -84,10 +83,9 @@ public class LListTest
 	// Get
 	//=====================================
 		
-	@Test (expected = IllegalArgumentException.class)
+	@Test (expected = ListIsEmptyException.class)
 	public void testGet() 
 	{
-
 		int[] ini = {};
 		rr.init(ini);
 		rr.get(0);
@@ -116,10 +114,10 @@ public class LListTest
 		rr.init(ini);
 		assertEquals(77, rr.get(3));
 	}
-	@Test (expected = IllegalArgumentException.class)
+	@Test (expected = ListIsEmptyException.class)
 	public void testGet_many2() 
 	{
-		int[] ini = {10,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
+		int[] ini = {10,20,33,77,11,24,19};
 		rr.init(ini);
 		rr.get(25);
 	}
@@ -127,7 +125,7 @@ public class LListTest
 	//=====================================
 	// Set
 	//=====================================
-	@Test (expected = IllegalArgumentException.class)
+	@Test (expected = ListIsEmptyException.class)
 	public void testSet_0() 
 	{
 		int[] ini = {};
@@ -178,7 +176,7 @@ public class LListTest
 		int[] act = rr.toArray();
 		assertArrayEquals(exp, act);
 	}
-	@Test (expected = IllegalArgumentException.class)
+	@Test (expected = ListIsEmptyException.class)
 	public void testSet_outrange() 
 	{
 		int[] ini = {10,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
@@ -246,18 +244,6 @@ public class LListTest
 		int[] act = rr.toArray();
 		assertArrayEquals(exp, act);
 	}
-	@Test
-	public void testAddStart_many2() 
-	{
-		int[] ini = {10,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
-		rr.init(ini);
-		rr.addStart(99);
-		assertEquals(21, rr.size());
-		assertEquals(99, rr.get(0));
-		int[] exp = {99,10,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
-		int[] act = rr.toArray();
-		assertArrayEquals(exp, act);
-	}
 
 	//=====================================
 	// addEnd
@@ -296,7 +282,7 @@ public class LListTest
 		rr.init(ini);
 		rr.addEnd(99);
 		assertEquals(3, rr.size());
-		assertEquals(99, rr.get(rr.size()-1));
+		//assertEquals(99, rr.get(rr.size()-1));
 		int[] exp = {10,20,99};
 		int[] act = rr.toArray();
 		assertArrayEquals(exp, act);
@@ -309,24 +295,12 @@ public class LListTest
 		rr.init(ini);
 		rr.addEnd(99);
 		assertEquals(8, rr.size());
-		assertEquals(99, rr.get(rr.size()-1));
+		//assertEquals(99, rr.get(rr.size()-1));
 		int[] exp = {10,20,33,77,11,24,19,99};
 		int[] act = rr.toArray();
 		assertArrayEquals(exp, act);
 	}
-	@Test
-	public void testAddEnd_many2() 
-	{
-		int[] ini = {10,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
-		rr.init(ini);
-		rr.addEnd(99);
-		assertEquals(21, rr.size());
-		assertEquals(99, rr.get(rr.size()-1));
-		int[] exp = {10,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20,99};
-		int[] act = rr.toArray();
-		assertArrayEquals(exp, act);
-	}
-
+	
 	//=====================================
 	// addPos
 	//=====================================
@@ -382,27 +356,13 @@ public class LListTest
 		int[] act = rr.toArray();
 		assertArrayEquals(exp, act);
 	}
-	@Test
-	public void testAddPos_many2() 
-	{
-
-		int[] ini = {10,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
-		rr.init(ini);
-		rr.addPos(1,99);
-		assertEquals(21, rr.size());
-		assertEquals(99, rr.get(1));
-		int[] exp = {10,99,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
-		int[] act = rr.toArray();
-		assertArrayEquals(exp, act);
-	}
 
 	//=====================================
 	// delStart
 	//=====================================
-	@Test (expected = IllegalArgumentException.class)
+	@Test (expected = ListIsEmptyException.class)
 	public void testDelStart_0()
 	{
-
 		int[] ini = {};
 		rr.init(ini);
 		rr.delStart();
@@ -443,23 +403,11 @@ public class LListTest
 		int[] act = rr.toArray();
 		assertArrayEquals(exp, act);		
 	}
-	@Test
-	public void testDelStart_many2()
-	{
-
-		int[] ini = {10,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
-		rr.init(ini);
-		rr.delStart();
-		assertEquals(19, rr.size());
-		int[] exp = {20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
-		int[] act = rr.toArray();
-		assertArrayEquals(exp, act);		
-	}
 
 	//=====================================
 	// delEnd
 	//=====================================
-	@Test (expected = IllegalArgumentException.class)
+	@Test (expected = ListIsEmptyException.class)
 	public void testDelEnd_0()
 	{
 		int[] ini = {};
@@ -501,23 +449,11 @@ public class LListTest
 		int[] act = rr.toArray();
 		assertArrayEquals(exp, act);		
 	}
-	@Test
-	public void testDelEnd_many2()
-	{
-
-		int[] ini = {10,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
-		rr.init(ini);
-		rr.delEnd();
-		assertEquals(19, rr.size());
-		int[] exp = {10,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19};
-		int[] act = rr.toArray();
-		assertArrayEquals(exp, act);		
-	}
 
 	//=====================================
 	// delPos
 	//=====================================
-	@Test (expected = IllegalArgumentException.class)
+	@Test (expected = ListIsEmptyException.class)
 	public void testDelPos_0()
 	{		
 		int[] ini = {};
@@ -527,7 +463,6 @@ public class LListTest
 	@Test
 	public void testDelPos_1()
 	{
-
 		int[] ini = {10};
 		rr.init(ini);
 		rr.delPos(0);
@@ -560,23 +495,11 @@ public class LListTest
 		int[] act = rr.toArray();
 		assertArrayEquals(exp, act);		
 	}
-	@Test
-	public void testDelPos_many2()
-	{
-
-		int[] ini = {10,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
-		rr.init(ini);
-		rr.delPos(3);
-		assertEquals(19, rr.size());
-		int[] exp = {10,20,33,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
-		int[] act = rr.toArray();
-		assertArrayEquals(exp, act);		
-	}
 
 	//=====================================
 	// Min
 	//=====================================
-	@Test (expected = IllegalArgumentException.class)
+	@Test (expected = ListIsEmptyException.class)
 	public void testMin_0()
 	{	
 		int[] ini = {};
@@ -605,18 +528,10 @@ public class LListTest
 		assertEquals(10, rr.min());
 	}
 
-	@Test
-	public void testMin_many2()
-	{	
-		int[] ini = {10,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
-		rr.init(ini);
-		assertEquals(4, rr.min());
-	}
-
 	//=====================================
 	// Max
 	//=====================================
-	@Test (expected = IllegalArgumentException.class)
+	@Test (expected = ListIsEmptyException.class)
 	public void testMax_0()
 	{	
 		int[] ini = {};
@@ -645,18 +560,10 @@ public class LListTest
 		assertEquals(77, rr.max());
 	}
 
-	@Test
-	public void testMax_many2()
-	{	
-		int[] ini = {10,20,33,77,11,24,19,10,4,19,11,14,15,13,15,16,12,8,19,20};
-		rr.init(ini);
-		assertEquals(77, rr.max());
-	}
-
 	//=====================================
 	// MinInd
 	//=====================================
-	@Test (expected = IllegalArgumentException.class)
+	@Test (expected = ListIsEmptyException.class)
 	public void testMinInd_0()
 	{	
 		int[] ini = {};
@@ -680,9 +587,9 @@ public class LListTest
 	@Test
 	public void testMinInd_many()
 	{	
-		int[] ini = {10,20,33,77,11};
+		int[] ini = {10,20,33,77,11,5};
 		rr.init(ini);
-		assertEquals(0, rr.minInd());
+		assertEquals(5, rr.minInd());
 	}
 
 	@Test
@@ -696,7 +603,7 @@ public class LListTest
 	//=====================================
 	// MaxInd
 	//=====================================
-	@Test (expected = IllegalArgumentException.class)
+	@Test (expected = ListIsEmptyException.class)
 	public void testMaxInd_0()
 	{	
 		int[] ini = {};
@@ -739,7 +646,6 @@ public class LListTest
 	@Test
 	public void testSort_0() 
 	{
-
 		int[] ini = {};
 		rr.init(ini);
 		rr.sort();
