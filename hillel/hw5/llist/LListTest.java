@@ -2,12 +2,39 @@ package edu.hillel.hw5.llist;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+import java.util.Collection;
+
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
-public class LListTest 
+
+@RunWith(Parameterized.class)
+public class EListTest 
 {
-	EList rr = new LList0();
-
+	EList rr=null;
+	@Parameterized.Parameters
+	public static Collection primeNumbers()
+	{
+		return Arrays.asList(new Object[][]{
+			{ new AList0() },
+			{ new AList1() },
+			{ new AList2() },
+			{ new LList0() }
+		});
+	}
+	public EListTest(EList zz)
+	{
+		rr=zz;
+	}
+	
+	@Before
+	public void setUp()
+	{
+		rr.clear();
+	}
 	//=====================================
 	// size, init, toArray
 	//=====================================
