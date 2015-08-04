@@ -1,5 +1,4 @@
 package edu.hillel.hw5.llist;
-
 import static org.junit.Assert.*;
 
 import java.util.Arrays;
@@ -12,20 +11,21 @@ import org.junit.runners.Parameterized;
 
 
 @RunWith(Parameterized.class)
-public class EListTest 
+public class LListTest 
 {
 	EList rr=null;
 	@Parameterized.Parameters
 	public static Collection primeNumbers()
 	{
 		return Arrays.asList(new Object[][]{
-			{ new AList0() },
-			{ new AList1() },
-			{ new AList2() },
-			{ new LList0() }
+			//{ new AList0() },
+			//{ new AList1() },
+			//{ new AList2() },
+			//{ new LList0() },
+			{ new LList2() }
 		});
 	}
-	public EListTest(EList zz)
+	public LListTest(EList zz)
 	{
 		rr=zz;
 	}
@@ -309,7 +309,7 @@ public class EListTest
 		rr.init(ini);
 		rr.addEnd(99);
 		assertEquals(3, rr.size());
-		//assertEquals(99, rr.get(rr.size()-1));
+		assertEquals(99, rr.get(rr.size()-1));
 		int[] exp = {10,20,99};
 		int[] act = rr.toArray();
 		assertArrayEquals(exp, act);
@@ -322,7 +322,7 @@ public class EListTest
 		rr.init(ini);
 		rr.addEnd(99);
 		assertEquals(8, rr.size());
-		//assertEquals(99, rr.get(rr.size()-1));
+		assertEquals(99, rr.get(rr.size()-1));
 		int[] exp = {10,20,33,77,11,24,19,99};
 		int[] act = rr.toArray();
 		assertArrayEquals(exp, act);
