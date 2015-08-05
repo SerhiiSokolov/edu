@@ -20,7 +20,6 @@ public class LList2 implements EList
 				count++;
 			}
 		}
-		System.out.println("count="+count);
 		return count;
 	}
 
@@ -73,6 +72,7 @@ public class LList2 implements EList
 			node=node.getNext();
 			i++;
 		}
+
 		return node.getData();
 	}
 
@@ -152,7 +152,7 @@ public class LList2 implements EList
 			node=root.getNext();
 			Node2 newNode2=new Node2();
 			int i=0;
-
+			
 			while(i<pos-1)
 			{
 				i++;
@@ -172,7 +172,7 @@ public class LList2 implements EList
 	{		
 		if(count == 0)
 			throw new ListIsEmptyException();
-		
+
 		int ret=0;
 		if (count==1)
 		{
@@ -194,26 +194,23 @@ public class LList2 implements EList
 	@Override
 	public int delEnd()
 	{
-		if(size() == 0)
+		if(count == 0)
 			throw new ListIsEmptyException();
 		int ret=0;
-		if(size()==1) 
+		if(count==1) 
 		{
 			ret=root.getNext().getData();	
-			root.setNext(null);
+			clear();
 		}
 		else
 		{
-			Node2 node=new Node2();
-			node.setNext(root.getNext());
-			int i=-1;
-			do
-			{
-				i++;
-				node=node.getNext();
-			}while(i<size()-2);
-			ret = node.getNext().getData();
+			node=root.getPrev();
+			ret=node.getData();
+			
+			node=node.getPrev();
 			node.setNext(null);
+			root.setPrev(node);
+			count--;
 		}
 		return ret;
 	}
@@ -224,31 +221,38 @@ public class LList2 implements EList
 		if(size()==0||pos<0||pos>size())
 			throw new ListIsEmptyException();
 		int ret=0;
-		Node2 node=new Node2();
-		node.setNext(root.getNext());
-		if(size()==1) 
+		node=root.getNext();
+		if(count==1) 
 		{
-			ret=root.getNext().getData();	
-			root.setNext(null);
+			ret=node.getData();	
+			clear();
 		}
+		else if(pos==0) ret=delStart();
+		else if(pos==count-1) ret=delEnd();
 		else
 		{
-			int i=-1;
-			do
+			if (pos<count/2)
 			{
-				i++;
-				node=node.getNext();
-			}while(i<pos-1);
-			ret=node.getNext().getData();
-			if(size()==2) 
-			{
-				root.setNext(node.getNext());
+				for(int i=0;i<pos;i++) 
+				{
+					node=node.getNext();
+				}
 			}
 			else
 			{
-				node.setNext(node.getNext().getNext());	
+				node=root.getPrev();
+				for(int i=count-1;i>pos;i--)
+				{
+					node=node.getPrev();
+				}
 			}
-
+			ret=node.getData();
+			Node2 prev=node.getPrev();
+			Node2 next=node.getNext();
+			prev.setNext(next);
+			next.setPrev(prev);
+			
+			count--;
 		}
 		return ret;
 	}
@@ -334,18 +338,14 @@ public class LList2 implements EList
 	@Override
 	public void sort()
 	{
-		Node2 nodeA=new Node2();
-		Node2 nodeB=new Node2();
+		Node2 nodeA=root.getPrev();
+		Node2 nodeB=root.getNext();
 
-		nodeA.setNext(root.getNext());
-
-		for(int i=0;i<size()-1;i++)
+		for(int i=count-1;i>0;i--)
 		{
-			nodeA=nodeA.getNext();	
-			nodeB=nodeA.getNext();
-			for(int j=i+1;j<size();j++)
+			for(int j=0;j<i;j++)
 			{
-				if (nodeA.getData()>nodeB.getData())
+				if (nodeA.getData()<nodeB.getData())
 				{
 					int temp=nodeA.getData();
 					nodeA.setData(nodeB.getData());
@@ -353,28 +353,25 @@ public class LList2 implements EList
 				}
 				nodeB=nodeB.getNext();
 			}
+			nodeA=nodeA.getPrev();	
+			nodeB=root.getNext();
 		}
 	}
 
 	@Override
 	public void reverse()
 	{
-		Node2 nodeA=new Node2();
-		Node2 nodeB=new Node2();
-
-		nodeA.setNext(root.getNext());
-		int temp=0;
-		for(int i=0;i<size()/2;i++)
+		Node2 nodeA=root.getNext();
+		Node2 nodeB=root.getPrev();
+		int tmp=0;
+		for(int i=0;i<count/2;i++)
 		{
-			nodeA=nodeA.getNext();	
-			nodeB=nodeA.getNext();
-			for(int j=i;j<(size()-i-2);j++)
-			{
-				nodeB=nodeB.getNext();
-			}
-			temp=nodeA.getData();
+			tmp=nodeA.getData();
 			nodeA.setData(nodeB.getData());
-			nodeB.setData(temp);
+			nodeB.setData(tmp);
+			
+			nodeA=nodeA.getNext();
+			nodeB=nodeB.getPrev();	
 		}
 	}
 

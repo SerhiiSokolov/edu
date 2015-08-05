@@ -15,13 +15,13 @@ public class LListTest
 {
 	EList rr=null;
 	@Parameterized.Parameters
-	public static Collection primeNumbers()
+	public static Collection<Object[]> primeNumbers()
 	{
 		return Arrays.asList(new Object[][]{
-			//{ new AList0() },
-			//{ new AList1() },
-			//{ new AList2() },
-			//{ new LList0() },
+			{ new AList0() },
+			{ new AList1() },
+			{ new AList2() },
+			{ new LList0() },
 			{ new LList2() }
 		});
 	}
@@ -117,6 +117,23 @@ public class LListTest
 		rr.init(ini);
 		rr.get(0);
 	}
+	
+	@Test (expected = ListIsEmptyException.class)
+	public void testGet_OutRange1() 
+	{
+		int[] ini = {10,20,33,77,11,24,19};
+		rr.init(ini);
+		rr.get(25);
+	}
+	
+	@Test (expected = ListIsEmptyException.class)
+	public void testGet_OutRange2() 
+	{
+		int[] ini = {10,20,33,77,11,24,19};
+		rr.init(ini);
+		rr.get(-1);
+	}
+	
 	@Test
 	public void testGet_1() 
 	{
@@ -140,13 +157,6 @@ public class LListTest
 		int[] ini = {10,20,33,77,11,24,19};
 		rr.init(ini);
 		assertEquals(77, rr.get(3));
-	}
-	@Test (expected = ListIsEmptyException.class)
-	public void testGet_many2() 
-	{
-		int[] ini = {10,20,33,77,11,24,19};
-		rr.init(ini);
-		rr.get(25);
 	}
 	
 	//=====================================
