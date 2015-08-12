@@ -11,7 +11,7 @@ select distinct FirstName from Person order by 1
 select FirstName, count(1) from Person  group by FirstName
 
 5. Вывести фамилии, которые содержат в середине букву <б>
-select FirstName from Person where FirstName like "%_б_%"
+select LastName from Person where LastName like "%_б_%"
 
 6. Вывести список <бомжей>
 select FirstName from Person where Id_Street is null
