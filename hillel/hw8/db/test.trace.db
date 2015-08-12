@@ -1,0 +1,171 @@
+2015-08-12 21:59:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "PERSON" не найдена
+Table "PERSON" not found; SQL statement:
+SELECT * FROM PERSON [42102-188]
+2015-08-12 22:04:09 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "INSERT INTO STREET (NAME) VALUES ('проспект Правды'), ('проспект Карла Маркса'), ('проспект Кирова'), ('улица Шмидта')Ж[*] "
+Syntax error in SQL statement "INSERT INTO STREET (NAME) VALUES ('проспект Правды'), ('проспект Карла Маркса'), ('проспект Кирова'), ('улица Шмидта')Ж[*] "; SQL statement:
+insert into street (name) values ('проспект Правды'), ('проспект Карла Маркса'), ('проспект Кирова'), ('улица Шмидта')ж [42000-188]
+2015-08-12 22:04:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Значение слишком длинное для поля "NAME VARCHAR(20) NOT NULL": "STRINGDECODE('\u043f\u0440\u043e\u0441\u043f\u0435\u043a\u0442 \u041a\u0430\u0440\u043b\u0430 \u041c\u0430\u0440\u043a\u0441\u04... (21)"
+Value too long for column "NAME VARCHAR(20) NOT NULL": "STRINGDECODE('\u043f\u0440\u043e\u0441\u043f\u0435\u043a\u0442 \u041a\u0430\u0440\u043b\u0430 \u041c\u0430\u0440\u043a\u0441\u04... (21)"; SQL statement:
+insert into street (name) values ('проспект Правды'), ('проспект Карла Маркса'), ('проспект Кирова'), ('улица Шмидта') [22001-188]
+2015-08-12 22:08:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "DROPE[*] TABLE STREET "; ожидалось "DELETE, DROP, DECLARE, DEALLOCATE, {"
+Syntax error in SQL statement "DROPE[*] TABLE STREET "; expected "DELETE, DROP, DECLARE, DEALLOCATE, {"; SQL statement:
+drope table street [42001-188]
+2015-08-12 22:08:42 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "DROPE[*] TABLE STREET "; ожидалось "DELETE, DROP, DECLARE, DEALLOCATE, {"
+Syntax error in SQL statement "DROPE[*] TABLE STREET "; expected "DELETE, DROP, DECLARE, DEALLOCATE, {"; SQL statement:
+drope table street [42001-188]
+2015-08-12 22:08:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Таблица "TABLE" не найдена
+Table "TABLE" not found; SQL statement:
+delete table street [42102-188]
+2015-08-12 22:16:37 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Столбец "LASTNME" не найден
+Column "LASTNME" not found; SQL statement:
+insert into person (id,firstname, lastnme, age, id_street) values ('1','Сергей'),('Соколов'),('33'),('2') [42122-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.table.Table.getColumn(Table.java:648)
+	at org.h2.command.Parser.parseColumn(Parser.java:855)
+	at org.h2.command.Parser.parseColumnList(Parser.java:839)
+	at org.h2.command.Parser.parseInsert(Parser.java:1039)
+	at org.h2.command.Parser.parsePrepared(Parser.java:400)
+	at org.h2.command.Parser.parse(Parser.java:304)
+	at org.h2.command.Parser.parse(Parser.java:276)
+	at org.h2.command.Parser.prepareCommand(Parser.java:241)
+	at org.h2.engine.Session.prepareLocal(Session.java:461)
+	at org.h2.engine.Session.prepareCommand(Session.java:403)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2015-08-12 22:16:46 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Неверное количество столбцов
+Column count does not match; SQL statement:
+insert into person (id,firstname, lastname, age, id_street) values ('1','Сергей'),('Соколов'),('33'),('2') [21002-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.command.dml.Insert.prepare(Insert.java:265)
+	at org.h2.command.Parser.prepareCommand(Parser.java:246)
+	at org.h2.engine.Session.prepareLocal(Session.java:461)
+	at org.h2.engine.Session.prepareCommand(Session.java:403)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1188)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:170)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1388)
+	at org.h2.server.web.WebApp.query(WebApp.java:1061)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1023)
+	at org.h2.server.web.WebApp$1.next(WebApp.java:1010)
+	at org.h2.server.web.WebThread.process(WebThread.java:164)
+	at org.h2.server.web.WebThread.run(WebThread.java:89)
+	at java.lang.Thread.run(Unknown Source)
+2015-08-12 22:27:42 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ошибка преобразования данных при конвертации "'' (PERSON: ID_STREET INT)"
+Data conversion error converting "'' (PERSON: ID_STREET INT)"; SQL statement:
+insert into person (firstname, lastname, age, id_street) values
+('Андрей','Ковалинский','45','3'),
+('Света','Соколова','18','2'),
+('Максим','Петров','23','1'),
+('Жанна','Петрова','40',''),
+('Анна','Соколова','80','2'),
+('Валентин','Сидоров','4','4'),
+('Сергей','Иванов','10',''),
+('Гриша','Козлов','46','2'),
+('Андрей','Пшонка','33','3'),
+('Настя','Соколова','32','4'),
+('Николай','Азаров','50','1'),
+('Виктор','Янкович','60','2'),
+('Наташа','Ростова','65','3'),
+('Ира','Бабич','9','4'),
+('Хрен','Табачник','8','1'),
+('Валерия','Гонтарева','17',''),
+('Надя','Подопригора','19','3'),
+('Борис','Дзиндзя','25','4'),
+('Борис','Моисеев','36','1'),
+('Андрей','Калашников','28',''),
+('Саша','Какой','29','3'),
+('Александра','Пушкина','46','4'),
+('Виктория','Никакая','48','1'),
+('Алексей','Ванюка	','11','2'),
+('Пуйло','Путин','99','2') -- row #4 (STRINGDECODE('\u0416\u0430\u043d\u043d\u0430'), STRINGDECODE('\u041f\u0435\u0442\u0440\u043e\u0432\u0430'), '40', '') [22018-188]
+2015-08-12 22:28:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Ошибка преобразования данных при конвертации "'' (PERSON: ID_STREET INT)"
+Data conversion error converting "'' (PERSON: ID_STREET INT)"; SQL statement:
+insert into person (firstname, lastname, age, id_street) values
+('Андрей','Ковалинский','45','3'),
+('Света','Соколова','18','2'),
+('Максим','Петров','23','1'),
+('Жанна','Петрова','40',''),
+('Анна','Соколова','80','2'),
+('Валентин','Сидоров','4','4'),
+('Сергей','Иванов','10',''),
+('Гриша','Козлов','46','2'),
+('Андрей','Пшонка','33','3'),
+('Настя','Соколова','32','4'),
+('Николай','Азаров','50','1'),
+('Виктор','Янкович','60','2'),
+('Наташа','Ростова','65','3'),
+('Ира','Бабич','9','4'),
+('Хрен','Табачник','8','1'),
+('Валерия','Гонтарева','17',''),
+('Надя','Подопригора','19','3'),
+('Борис','Дзиндзя','25','4'),
+('Борис','Моисеев','36','1'),
+('Андрей','Калашников','28',''),
+('Саша','Какой','29','3'),
+('Александра','Пушкина','46','4'),
+('Виктория','Никакая','48','1'),
+('Алексей','Ванюка	','11','2'),
+('Пуйло','Путин','99','2') -- row #4 (STRINGDECODE('\u0416\u0430\u043d\u043d\u0430'), STRINGDECODE('\u041f\u0435\u0442\u0440\u043e\u0432\u0430'), '40', '') [22018-188]
+2015-08-12 22:31:49 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Синтаксическая ошибка в выражении SQL "SELECT * FROM PERSON WHERE AGE>18 OR AGE<10 ODER[*] BY AGE "
+Syntax error in SQL statement "SELECT * FROM PERSON WHERE AGE>18 OR AGE<10 ODER[*] BY AGE "; SQL statement:
+SELECT * FROM PERSON where age>18 or age<10 oder by age [42000-188]
+2015-08-12 22:33:35 database: flush
+org.h2.message.DbException: Внутренняя ошибка: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/ssv/test.mv.db [1.4.188/7]"
+General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/ssv/test.mv.db [1.4.188/7]" [50000-188]
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.message.DbException.convert(DbException.java:295)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:94)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:377)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:360)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:2888)
+	at org.h2.mvstore.db.MVTableEngine$Store.open(MVTableEngine.java:154)
+	at org.h2.mvstore.db.MVTableEngine.init(MVTableEngine.java:99)
+	at org.h2.engine.Database.getPageStore(Database.java:2434)
+	at org.h2.engine.Database.open(Database.java:671)
+	at org.h2.engine.Database.openDatabase(Database.java:268)
+	at org.h2.engine.Database.<init>(Database.java:262)
+	at org.h2.engine.Engine.openSession(Engine.java:65)
+	at org.h2.engine.Engine.openSession(Engine.java:175)
+	at org.h2.engine.Engine.createSessionAndValidate(Engine.java:153)
+	at org.h2.engine.Engine.createSession(Engine.java:136)
+	at org.h2.engine.Engine.createSession(Engine.java:28)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:349)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:107)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:91)
+	at org.h2.Driver.connect(Driver.java:72)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at edu.hillel.hw8.db.DBxx.main(DBxx.java:13)
+Caused by: org.h2.jdbc.JdbcSQLException: Внутренняя ошибка: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/ssv/test.mv.db [1.4.188/7]"
+General error: "java.lang.IllegalStateException: The file is locked: nio:C:/Users/ssv/test.mv.db [1.4.188/7]" [50000-188]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345)
+	... 24 more
+Caused by: java.lang.IllegalStateException: The file is locked: nio:C:/Users/ssv/test.mv.db [1.4.188/7]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:773)
+	at org.h2.mvstore.FileStore.open(FileStore.java:172)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:346)
+	... 19 more
