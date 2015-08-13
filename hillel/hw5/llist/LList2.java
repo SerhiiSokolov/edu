@@ -4,7 +4,7 @@ public class LList2 implements EList
 {
 	private Node2 root=new Node2();
 	private Node2 node=null;
-	int count=1;
+	int count=0;
 
 	@Override
 	public int size()
