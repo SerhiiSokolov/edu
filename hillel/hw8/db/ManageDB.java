@@ -8,7 +8,7 @@ public class ManageDB {
 			DBxx db=new DBxx();
 			db.getByAge(10, 20);
 			db.getByFirstLater();
-			db.getByMiddleChar("Ð½");
+			db.getByMiddleChar("í");
 			db.getEvenId();
 		}
 		catch (ClassNotFoundException|SQLException errObj)
