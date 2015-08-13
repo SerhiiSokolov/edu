@@ -20,12 +20,6 @@ public class LListTestNG extends Assert
 		};
 	}
 	
-	/*@AfterMethod
-	public void setUp()
-	{
-		rr=null;
-	}
-	*/
 	//=====================================
 	// size, init, toArray
 	//=====================================
@@ -42,7 +36,6 @@ public class LListTestNG extends Assert
 	@Test(dataProvider = "parameterTestNG")
 	public void testSize_0(EList rr)
 	{
-
 		int[] ini = {};
 		rr.init(ini);
 		assertEquals(0, rr.size());
@@ -344,6 +337,7 @@ public class LListTestNG extends Assert
 		int[] act = rr.toArray();
 		AssertJUnit.assertArrayEquals(exp, act);
 	}
+
 	@Test(dataProvider = "parameterTestNG")
 	public void testAddPos_1(EList rr)
 	{
