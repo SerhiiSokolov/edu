@@ -1,0 +1,26 @@
+package edu.hillel.hw8.db;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class ManageDB {
+
+	public static void main(String[] args)throws ClassNotFoundException, SQLException  {
+		ResultSet rs;
+		try{
+			DBxx db=new DBxx();
+			rs=db.getByAge(10, 20);
+
+			rs=db.getByFirstLater();
+
+			rs=db.getByMiddleChar("н");
+
+			rs=db.getEvenId();
+
+		}
+		catch (ClassNotFoundException|SQLException errObj)
+		{
+			System.out.println("Error"+errObj);
+		}
+	}
+}
