@@ -15,7 +15,6 @@ public class DBxx {
 				+ "FROM PERSON "
 				+ "WHERE AGE>="+startAge+" and AGE<="+endAge;		
 		rs=st.executeQuery(query);		
-		printRS(rs);
 		return rs;
 	}
 
@@ -23,8 +22,7 @@ public class DBxx {
 		st=getConnection();
 		rs=st.executeQuery("SELECT DISTINCT FirstName, LastName "
 				+ "FROM PERSON "
-				+ "WHERE LEFT(FirstName,1)=LEFT(LastName,1)");		
-		printRS(rs);
+				+ "WHERE LEFT(FirstName,1)=LEFT(LastName,1)");
 		return rs;
 	}
 
@@ -33,7 +31,6 @@ public class DBxx {
 		rs=st.executeQuery("SELECT Id, FirstName, LastName "
 				+ "FROM PERSON "
 				+ "WHERE Id%2=0");
-		printRS(rs);
 		return rs;
 	}
 
@@ -43,8 +40,6 @@ public class DBxx {
 				+ "FROM Person "
 				+ "WHERE LastName like '%_"+s+"_%'";
 		rs=st.executeQuery(query);
-		
-		printRS(rs);
 		return rs;
 	}
 	
@@ -54,14 +49,19 @@ public class DBxx {
 		return conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 		        ResultSet.CONCUR_UPDATABLE);
 	}
-
-	public void printRS(ResultSet rs) throws ClassNotFoundException, SQLException{
-		int x = rs.getMetaData().getColumnCount();
-		while(rs.next()){
-			for(int i=1; i<=x;i++){
-				System.out.print(rs.getString(i) + ", ");
+	
+	public String[][] toArray(ResultSet rs) throws SQLException{
+		rs.last();
+		int row = rs.getRow();
+		int column=rs.getMetaData().getColumnCount();
+		String[][] string=new String[row][column];
+		rs.beforeFirst();
+		
+		for(int j=0;rs.next();j++){
+			for(int i=0; i<column;i++){
+				string[j][i]=rs.getString(i+1);
 			}
-			System.out.println();
 		}
+		return string;
 	}
 }
