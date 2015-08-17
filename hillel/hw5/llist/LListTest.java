@@ -22,7 +22,8 @@ public class LListTest
 			{ new AList1() },
 			{ new AList2() },
 			{ new LList0() },
-			{ new LList2() }
+			{ new LList2() },
+			{ new LList3() }
 		});
 	}
 	public LListTest(EList zz)
