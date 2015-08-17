@@ -45,20 +45,18 @@ public class AListR implements EList {
 	public int[] toArray() 
 	{
 		int[] tmp = new int[count];
-		if (start>end)
+		if (count==0) ;
+		else if (start>end)
 		{
-			int j=0;
-			for(int i=start;i<arr.length;i++,j++)
+			int j=0;		
+			for(int i=start;j<count;i++,j++)
 			{
-				tmp[j]=arr[i];
-			}
-			for(int i=0;i<=end;i++,j++)
-			{
+				if(i==arr.length) i=0;
 				tmp[j]=arr[i];
 			}
 		}
 		else
-		{
+		{			
 			for (int i = start; i <= end; i++) 
 			{
 				tmp[i-start] = arr[i];
@@ -99,7 +97,6 @@ public class AListR implements EList {
 		{
 			realPos=start+pos;
 		}
-		System.out.println("realpos="+realPos);
 		arr[realPos] = val;
 	}
 
@@ -129,9 +126,19 @@ public class AListR implements EList {
 		if (pos>count)
 			throw new ListIsEmptyException();
 		if (arr.length-count==0) resize();
-		
+
 		if(pos==0) addStart(val);
-		else if(pos==count-1) addEnd(val);
+		else if(pos==count) addEnd(val);		
+		else if(start<end)
+		{
+			for (int i = end+1; i >pos+start; i--) 
+			{
+				arr[i] = arr[i-1];
+			}
+			arr[pos+start] = val;
+			end++;
+			count++;
+		}
 		else
 		{
 			addEnd(arr[end]);
@@ -180,16 +187,24 @@ public class AListR implements EList {
 	@Override
 	public int delPos(int pos)
 	{
-		int realPos=pos+start;
-		if(size() == 0||realPos<start||pos>end)
+		int[] tmp=toArray();
+				
+		if(size() == 0||pos<0||pos>tmp.length-1)
 			throw new ListIsEmptyException();
-		int ret = arr[realPos];
-
-		for(int i=realPos;i<end;i++)
+		int ret=tmp[pos];
+		
+		for(int i=pos;i<tmp.length-1;i++)
 		{
-			arr[i]=arr[i+1];
+			tmp[i]=tmp[i+1];
 		}
+		
+		backArray(tmp);
+		
+		arr[end]=0;
 		end--;
+		if(end<0) end=arr.length-1;
+		count--;
+		
 		return ret;
 	}
 
@@ -199,8 +214,9 @@ public class AListR implements EList {
 		if(size()==0) 
 			throw new ListIsEmptyException();
 		int min = arr[start];
-		for (int i=start; i < end; i++)
+		for (int i=start, j=0;j < count; i++,j++)
 		{
+			if(i==arr.length) i=0;
 			if (arr[i] < min)
 			{
 				min = arr[i];
@@ -215,8 +231,9 @@ public class AListR implements EList {
 		if(size() == 0)
 			throw new ListIsEmptyException();
 		int max = arr[start];
-		for (int i = start; i < end; i++)
+		for (int i=start, j=0;j < count; i++,j++)
 		{
+			if(i==arr.length) i=0;
 			if (arr[i] > max)
 			{
 				max = arr[i];
@@ -231,8 +248,9 @@ public class AListR implements EList {
 		if(size() == 0)
 			throw new ListIsEmptyException();
 		int min = start;
-		for (int i=start; i < end ; i++)
+		for (int i=start, j=0;j < count; i++,j++)
 		{
+			if(i==arr.length) i=0;
 			if (arr[min] > arr[i])
 			{
 				min = i;
@@ -248,8 +266,9 @@ public class AListR implements EList {
 		if(size() == 0)
 			throw new ListIsEmptyException();
 		int max = 0;
-		for (int i=start; i < end; i++)
+		for (int i=start, j=0;j < count; i++,j++)
 		{
+			if(i==arr.length) i=0;
 			if (arr[max] < arr[i])
 			{
 				max = i;
@@ -261,49 +280,47 @@ public class AListR implements EList {
 	@Override
 	public void sort()
 	{
-		for(int i = end-1 ; i > 0 ; i--)
-		{
-			for(int j = start ; j < i ; j++)
-			{
-				if( arr[j] > arr[j+1] )
+		int[] tmpArr=toArray();
+		for(int i = tmpArr.length-1 ; i > 0 ; i--)
+	    {
+	        for(int j = 0 ; j < i ; j++)
+	        {
+				if( tmpArr[j] > tmpArr[j+1] )
 				{
-					int tmp = arr[j];
-					arr[j] = arr[j+1];
-					arr[j+1] = tmp;
+					int tmp = tmpArr[j];
+					tmpArr[j] = tmpArr[j+1];
+					tmpArr[j+1] = tmp;
 				}
 			}
 		}
+		backArray(tmpArr);
 	}
 
 	@Override
 	public void reverse()
 	{
-		int first=start;
-		int last=end-1;
-		while(last>first)
+		int[] tmpArr=toArray();
+		for (int i=0; i < tmpArr.length/2; i++)
 		{
-			int tmp = arr[first];
-			arr[first] = arr[last];
-			arr[last] = tmp;
-			first++;
-			last--;
+			int tmp = tmpArr[i];
+			tmpArr[i] = tmpArr[tmpArr.length-1-i];
+			tmpArr[tmpArr.length-1-i] = tmp;
 		}
+		backArray(tmpArr);
 	}
 
 	@Override
 	public void halfReverse()
 	{	
-		int d = (size()%2==0)?0:1;
-		int first=start;
-		int last=(start+end)/2+d;
-		while(last<end)
+		int[] tmpArr=toArray();
+		int d = (tmpArr.length%2==0)?0:1;
+		for (int i=0; i < (tmpArr.length)/2; i++)
 		{
-			int tmp=arr[first];
-			arr[first]=arr[last];
-			arr[last]=tmp;
-			first++;
-			last++;
+			int tmp = tmpArr[i];
+			tmpArr[i] = tmpArr[(tmpArr.length)/2+d+i];
+			tmpArr[(tmpArr.length)/2+d+i] = tmp;
 		}
+		backArray(tmpArr);
 	}
 
 	private void resize()
@@ -357,5 +374,15 @@ public class AListR implements EList {
 			System.out.print("["+arr[i]+"] ");
 		}
 		System.out.println();
+	}
+	
+	private void backArray(int[] tmp)
+	{
+		int i=start;
+		for(int j=0;j<tmp.length;i++,j++)
+		{
+			if(i==arr.length) i=0;
+			arr[i]=tmp[j];
+		}
 	}
 }

@@ -21,9 +21,10 @@ public class LListTest
 			{ new AList0() },
 			{ new AList1() },
 			{ new AList2() },
-			{ new LList0() },
+			{ new AListR() },
+			{ new LList1() },
 			{ new LList2() },
-			{ new LList3() }
+			{ new LListR() }
 		});
 	}
 	public LListTest(EList zz)
@@ -734,7 +735,7 @@ public class LListTest
 		int[] act = rr.toArray();
 		assertArrayEquals(exp, act);
 	}
-
+	
 	//=====================================
 	// reverse
 	//=====================================

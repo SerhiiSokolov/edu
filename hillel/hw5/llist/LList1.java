@@ -1,6 +1,6 @@
 package edu.hillel.hw5.llist;
 
-public class LList0 implements EList
+public class LList1 implements EList
 {
 	Node root=new Node();
 	@Override

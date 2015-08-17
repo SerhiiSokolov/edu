@@ -31,7 +31,6 @@ public class LListR implements EList
 	public void clear()
 	{
 		root.setNext(null);
-		//root.setPrev(root.getNext());
 		count=0;
 	}
 
@@ -253,7 +252,6 @@ public class LListR implements EList
 			Node2 next=node.getNext();
 			prev.setNext(next);
 			next.setPrev(prev);
-
 			count--;
 		}
 		return ret;
@@ -325,7 +323,7 @@ public class LListR implements EList
 			throw new ListIsEmptyException();
 		Node2 node=new Node2();
 		node.setNext(root.getNext());
-		int max = root.getNext().getData();
+		int max = node.getData();
 		int maxInd=0;
 		int i=0;
 		while(i<count)

@@ -8,13 +8,13 @@ public class ssv {
 		rr.init(ini);
 		printarr(rr);
 		System.out.println();
-		for(int i=0;i<5;i++){
+		for(int i=0;i<7;i++){
 			rr.addEnd(i+1);
-			//printarr(rr);
-			//System.out.println();
+			rr.printArray();
 		}
-		//printarr(rr);
-		System.out.println();
+		rr.reverse();
+		rr.printArray();
+
 	}
 	
 	public static void printarr(AListR ar){
