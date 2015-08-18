@@ -11,8 +11,21 @@ public class DS_H2 implements DS
 {
 
 	@Override
-	public void create(Person p) {
-		// TODO Auto-generated method stub
+	public void create(Person p){
+		try 
+		{
+			Class.forName("org.h2.Driver");
+
+			Connection conn = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
+			Statement st = conn.createStatement();
+			String values="'"+p.getId()+"', '"+p.getfName()+"', '"+p.lName+"', '"+p.getAge()+"'";
+			String query="INSERT INTO PERSON (ID, FirstName,LastName,Age) VALUES("+values+");";
+			st.execute(query);
+		} 
+		catch (ClassNotFoundException | SQLException e) 
+		{
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -44,15 +57,37 @@ public class DS_H2 implements DS
 	}
 
 	@Override
-	public void update(Person p) {
-		// TODO Auto-generated method stub
-		
+	public void update(Person p) {	
+		try 
+		{
+			Class.forName("org.h2.Driver");
+
+			Connection conn = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
+			Statement st = conn.createStatement();
+			String query="UPDATE PERSON SET Age="+p.getAge()+" WHERE Id="+p.getId()+";";
+			st.executeUpdate(query);
+		} 
+		catch (ClassNotFoundException | SQLException e) 
+		{
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void delete(Person p) {
-		// TODO Auto-generated method stub
-		
+		try 
+		{
+			Class.forName("org.h2.Driver");
+
+			Connection conn = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
+			Statement st = conn.createStatement();
+			String query="DELETE FROM Person WHERE Id="+p.getId()+";";
+			st.executeUpdate(query);
+		} 
+		catch (ClassNotFoundException | SQLException e) 
+		{
+			e.printStackTrace();
+		}
 	}
 
 }
