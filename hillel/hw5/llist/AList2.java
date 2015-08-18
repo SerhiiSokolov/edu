@@ -3,10 +3,9 @@ package edu.hillel.hw5.llist;
 public class AList2 implements EList {
 
 
-	private int[] arr = new int[100];
-	private int start=0;
-	private int end=arr.length;
-	private int middle=arr.length/2;
+	private int[] arr = new int[10];
+	private int start=arr.length/2;
+	private int end=start;
 
 	@Override
 	public int size()
@@ -20,17 +19,20 @@ public class AList2 implements EList {
 		if(ini == null)
 		{
 			ini = new int[0];
-			start=end=0;
+			start=arr.length/2;
+			end=start;
 		}
-		
+
 		if (ini.length>arr.length) resize((int)(ini.length*1.3));
-		start=middle-ini.length/2;
+
+		start=arr.length/2-ini.length/2;
 		end=start+ini.length;
-		for (int i = start; i < end; i++) 
+
+		for (int i = start; i < start+ini.length; i++) 
 		{
 			arr[i] = ini[i-start];
 		}
-		
+
 	}
 
 	@Override
@@ -53,37 +55,34 @@ public class AList2 implements EList {
 	@Override
 	public int get(int pos) 
 	{	
-		int realPos=start+pos;
-		
-		if(size() == 0||realPos<start||realPos>end)
+		if(size() == 0||(start+pos)<start||(start+pos)>end)
 			throw new ListIsEmptyException();
-		return arr[realPos];
+
+		return arr[start+pos];
 	}
 
 	@Override
 	public void set(int pos, int val) 
 	{
-		int realPos=start+pos;
-		
-		if(size() == 0||realPos<start||realPos>end)
+
+		if(size() == 0||(start+pos)<start||(start+pos)>end)
 			throw new ListIsEmptyException();
-		arr[realPos] = val;
+
+		arr[start+pos] = val;
 	}
 
 	@Override
 	public void addStart(int val)
 	{
-		if (start==0) resize();
-		start--;
-		arr[start]=val;
+		resize();
+		arr[--start]=val;
 	}
 
 	@Override
 	public void addEnd(int val)
 	{	
-		if (end==arr.length) resize();
-		end++;
-		arr[end-1]=val;
+		resize();
+		arr[end++]=val;
 	}
 
 	@Override
@@ -91,7 +90,8 @@ public class AList2 implements EList {
 	{
 		if (start+pos>end)
 			throw new ListIsEmptyException();
-		if (end==arr.length) resize();
+
+		resize();
 		for (int i = end; i > pos+start; i--) 
 		{
 			arr[i] = arr[i-1];
@@ -183,7 +183,7 @@ public class AList2 implements EList {
 			{
 				min = i;
 			}
-			
+
 		}
 		return min-start;
 	}
@@ -193,8 +193,8 @@ public class AList2 implements EList {
 	{
 		if(size() == 0)
 			throw new ListIsEmptyException();
-		int max = 0;
-		for (int i=start; i < end; i++)
+		int max = start;
+		for (int i=start+1; i < end; i++)
 		{
 			if (arr[max] < arr[i])
 			{
@@ -224,15 +224,11 @@ public class AList2 implements EList {
 	@Override
 	public void reverse()
 	{
-		int first=start;
-		int last=end-1;
-		while(last>first)
+		for(int i=0;i<size()/2;i++)
 		{
-			int tmp = arr[first];
-			arr[first] = arr[last];
-			arr[last] = tmp;
-			first++;
-			last--;
+			int tmp=arr[i+start];
+			arr[i+start]=arr[end-i-1];
+			arr[end-i-1]=tmp;
 		}
 	}
 
@@ -240,34 +236,32 @@ public class AList2 implements EList {
 	public void halfReverse()
 	{	
 		int d = (size()%2==0)?0:1;
-		int first=start;
-		int last=(start+end)/2+d;
-		while(last<end)
+		for(int i=start;i<start+size()/2;i++)
 		{
-			int tmp=arr[first];
-			arr[first]=arr[last];
-			arr[last]=tmp;
-			first++;
-			last++;
+			int tmp=arr[i];
+			arr[i]=arr[size()/2+i+d];
+			arr[size()/2+i+d]=tmp;
 		}
 	}
-	
+
 	private void resize()
-	{		
-		int newSize=arr.length+arr.length/3;
-		middle=newSize/2;
-		int[] tmp=new int[newSize];
-		int j=(tmp.length-arr.length)/2;
-		
-		for(int i=start; i<end;i++, j++)
+	{
+		if(start==0||end==arr.length)
 		{
-			tmp[j]=arr[i];
+			int newSize=arr.length+arr.length/3;
+			int[] tmp=new int[newSize];
+			int j=(tmp.length-arr.length)/2;
+
+			for(int i=start; i<end;i++, j++)
+			{
+				tmp[j]=arr[i];
+			}
+			start=(tmp.length-arr.length)/2;
+			end=j;
+			arr=tmp;
 		}
-		start=(tmp.length-arr.length)/2;
-		end=j;
-		arr=tmp;
 	}
-	
+
 	private void resize(int newSize)
 	{
 		int[] tmp=new int[newSize];
@@ -276,16 +270,6 @@ public class AList2 implements EList {
 			tmp[i]=arr[i];
 		}
 		arr=tmp;
-		middle=arr.length/2;
 	}
 
-	public void printArray()
-	{
-		if(arr==null) throw new ListIsEmptyException();
-		for(int i=0;i<arr.length;i++)
-		{
-			System.out.print("["+arr[i]+"] ");
-		}
-		System.out.println();
-	}
 }

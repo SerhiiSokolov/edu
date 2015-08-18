@@ -1,10 +1,28 @@
 package edu.hillel.hw9.db;
 public class Person 
 {
-	int id=27;
+	int id;
 	String fName;
 	String lName;
 	int age;
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setfName(String fName) {
+		this.fName = fName;
+	}
+
+	public void setlName(String lName) {
+		this.lName = lName;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	
 	
 	public int getId() {
 		return id;

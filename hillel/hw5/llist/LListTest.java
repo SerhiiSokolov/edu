@@ -18,13 +18,13 @@ public class LListTest
 	public static Collection<Object[]> primeNumbers()
 	{
 		return Arrays.asList(new Object[][]{
-			{ new AList0() },
-			{ new AList1() },
-			{ new AList2() },
-			{ new AListR() },
-			{ new LList1() },
-			{ new LList2() },
-			{ new LListR() }
+			//{ new AList0() },
+			//{ new AList1() },
+			//{ new AList2() },
+			{ new AListR() }
+			//{ new LList1() },
+			//{ new LList2() },
+			//{ new LListR() }
 		});
 	}
 	public LListTest(EList zz)
@@ -489,7 +489,7 @@ public class LListTest
 		assertArrayEquals(exp, act);		
 	}
 
-	//=====================================
+/*	//=====================================
 	// delPos
 	//=====================================
 	@Test (expected = ListIsEmptyException.class)
@@ -844,4 +844,4 @@ public class LListTest
 		int[] act = rr.toArray();
 		assertArrayEquals(exp, act);
 	}
-}
+*/}

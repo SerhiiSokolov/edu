@@ -85,6 +85,7 @@ public class AList1 implements EList {
 	{
 		if (pos>index)
 			throw new ListIsEmptyException();
+		
 		if (index>arr.length-1) resize();
 		for (int i = index; i > pos; i--) 
 		{
