@@ -21,8 +21,8 @@ public class LListTest
 			//{ new AList0() },
 			//{ new AList1() },
 			//{ new AList2() },
-			{ new AListR() }
-			//{ new LList1() },
+			//{ new AListR() },
+			{ new LList1() },
 			//{ new LList2() },
 			//{ new LListR() }
 		});
@@ -489,7 +489,7 @@ public class LListTest
 		assertArrayEquals(exp, act);		
 	}
 
-/*	//=====================================
+	//=====================================
 	// delPos
 	//=====================================
 	@Test (expected = ListIsEmptyException.class)
@@ -786,7 +786,7 @@ public class LListTest
 
 	//=====================================
 	// halfReverse
-	//=====================================
+	/*	//=====================================
 	@Test
 	public void testHalfReverse_0() 
 	{

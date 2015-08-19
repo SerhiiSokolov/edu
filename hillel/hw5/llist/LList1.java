@@ -308,29 +308,23 @@ public class LList1 implements EList
 	@Override
 	public void reverse()
 	{
-		Node nodeA=new Node();
-		Node nodeB=new Node();
-
-		nodeA.setNext(root.getNext());
-		int temp=0;
-		for(int i=0;i<size()/2;i++)
+		Node out=null;
+		Node q;
+		while (root!=null)
 		{
-			nodeA=nodeA.getNext();	
-			nodeB=nodeA.getNext();
-			for(int j=i;j<(size()-i-2);j++)
-			{
-				nodeB=nodeB.getNext();
-			}
-			temp=nodeA.getData();
-			nodeA.setData(nodeB.getData());
-			nodeB.setData(temp);
+			q=root;
+			root=root.next;
+			q.next=out;
+			out=q;
 		}
+		root=out;
 	}
 
 	@Override
 	public void halfReverse()
 	{	
-		int d = (size()%2==0)?0:1;
+		
+		/*int d = (size()%2==0)?0:1;
 		Node nodeA=new Node();
 		Node nodeB=new Node();
 
@@ -348,7 +342,7 @@ public class LList1 implements EList
 			temp=nodeA.getData();
 			nodeA.setData(nodeB.getData());
 			nodeB.setData(temp);	
-		}
+		}*/
 	}
 
 }
