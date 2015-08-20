@@ -67,7 +67,7 @@ public class LList1 implements EList
 	@Override
 	public int get(int pos) 
 	{
-		if(size() == 0||pos<0||pos>size())
+		if(size() == 0||pos<0||pos>size()-1)
 			throw new ListIsEmptyException();
 
 		Node tmp=root;
@@ -77,7 +77,6 @@ public class LList1 implements EList
 			tmp=tmp.next;
 			count++;
 		}
-
 		return tmp.data;
 	}
 
@@ -126,7 +125,7 @@ public class LList1 implements EList
 		if(pos<0||pos>size())
 			throw new ListIsEmptyException();
 
-		if(pos==0||root==null)
+		if(pos==0)
 		{
 			addStart(val);
 		}
@@ -322,27 +321,21 @@ public class LList1 implements EList
 
 	@Override
 	public void halfReverse()
-	{	
-		
-		/*int d = (size()%2==0)?0:1;
-		Node nodeA=new Node();
-		Node nodeB=new Node();
-
-		nodeA.setNext(root.getNext());
-		int temp=0;
-		for(int i=0;i<size()/2;i++)
+	{		
+		//int d = (size()%2==0)?0:1;
+		if(size()==0) return;
+		int count=0;
+		Node tmp=root;
+		while(tmp.next!=null) tmp=tmp.next;
+		while(count<size()/2)
 		{
-			nodeA=nodeA.getNext();	
-			nodeB=root.getNext();
-			size();
-			for(int j=0; j<size()/2+d+i;j++)
-			{
-				nodeB=nodeB.getNext();
-			}
-			temp=nodeA.getData();
-			nodeA.setData(nodeB.getData());
-			nodeB.setData(temp);	
-		}*/
+			tmp.next=root;
+			root=root.next;
+			tmp=tmp.next;
+			tmp.next=null;
+
+			count++;
+		}
 	}
 
 }

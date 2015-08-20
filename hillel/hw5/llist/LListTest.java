@@ -22,9 +22,9 @@ public class LListTest
 			//{ new AList1() },
 			//{ new AList2() },
 			//{ new AListR() },
-			{ new LList1() },
-			//{ new LList2() },
-			//{ new LListR() }
+			//{ new LList1() }
+			//{ new LList2() }
+			{ new LListR() }
 		});
 	}
 	public LListTest(EList zz)
@@ -125,7 +125,7 @@ public class LListTest
 	{
 		int[] ini = {10,20,33,77,11,24,19};
 		rr.init(ini);
-		rr.get(25);
+		rr.get(7);
 	}
 	
 	@Test (expected = ListIsEmptyException.class)
@@ -339,7 +339,7 @@ public class LListTest
 		int[] act = rr.toArray();
 		assertArrayEquals(exp, act);
 	}
-	
+		
 	//=====================================
 	// addPos
 	//=====================================
@@ -736,7 +736,7 @@ public class LListTest
 		assertArrayEquals(exp, act);
 	}
 	
-	//=====================================
+/*	//=====================================
 	// reverse
 	//=====================================
 	@Test
@@ -786,7 +786,7 @@ public class LListTest
 
 	//=====================================
 	// halfReverse
-	/*	//=====================================
+	//=====================================
 	@Test
 	public void testHalfReverse_0() 
 	{

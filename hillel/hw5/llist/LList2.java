@@ -127,12 +127,7 @@ public class LList2 implements EList
 
 		Node2 node=new Node2(val);
 
-		if (root==null)
-		{
-			root=node;
-		}
-
-		else if(pos==0) addStart(val);
+		if(pos==0) addStart(val);
 		else if(pos==size()) addEnd(val);
 
 		else
@@ -158,10 +153,9 @@ public class LList2 implements EList
 		if(size() == 0)
 			throw new ListIsEmptyException();
 
-		int ret=0;
+		int ret = root.data;
 		if (size()==1)
-		{
-			ret = root.data;
+		{			
 			clear();
 		}
 		else
@@ -207,8 +201,7 @@ public class LList2 implements EList
 		int ret=0;		
 		if(size()==1) 
 		{
-			Node2 tmp=root;
-			ret=tmp.data;	
+			ret=root.data;	
 			clear();
 		}
 		else if(pos==0) ret=delStart();
@@ -334,7 +327,8 @@ public class LList2 implements EList
 				tmp.next=p;
 				tmp.prev=pr;
 				pr.next=tmp;
-				if(p!=null){
+				if(p!=null)
+				{
 					p.prev=tmp;
 				}
 			}
@@ -345,41 +339,35 @@ public class LList2 implements EList
 	@Override
 	public void reverse()
 	{
-		Node2 nodeA=root.getNext();
-		Node2 nodeB=root.getPrev();
-		int tmp=0;
-		for(int i=0;i<count/2;i++)
+		Node2 out=null;
+		Node2 tmp=root;
+		while(root!=null)
 		{
-			tmp=nodeA.getData();
-			nodeA.setData(nodeB.getData());
-			nodeB.setData(tmp);
+			tmp=root;
+			root=root.next;
 
-			nodeA=nodeA.getNext();
-			nodeB=nodeB.getPrev();	
+			tmp.next=out;
+			if(out!=null)  out.prev=tmp;
+			out=tmp;
 		}
+		root=out;
 	}
 
 	@Override
 	public void halfReverse()
 	{	
-		int d = (size()%2==0)?0:1;
-		Node2 nodeA=new Node2();
-		Node2 nodeB=new Node2();
-
-		nodeA.setNext(root.getNext());
-		int temp=0;
-		for(int i=0;i<size()/2;i++)
+		//int d = (size()%2==0)?0:1;
+		int count=0;
+		Node2 tmp=root;
+		while(tmp.next!=null) tmp=tmp.next;
+		while(count<size()/2)
 		{
-			nodeA=nodeA.getNext();	
-			nodeB=root.getNext();
-			size();
-			for(int j=0; j<size()/2+d+i;j++)
-			{
-				nodeB=nodeB.getNext();
-			}
-			temp=nodeA.getData();
-			nodeA.setData(nodeB.getData());
-			nodeB.setData(temp);	
+			tmp.next=root;
+			tmp=tmp.next;
+			tmp.next=null;
+
+			root=root.next;
+			count++;
 		}
 	}
 
