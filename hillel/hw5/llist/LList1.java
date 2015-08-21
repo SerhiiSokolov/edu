@@ -322,20 +322,29 @@ public class LList1 implements EList
 	@Override
 	public void halfReverse()
 	{		
-		//int d = (size()%2==0)?0:1;
-		if(size()==0) return;
-		int count=0;
-		Node tmp=root;
-		while(tmp.next!=null) tmp=tmp.next;
-		while(count<size()/2)
+		if(size()==0||size()==1) return;
+		int d = (size()%2==0)?0:1;
+		Node out;
+		Node tmp=root;		
+		for(int i=0;i<size()/2-1;i++)
 		{
-			tmp.next=root;
-			root=root.next;
 			tmp=tmp.next;
-			tmp.next=null;
-
-			count++;
 		}
+		out=tmp.next;
+		tmp.next=null;
+		if(d==1)
+		{
+			tmp=out;
+			out=out.next;
+			tmp.next=root;
+			root=tmp;
+		}
+		tmp=out;
+		while(tmp.next!=null)
+		{
+			tmp=tmp.next;
+		}
+		tmp.next=root;
+		root=out;
 	}
-
 }
