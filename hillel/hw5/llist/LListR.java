@@ -12,7 +12,7 @@ public class LListR implements EList
 			this.data=data;
 		}
 	}
-	
+
 	Node2 root=null;
 
 	@Override
@@ -398,6 +398,6 @@ public class LListR implements EList
 	@Override
 	public void halfReverse()
 	{	
-
+		
 	}
 }
