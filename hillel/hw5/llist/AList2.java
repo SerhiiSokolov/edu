@@ -55,7 +55,7 @@ public class AList2 implements EList {
 	@Override
 	public int get(int pos) 
 	{	
-		if(size() == 0||(start+pos)<start||(start+pos)>end)
+		if(size() == 0||pos<0||pos>=size())
 			throw new ListIsEmptyException();
 
 		return arr[start+pos];

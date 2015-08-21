@@ -17,7 +17,7 @@ public class DS_MySQL implements DS {
 			Class.forName(myDriver);
 			Connection conn = DriverManager.getConnection(myUrl, "root", "1234");
 			Statement st = conn.createStatement();
-			String values="'"+p.getId()+"', '"+p.getfName()+"', '"+p.lName+"', '"+p.getAge()+"'";
+			String values=p.getId()+",'"+p.getfName()+"', '"+p.lName+"',"+p.getAge();
 			String query="INSERT INTO PERSON (ID, FirstName,LastName,Age) VALUES("+values+");";
 			st.execute(query);
 			st.close();

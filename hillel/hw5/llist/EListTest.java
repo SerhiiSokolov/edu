@@ -11,23 +11,23 @@ import org.junit.runners.Parameterized;
 
 
 @RunWith(Parameterized.class)
-public class LListTest 
+public class EListTest 
 {
 	EList rr=null;
 	@Parameterized.Parameters
 	public static Collection<Object[]> primeNumbers()
 	{
 		return Arrays.asList(new Object[][]{
-			//{ new AList0() },
-			//{ new AList1() },
-			//{ new AList2() },
-			//{ new AListR() },
-			//{ new LList1() }
-			//{ new LList2() }
+			{ new AList0() },
+			{ new AList1() },
+			{ new AList2() },
+			{ new AListR() },
+			{ new LList1() },
+			{ new LList2() },
 			{ new LListR() }
 		});
 	}
-	public LListTest(EList zz)
+	public EListTest(EList zz)
 	{
 		rr=zz;
 	}
@@ -736,7 +736,7 @@ public class LListTest
 		assertArrayEquals(exp, act);
 	}
 	
-/*	//=====================================
+	//=====================================
 	// reverse
 	//=====================================
 	@Test
@@ -844,4 +844,4 @@ public class LListTest
 		int[] act = rr.toArray();
 		assertArrayEquals(exp, act);
 	}
-*/}
+}

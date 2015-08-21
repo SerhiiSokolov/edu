@@ -1,9 +1,18 @@
 package edu.hillel.hw5.llist;
 
-import edu.hillel.hw5.llist.LList1.Node;
-
 public class LList2 implements EList
 {
+	public class Node2
+	{
+		int data;
+		Node2 next;
+		Node2 prev;
+		Node2(int data)
+		{
+			this.data=data;
+		}
+	}
+	
 	Node2 root=null;
 	@Override
 	public int size()
@@ -49,6 +58,24 @@ public class LList2 implements EList
 			arr[i] = tmp.data;
 			tmp=tmp.next;
 		}
+		return arr;
+	}
+	public int[] revToArray() 
+	{
+		Node2 tmp=root;
+		int[] arr = new int[size()];
+		while(tmp.next!=null)
+		{
+			tmp=tmp.next;
+		}
+		int i=size()-1;
+		do
+		{
+			System.out.println("i="+i);
+			arr[i] = tmp.data;
+			tmp=tmp.prev;
+			i--;
+		}while(tmp!=null);
 		return arr;
 	}
 
@@ -339,13 +366,13 @@ public class LList2 implements EList
 	@Override
 	public void reverse()
 	{
+		if(size()<=1) return;
 		Node2 out=null;
 		Node2 tmp=root;
 		while(root!=null)
 		{
 			tmp=root;
 			root=root.next;
-
 			tmp.next=out;
 			if(out!=null)  out.prev=tmp;
 			out=tmp;
@@ -355,20 +382,34 @@ public class LList2 implements EList
 
 	@Override
 	public void halfReverse()
-	{	
-		//int d = (size()%2==0)?0:1;
-		int count=0;
-		Node2 tmp=root;
-		while(tmp.next!=null) tmp=tmp.next;
-		while(count<size()/2)
+	{		
+		if(size()<=1) return;
+		int d = (size()%2==0)?0:1;
+		Node2 out;
+		Node2 tmp=root;		
+		for(int i=0;i<size()/2-1;i++)
 		{
-			tmp.next=root;
 			tmp=tmp.next;
-			tmp.next=null;
-
-			root=root.next;
-			count++;
 		}
+		out=tmp.next;
+		tmp.next=null;
+		out.prev=null;
+		if(d==1)
+		{
+			tmp=out;
+			out=out.next;
+			tmp.next=root;
+			root.prev=tmp;
+			out.prev=null;
+			root=tmp;
+		}
+		tmp=out;
+		while(tmp.next!=null)
+		{
+			tmp=tmp.next;
+		}
+		tmp.next=root;
+		root.prev=tmp;
+		root=out;
 	}
-
 }

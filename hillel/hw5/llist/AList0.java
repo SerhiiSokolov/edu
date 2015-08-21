@@ -44,7 +44,7 @@ public class AList0 implements EList
 	@Override
 	public int get(int pos) 
 	{
-		if(size() == 0||pos<0||pos>arr.length)
+		if(size() == 0||pos<0||pos>=arr.length)
 			throw new ListIsEmptyException();
 		return arr[pos];
 	}

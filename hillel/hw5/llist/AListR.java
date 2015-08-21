@@ -76,7 +76,7 @@ public class AListR implements EList {
 	@Override
 	public int get(int pos) 
 	{	
-		if(size() == 0||pos>size()||pos<0)
+		if(size() == 0||pos>=size()||pos<0)
 			throw new ListIsEmptyException();
 
 		int realPos;
@@ -95,7 +95,7 @@ public class AListR implements EList {
 	@Override
 	public void set(int pos, int val) 
 	{
-		if(size() == 0||pos>size()||pos<0)
+		if(size() == 0||pos>=size()||pos<0)
 			throw new ListIsEmptyException();
 
 		int realPos;
@@ -181,7 +181,7 @@ public class AListR implements EList {
 		else if(pos==size()-1) delEnd();
 		else
 		{
-			for(int j=pos;j<size();j++)
+			for(int j=pos;j<size()-1;j++)
 			{
 				set(j,get(j+1));
 			}

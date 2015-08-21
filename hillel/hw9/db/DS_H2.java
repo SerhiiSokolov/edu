@@ -15,10 +15,9 @@ public class DS_H2 implements DS
 		try 
 		{
 			Class.forName("org.h2.Driver");
-
 			Connection conn = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
 			Statement st = conn.createStatement();
-			String values="'"+p.getId()+"', '"+p.getfName()+"', '"+p.lName+"', '"+p.getAge()+"'";
+			String values=p.getId()+",'"+p.getfName()+"', '"+p.lName+"',"+p.getAge();
 			String query="INSERT INTO PERSON (ID, FirstName,LastName,Age) VALUES("+values+");";
 			st.execute(query);
 		} 

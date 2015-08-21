@@ -307,6 +307,7 @@ public class LList1 implements EList
 	@Override
 	public void reverse()
 	{
+		if(size()<=1) return;
 		Node out=null;
 		Node q;
 		while (root!=null)
@@ -322,7 +323,7 @@ public class LList1 implements EList
 	@Override
 	public void halfReverse()
 	{		
-		if(size()==0||size()==1) return;
+		if(size()<=1) return;
 		int d = (size()%2==0)?0:1;
 		Node out;
 		Node tmp=root;		

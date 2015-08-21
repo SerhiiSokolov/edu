@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 import org.testng.Assert;
 import org.testng.AssertJUnit;
 
-public class LListTestNG extends Assert
+public class EListTestNG extends Assert
 {
 	EList rr=null;
 
@@ -15,8 +15,10 @@ public class LListTestNG extends Assert
 			{ new AList0() },
 			{ new AList1() },
 			{ new AList2() },
-			{ new LList0() },
-			{ new LList2() }
+			{ new AListR() },
+			{ new LList1() },
+			{ new LList2() },
+			{ new LListR() }
 		};
 	}
 	

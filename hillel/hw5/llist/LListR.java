@@ -2,6 +2,17 @@ package edu.hillel.hw5.llist;
 
 public class LListR implements EList
 {
+	public class Node2
+	{
+		int data;
+		Node2 next;
+		Node2 prev;
+		Node2(int data)
+		{
+			this.data=data;
+		}
+	}
+	
 	Node2 root=null;
 
 	@Override
@@ -238,13 +249,18 @@ public class LListR implements EList
 	{
 		if(size() == 0)
 			throw new ListIsEmptyException();
-		int min = root.data;
-		Node2 tmp=root.next;
-		do 
+		int min=0;
+		if(size()==1) min=root.data;
+		else
 		{
-			if (tmp.data<min) min=tmp.data;
-			tmp=tmp.next;
-		}while(tmp!=root);
+			min= root.data;
+			Node2 tmp=root.next;
+			do 
+			{
+				if (tmp.data<min) min=tmp.data;
+				tmp=tmp.next;
+			}while(tmp!=root);
+		}
 		return min;
 	}
 
@@ -254,13 +270,18 @@ public class LListR implements EList
 		if(size() == 0)
 			throw new ListIsEmptyException();
 
-		int max = root.data;
-		Node2 tmp=root.next;
-		do
+		int max =0;
+		if(size()==1) max=root.data;
+		else
 		{
-			if (tmp.data>max) max=tmp.data;
-			tmp=tmp.next;			
-		}while(tmp!=root);
+			max=root.data;
+			Node2 tmp=root.next;
+			do
+			{
+				if (tmp.data>max) max=tmp.data;
+				tmp=tmp.next;			
+			}while(tmp!=root);
+		}
 		return max;
 	}
 
@@ -271,20 +292,23 @@ public class LListR implements EList
 			throw new ListIsEmptyException();
 
 		int minInd=0;
-		int index=1;
-		int min=root.data;
-		Node2 tmp=root.next;
-
-		do
+		if(size()==1) minInd=0;
+		else
 		{
-			if(tmp.data<min)
+			int index=1;
+			int min=root.data;
+			Node2 tmp=root.next;
+			do
 			{
-				min=tmp.data;
-				minInd=index;
-			}
-			index++;
-			tmp=tmp.next;
-		}while (tmp!=root);
+				if(tmp.data<min)
+				{
+					min=tmp.data;
+					minInd=index;
+				}
+				index++;
+				tmp=tmp.next;
+			}while (tmp!=root);
+		}
 		return minInd;
 	}
 
@@ -293,64 +317,64 @@ public class LListR implements EList
 	{
 		if(size() == 0)
 			throw new ListIsEmptyException();
-
 		int maxInd=0;
-		int index=1;
-		int max=root.data;
-		Node2 tmp=root.next;
-
-		do
+		if(size()==1) maxInd=0;
+		else
 		{
-			if(tmp.data>max)
+			int index=1;
+			int max=root.data;
+			Node2 tmp=root.next;
+
+			do
 			{
-				max=tmp.data;
-				maxInd=index;
-			}
-			index++;
-			tmp=tmp.next;
-		}while (tmp!=root);
+				if(tmp.data>max)
+				{
+					max=tmp.data;
+					maxInd=index;
+				}
+				index++;
+				tmp=tmp.next;
+			}while (tmp!=root);
+		}
 		return maxInd;
 	}
 
 	@Override
 	public void sort()
 	{
-		if(size()==0||size()==1) return;
+		if(size()<=1) return;
 
-		Node2 last=root.next;
-		Node2 out=root;
+		Node2 out=null;
 		Node2 tmp;
-		Node2 tmpOut;
-		do
+		while(root!=null)
 		{
-			tmp=last;
-			last=last.next;
-			tmpOut=out;
-			int count=0;
-			do
+			Node2 max = root;
+			tmp=root.next;
+			while(tmp!=root)
 			{
-				System.out.println("tmp.data="+tmp.data+", tmpOut.data="+tmpOut.data+"count="+count);
-				if(tmp.data<tmpOut.data||count==10) break;
-				tmpOut=tmpOut.next;
-				count++;
-			}while (tmpOut!=out);
-			
-			if(tmpOut==out)
-			{
-				tmp.prev=tmpOut.prev;
-				tmp.next=tmpOut;
-				tmpOut.prev.next=tmp;
-				tmpOut.prev=tmp;
-				out=tmp;
+				if(max.data<tmp.data)
+				{
+					max=tmp;
+				}
+				tmp=tmp.next;
 			}
+			root=max;
+			delStart();
+			if (out==null)
+			{
+				out=max;
+				max.next=max;
+				max.prev=max;
+			}	
 			else
 			{
-				tmp.next=tmpOut;
-				tmp.prev=tmpOut.prev;
-				tmpOut.prev.next=tmp;
-				tmpOut.prev=tmp;
-			}	
-		}while(last!=root);
+				max.next=out;
+				max.prev=out.prev;
+				out.prev.next=max;
+				out.prev=max;
+				out=max;
+			}			
+		}
 		root=out;
 	}
 
@@ -358,50 +382,22 @@ public class LListR implements EList
 	@Override
 	public void reverse()
 	{
-		if(count<=1);
-		else
+		if(size()<=1) return;
+		root=root.prev;
+		Node2 tmp=root;
+		Node2 temp;
+		do
 		{
-			Node2 nodeA=root.getNext();
-			Node2 nodeB=root.getNext().getPrev();
-			int tmp=0;
-			for(int i=0;i<count/2;i++)
-			{
-				tmp=nodeA.getData();
-				nodeA.setData(nodeB.getData());
-				nodeB.setData(tmp);
-
-				nodeA=nodeA.getNext();
-				nodeB=nodeB.getPrev();	
-			}
-		}
+			temp=tmp;
+			tmp.next=tmp.prev;
+			tmp.prev=temp;
+			tmp=tmp.next;
+		}while(tmp!=root);	
 	}
 
 	@Override
 	public void halfReverse()
 	{	
-		if(count<=1);
-		else
-		{
-			int d = (size()%2==0)?0:1;
-			Node2 nodeA=new Node2();
-			Node2 nodeB=new Node2();
 
-			nodeA.setNext(root.getNext());
-			int temp=0;
-			for(int i=0;i<size()/2;i++)
-			{
-				nodeA=nodeA.getNext();	
-				nodeB=root.getNext();
-				size();
-				for(int j=0; j<size()/2+d+i;j++)
-				{
-					nodeB=nodeB.getNext();
-				}
-				temp=nodeA.getData();
-				nodeA.setData(nodeB.getData());
-				nodeB.setData(temp);	
-			}
-		}
 	}
-
 }

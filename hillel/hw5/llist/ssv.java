@@ -3,26 +3,14 @@ package edu.hillel.hw5.llist;
 public class ssv {
 
 	public static void main(String[] args) {
-		AListR rr=new AListR();
-		int[] ini = {10};
+		EList rr=new LListR();
+		int[] ini = {10,20,33,77,11,24,19};
 		rr.init(ini);
+		rr.halfReverse();
 		printarr(rr);
-		System.out.println();
-		for(int i=0;i<10;i++){
-			rr.addEnd(i+2);
-			rr.printArray();
-		}
-		rr.addPos(1,99);
-		//System.out.println(rr.minInd());
-		rr.printArray();
-		rr.addPos(1,99);
-		//System.out.println(rr.minInd());
-		rr.printArray();
-		printarr(rr);
-
 	}
 	
-	public static void printarr(AListR ar){
+	public static void printarr(EList ar){
 		int[] rr=ar.toArray();
 		for(int i=0;i<rr.length;i++){
 			System.out.print(rr[i]+", ");
