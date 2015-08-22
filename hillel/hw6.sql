@@ -8,7 +8,7 @@ select avg(Age) from Person
 select distinct FirstName from Person order by 1
 
 4. Вывести список фамилий, с указанием количества повторений этих фамилий в общем списке
-select FirstName, count(1) from Person  group by FirstName
+select LastName, count(1) from Person  group by FirstName
 
 5. Вывести фамилии, которые содержат в середине букву <б>
 select LastName from Person where LastName like "%_б_%"
