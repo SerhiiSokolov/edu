@@ -5,10 +5,10 @@ select count(*) from Person
 select avg(Age) from Person 
 
 3. Вывести отсортированный по алфавиту список фамилий без повторений
-select distinct FirstName from Person order by 1
+select distinct LastName from Person order by 1
 
 4. Вывести список фамилий, с указанием количества повторений этих фамилий в общем списке
-select LastName, count(1) from Person  group by FirstName
+select LastName, count(id) as PCount from Person  group by LastName
 
 5. Вывести фамилии, которые содержат в середине букву <б>
 select LastName from Person where LastName like "%_б_%"
@@ -17,7 +17,7 @@ select LastName from Person where LastName like "%_б_%"
 select FirstName from Person where Id_Street is null
 
 7. Вывести список несовершеннолетних, проживающих на проспекте Правды
-select FirstName, LastName from Person p, Street s  where  p.Id_Street = s.Id  and s.Name="проспект Правды" and p.Age < 18 
+select p.FirstName, p.LastName from Person p, Street s  where  p.Id_Street = s.Id  and s.Name="проспект Правды" and p.Age < 18 
 
 8. Вывести упорядоченный по алфавиту список всех улиц с указанием, сколько жильцов живёт на улице
 select s.Name, count(p.Id_Street)  from Person p, Street s where s.Id *= p.Id_Street  Group by s.Name order by 1
