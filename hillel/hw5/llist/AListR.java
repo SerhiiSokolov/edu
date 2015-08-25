@@ -1,5 +1,7 @@
 package edu.hillel.hw5.llist;
 
+import java.util.Iterator;
+
 public class AListR implements EList {
 
 
@@ -307,5 +309,31 @@ public class AListR implements EList {
 			end=j;
 			arr=tmp;
 		}
+	}
+
+	@Override
+	public Iterator<Integer> iterator() {
+		return new AIter(toArray());
+	}
+	class AIter implements Iterator<Integer>
+	{
+		int index=0;
+		int[] rr;
+		AIter(int[] rr)
+		{
+			this.rr=rr;
+		}
+		@Override
+		public boolean hasNext() 
+		{
+			return index<rr.length;
+		}
+
+		@Override
+		public Integer next() 
+		{
+			return rr[index++];
+		}
+
 	}
 }

@@ -1,6 +1,6 @@
 package edu.hillel.hw5.llist;
 
-public interface EList 
+public interface EList extends Iterable<Integer>
 {
 	int size();
 	void init(int[] ini);
@@ -25,5 +25,7 @@ public interface EList
 	void sort();
 	void reverse();
 	void halfReverse();
+	
+	
 }
 

@@ -1,6 +1,8 @@
 package edu.hillel.hw5.llist;
 
-public class LListR implements EList
+import java.util.Iterator;
+
+public class LListR implements EList, Iterable<Integer>
 {
 	public class Node2
 	{
@@ -399,5 +401,32 @@ public class LListR implements EList
 	public void halfReverse()
 	{	
 		
+	}
+	@Override
+	public Iterator<Integer> iterator() 
+	{
+		return new LIter(toArray());
+	}
+	
+	class LIter implements Iterator<Integer>
+	{
+		int index=0;
+		int[] array;
+		
+		public LIter(int[] array) 
+		{
+			this.array=array;
+		}
+
+		@Override
+		public boolean hasNext()
+		{
+			return index<array.length;
+		}
+
+		@Override
+		public Integer next() {
+			return array[index++];
+		}		
 	}
 }

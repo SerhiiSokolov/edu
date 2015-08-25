@@ -1,15 +1,17 @@
 package edu.hillel.hw5.llist;
- 	
+
+import java.util.Iterator;
+
 public class AList0 implements EList
 {
 	private int[] arr = {};
-	
+
 	@Override
 	public int size()
 	{
 		return arr.length;
 	}
-	
+
 	@Override
 	public void init(int[] ini)
 	{
@@ -29,7 +31,7 @@ public class AList0 implements EList
 	{
 		init(null);
 	}
-	
+
 	@Override
 	public int[] toArray() 
 	{
@@ -68,7 +70,7 @@ public class AList0 implements EList
 		}
 		arr = tmp;
 	}
-	
+
 	@Override
 	public void addEnd(int val)
 	{
@@ -80,7 +82,7 @@ public class AList0 implements EList
 		tmp[arr.length] = val;
 		arr = tmp;
 	}
-	
+
 	@Override
 	public void addPos(int pos, int val)
 	{
@@ -96,7 +98,7 @@ public class AList0 implements EList
 		tmp[pos] = val;
 		arr = tmp;
 	}
-	
+
 	@Override
 	public int delStart()
 	{		
@@ -112,13 +114,13 @@ public class AList0 implements EList
 		arr = tmp;
 		return ret;
 	}
-	
+
 	@Override
 	public int delEnd()
 	{
 		if(size() == 0)
 			throw new ListIsEmptyException();
-		
+
 		int ret = arr[arr.length-1];
 		int[] tmp = new int[arr.length-1];
 		for (int i = 0; i < arr.length-1; i++) 
@@ -128,7 +130,7 @@ public class AList0 implements EList
 		arr = tmp;
 		return ret;
 	}
-	
+
 	@Override
 	public int delPos(int pos)
 	{
@@ -136,7 +138,7 @@ public class AList0 implements EList
 			throw new ListIsEmptyException();
 		int ret = arr[pos];
 		int[] tmp = new int[arr.length-1];
-		
+
 		for (int i = 0; i < pos; i++) 
 		{
 			tmp[i] = arr[i];
@@ -148,7 +150,7 @@ public class AList0 implements EList
 		arr = tmp;
 		return ret;
 	}
-	
+
 	@Override
 	public int min()
 	{
@@ -164,7 +166,7 @@ public class AList0 implements EList
 		}
 		return min;
 	}
-	
+
 	@Override
 	public int max()
 	{
@@ -180,7 +182,7 @@ public class AList0 implements EList
 		}
 		return max;
 	}
-	
+
 	@Override
 	public int minInd()
 	{
@@ -196,7 +198,7 @@ public class AList0 implements EList
 		}
 		return min;
 	}
-	
+
 	@Override
 	public int maxInd()
 	{
@@ -212,24 +214,24 @@ public class AList0 implements EList
 		}
 		return max;
 	}
-	
+
 	@Override
 	public void sort()
 	{
-	    for(int i = arr.length-1 ; i > 0 ; i--)
-	    {
-	        for(int j = 0 ; j < i ; j++)
-	        {
-	            if( arr[j] > arr[j+1] )
-	            {
-	                int tmp = arr[j];
-	                arr[j] = arr[j+1];
-	                arr[j+1] = tmp;
-	            }
-	        }
-	    }
+		for(int i = arr.length-1 ; i > 0 ; i--)
+		{
+			for(int j = 0 ; j < i ; j++)
+			{
+				if( arr[j] > arr[j+1] )
+				{
+					int tmp = arr[j];
+					arr[j] = arr[j+1];
+					arr[j+1] = tmp;
+				}
+			}
+		}
 	}
-	
+
 	@Override
 	public void reverse()
 	{
@@ -240,7 +242,7 @@ public class AList0 implements EList
 			arr[arr.length-1-i] = tmp;
 		}
 	}
-	
+
 	@Override
 	public void halfReverse()
 	{	
@@ -252,4 +254,26 @@ public class AList0 implements EList
 			arr[(arr.length)/2+d+i] = tmp;
 		}
 	}
+
+	@Override
+	public Iterator<Integer> iterator() {
+		return new AIter();
+	}
+
+	public class AIter implements Iterator<Integer> {
+
+		int index=0;
+		@Override
+		public boolean hasNext() 
+		{
+			return index<arr.length;
+		}
+
+		@Override
+		public Integer next() {
+			return arr[index++];
+		}
+
+	}
+
 }

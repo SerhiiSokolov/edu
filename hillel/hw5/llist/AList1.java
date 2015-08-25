@@ -1,5 +1,7 @@
 package edu.hillel.hw5.llist;
 
+import java.util.Iterator;
+
 public class AList1 implements EList {
 
 	private int[] arr = new int[10];
@@ -260,5 +262,25 @@ public class AList1 implements EList {
 			tmp[i]=arr[i];
 		}
 		arr=tmp;
+	}
+
+	@Override
+	public Iterator<Integer> iterator() {
+		return new AIter();
+	}
+	
+	class AIter implements Iterator<Integer>
+	{
+		int iter=0;
+		@Override
+		public boolean hasNext() {
+			return iter<arr.length;
+		}
+
+		@Override
+		public Integer next() {
+			return arr[iter++];
+		}
+		
 	}
 }

@@ -1,5 +1,7 @@
 package edu.hillel.hw5.llist;
 
+import java.util.Iterator;
+
 public class LList1 implements EList
 {
 	public class Node 
@@ -347,5 +349,33 @@ public class LList1 implements EList
 		}
 		tmp.next=root;
 		root=out;
+	}
+
+	@Override
+	public Iterator<Integer> iterator() 
+	{
+		return new LIter(toArray());
+	}
+	
+	class LIter implements Iterator<Integer>
+	{
+		int index=0;
+		int[] array;
+		
+		public LIter(int[] array) 
+		{
+			this.array=array;
+		}
+
+		@Override
+		public boolean hasNext()
+		{
+			return index<array.length;
+		}
+
+		@Override
+		public Integer next() {
+			return array[index++];
+		}		
 	}
 }
