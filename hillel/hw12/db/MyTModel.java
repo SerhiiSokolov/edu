@@ -28,7 +28,8 @@ public class MyTModel extends AbstractTableModel
 	}
 
 	@Override
-	public Object getValueAt(int arg0, int arg1) {
+	public Object getValueAt(int arg0, int arg1) 
+	{
 		return null;
 	}
 

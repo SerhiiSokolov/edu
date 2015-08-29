@@ -17,8 +17,8 @@ public class DS_MySQL implements DS {
 			Class.forName(myDriver);
 			Connection conn = DriverManager.getConnection(myUrl, "root", "1234");
 			Statement st = conn.createStatement();
-			String values="'"+p.getId()+"', '"+p.getfName()+"', '"+p.lName+"', '"+p.getAge()+"'";
-			String query="INSERT INTO PERSON (ID, FirstName,LastName,Age) VALUES("+values+");";
+			String values="'"+p.getfName()+"', '"+p.getlName()+"', '"+p.getAge()+"'";
+			String query="INSERT INTO PERSON (FirstName,LastName,Age) VALUES("+values+");";
 			st.execute(query);
 			st.close();
 			conn.close();
@@ -66,7 +66,11 @@ public class DS_MySQL implements DS {
 			Class.forName(myDriver);
 			Connection conn = DriverManager.getConnection(myUrl, "root", "1234");
 			Statement st = conn.createStatement();
-			String query="UPDATE PERSON SET Age="+p.getAge()+" WHERE Id="+p.getId()+";";
+			String query="UPDATE PERSON SET "+
+					"FirstName='"+p.getfName()+
+					"', LastName='"+p.getlName()+
+					"', Age="+p.getAge()+
+					" WHERE Id="+p.getId()+";";
 			st.executeUpdate(query);
 			st.close();
 			conn.close();

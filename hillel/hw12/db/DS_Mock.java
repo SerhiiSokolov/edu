@@ -25,7 +25,6 @@ public class DS_Mock implements DS
 	public ArrayList<Person> read() 
 	{
 		return pp;
-		//return (ArrayList<Person>) mm.values();
 	}
 
 	@Override

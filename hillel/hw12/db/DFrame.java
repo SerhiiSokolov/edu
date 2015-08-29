@@ -8,10 +8,8 @@ public class DFrame extends JFrame
 	{
 		setTitle("Db Job");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setBounds(100, 100, 500, 500);
-		
+		setBounds(100, 100, 600, 500);		
 		add(new DPanel());
-		
 		setVisible(true);
 	}
 }
