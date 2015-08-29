@@ -2,6 +2,9 @@ package edu.hillel.hw5.llist;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import static org.junit.Assert.assertArrayEquals;
+
 import org.testng.Assert;
 import org.testng.AssertJUnit;
 
@@ -21,7 +24,7 @@ public class EListTestNG extends Assert
 			{ new LListR() }
 		};
 	}
-	
+
 	//=====================================
 	// size, init, toArray
 	//=====================================
@@ -827,5 +830,69 @@ public class EListTestNG extends Assert
 		int[] exp = {11,24,19,77,10,20,33};
 		int[] act = rr.toArray();
 		AssertJUnit.assertArrayEquals(exp, act);
+	}
+
+	//=====================================
+	// Test Iterator
+	//=====================================
+	@Test(dataProvider = "parameterTestNG")
+	public void testIterator0(EList rr) 
+	{
+
+		int[] ini = {};
+		rr.init(ini);
+		int[] act=new int[rr.size()];
+		int i=0;
+		for(Integer temp:rr)
+		{
+			act[i++]=temp;
+		}
+		int[] exp = {};
+		assertArrayEquals(exp, act);
+	}
+	@Test(dataProvider = "parameterTestNG")
+	public void testIterator1(EList rr) 
+	{
+
+		int[] ini = {10};
+		rr.init(ini);
+		int[] act=new int[rr.size()];
+		int i=0;
+		for(Integer temp:rr)
+		{
+			act[i++]=temp;
+		}
+		int[] exp = {10};
+		assertArrayEquals(exp, act);
+	}
+	@Test(dataProvider = "parameterTestNG")
+	public void testIterator2(EList rr) 
+	{
+
+		int[] ini = {10,20};
+		rr.init(ini);
+		int[] act=new int[rr.size()];
+		int i=0;
+		for(Integer temp:rr)
+		{
+			act[i++]=temp;
+		}
+		int[] exp = {10,20};
+		assertArrayEquals(exp, act);
+	}
+	@Test(dataProvider = "parameterTestNG")
+	public void testIteratorMany(EList rr) 
+	{
+
+		int[] ini = {10,20,33,77,11,24,19};
+		rr.init(ini);
+		int[] act=new int[rr.size()];
+		int i=0;
+		for(Integer temp:rr)
+		{
+			act[i++]=temp;
+		}
+		int[] exp = {10,20,33,77,11,24,19};
+		assertArrayEquals(exp, act);
 	}
 }

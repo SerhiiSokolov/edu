@@ -31,7 +31,7 @@ public class EListTest
 	{
 		rr=zz;
 	}
-	
+
 	@Before
 	public void setUp()
 	{
@@ -107,11 +107,11 @@ public class EListTest
 		rr.clear();
 		assertEquals(0, rr.size());
 	}
-	
+
 	//=====================================
 	// Get
 	//=====================================
-		
+
 	@Test (expected = ListIsEmptyException.class)
 	public void testGet() 
 	{
@@ -119,7 +119,7 @@ public class EListTest
 		rr.init(ini);
 		rr.get(0);
 	}
-	
+
 	@Test (expected = ListIsEmptyException.class)
 	public void testGet_OutRange1() 
 	{
@@ -127,7 +127,7 @@ public class EListTest
 		rr.init(ini);
 		rr.get(7);
 	}
-	
+
 	@Test (expected = ListIsEmptyException.class)
 	public void testGet_OutRange2() 
 	{
@@ -135,7 +135,7 @@ public class EListTest
 		rr.init(ini);
 		rr.get(-1);
 	}
-	
+
 	@Test
 	public void testGet_1() 
 	{
@@ -160,7 +160,7 @@ public class EListTest
 		rr.init(ini);
 		assertEquals(77, rr.get(3));
 	}
-	
+
 	//=====================================
 	// Set
 	//=====================================
@@ -339,7 +339,7 @@ public class EListTest
 		int[] act = rr.toArray();
 		assertArrayEquals(exp, act);
 	}
-		
+
 	//=====================================
 	// addPos
 	//=====================================
@@ -735,7 +735,7 @@ public class EListTest
 		int[] act = rr.toArray();
 		assertArrayEquals(exp, act);
 	}
-	
+
 	//=====================================
 	// reverse
 	//=====================================
@@ -842,6 +842,70 @@ public class EListTest
 		rr.halfReverse();
 		int[] exp = {11,24,19,77,10,20,33};
 		int[] act = rr.toArray();
+		assertArrayEquals(exp, act);
+	}
+
+	//=====================================
+	// Test Iterator
+	//=====================================
+	@Test
+	public void testIterator0() 
+	{
+
+		int[] ini = {};
+		rr.init(ini);
+		int[] act=new int[rr.size()];
+		int i=0;
+		for(Integer temp:rr)
+		{
+			act[i++]=temp;
+		}
+		int[] exp = {};
+		assertArrayEquals(exp, act);
+	}
+	@Test
+	public void testIterator1() 
+	{
+
+		int[] ini = {10};
+		rr.init(ini);
+		int[] act=new int[rr.size()];
+		int i=0;
+		for(Integer temp:rr)
+		{
+			act[i++]=temp;
+		}
+		int[] exp = {10};
+		assertArrayEquals(exp, act);
+	}
+	@Test
+	public void testIterator2() 
+	{
+
+		int[] ini = {10,20};
+		rr.init(ini);
+		int[] act=new int[rr.size()];
+		int i=0;
+		for(Integer temp:rr)
+		{
+			act[i++]=temp;
+		}
+		int[] exp = {10,20};
+		assertArrayEquals(exp, act);
+	}
+	@Test
+	public void testIteratorMany() 
+	{
+
+		int[] ini = {10,20,33,77,11,24,19};
+		rr.init(ini);
+		int[] act=new int[rr.size()];
+		int i=0;
+		for(Integer temp:rr)
+		{
+			act[i++]=temp;
+		}
+		int[] exp = {10,20,33,77,11,24,19};
 		assertArrayEquals(exp, act);
 	}
 }

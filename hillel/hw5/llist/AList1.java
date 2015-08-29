@@ -274,7 +274,7 @@ public class AList1 implements EList {
 		int iter=0;
 		@Override
 		public boolean hasNext() {
-			return iter<arr.length;
+			return iter<index;
 		}
 
 		@Override

@@ -31,7 +31,7 @@ public class DPanel extends JPanel
 				"PostgreSQL"
 		};
 
-		JComboBox boxSelectDB=new JComboBox(selectDB);
+		JComboBox<String> boxSelectDB=new JComboBox<String>(selectDB);
 		boxSelectDB.setBounds(410, 10, 120, 20);
 		boxSelectDB.setEditable(false);
 		add(boxSelectDB);
@@ -42,7 +42,8 @@ public class DPanel extends JPanel
 			{
 				String db=(String)boxSelectDB.getSelectedItem();
 				mdl.setDS(db);
-				tbl.revalidate();
+				
+				tbl.revalidate();tbl.invalidate();
 			}
 		});
 		
