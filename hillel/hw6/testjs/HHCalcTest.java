@@ -1,21 +1,44 @@
 package edu.hillel.hw6.testjs;
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+import java.util.Collection;
+
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class HHCalcTes 
+@RunWith(Parameterized.class)
+public class HHCalcTest
 {
+	WebDriver driver=null;
+	
+	@Parameterized.Parameters
+	public static Collection<Object[]> drivers()
+	{
+		return Arrays.asList(new Object[][]{
+			//{ new FirefoxDriver(),"webdriver.chrome.driver", "d:/chromedriver.exe" }
+			{ new ChromeDriver(),"webdriver.chrome.driver", "d:/chromedriver.exe"  }
+		});
+	}
+
+	public HHCalcTest(WebDriver driver, String property, String exe) {
+		System.setProperty("webdriver.chrome.driver", "d:/chromedriver.exe");this.driver=driver;
+		
+		//System.out.println("System.setProperty(\""+property+"\", \""+exe+"\"");
+		//System.setProperty(property,exe);
+	}
+	
 	@Test
 	public void existTestMozilla()
 	{
-		WebDriver driver = new FirefoxDriver();
+		//WebDriver driver = new FirefoxDriver();
 		Boolean result=true;
 		try {
 			driver.get("file:///d:/Java/ex_calk.html");	
@@ -34,6 +57,7 @@ public class HHCalcTes
 			driver.findElement(By.id("btnumnog"));
 			driver.findElement(By.id("btncount"));
 			driver.findElement(By.id("btndevide"));
+			driver.findElement(By.id("action"));
 		} catch (NoSuchElementException e) {
 			System.out.println(e);
 			result=false;
@@ -41,7 +65,7 @@ public class HHCalcTes
 		driver.quit();
 		assertEquals(true, result);
 	}
-	
+
 	@Test
 	public void simpleCheckTestMozilla() 
 	{
@@ -53,80 +77,80 @@ public class HHCalcTes
 			res = driver.findElement(By.id("txt1")).getAttribute("value");
 			assertEquals("1", res);
 			driver.findElement(By.id("txt1")).clear();
-			
+
 			driver.findElement(By.id("btn2")).click();
 			res = driver.findElement(By.id("txt1")).getAttribute("value");
 			assertEquals("2", res);
 			driver.findElement(By.id("txt1")).clear();
-			
+
 			driver.findElement(By.id("btn3")).click();
 			res = driver.findElement(By.id("txt1")).getAttribute("value");
 			assertEquals("3", res);
 			driver.findElement(By.id("txt1")).clear();
-			
+
 			driver.findElement(By.id("btn4")).click();
 			res = driver.findElement(By.id("txt1")).getAttribute("value");
 			assertEquals("4", res);
 			driver.findElement(By.id("txt1")).clear();
-			
+
 			driver.findElement(By.id("btn5")).click();
 			res = driver.findElement(By.id("txt1")).getAttribute("value");
 			assertEquals("5", res);
 			driver.findElement(By.id("txt1")).clear();
-			
+
 			driver.findElement(By.id("btn6")).click();
 			res = driver.findElement(By.id("txt1")).getAttribute("value");
 			assertEquals("6", res);
 			driver.findElement(By.id("txt1")).clear();
-			
+
 			driver.findElement(By.id("btn7")).click();
 			res = driver.findElement(By.id("txt1")).getAttribute("value");
 			assertEquals("7", res);
 			driver.findElement(By.id("txt1")).clear();
-			
+
 			driver.findElement(By.id("btn8")).click();
 			res = driver.findElement(By.id("txt1")).getAttribute("value");
 			assertEquals("8", res);
 			driver.findElement(By.id("txt1")).clear();
-			
+
 			driver.findElement(By.id("btn9")).click();
 			res = driver.findElement(By.id("txt1")).getAttribute("value");
 			assertEquals("9", res);
 			driver.findElement(By.id("txt1")).clear();
-			
+
 			driver.findElement(By.id("btn0")).click();
 			res = driver.findElement(By.id("txt1")).getAttribute("value");
 			assertEquals("0", res);
 			driver.findElement(By.id("txt1")).clear();
-			
+
 			driver.findElement(By.id("btnplus")).click();
 			res = driver.findElement(By.id("action")).getAttribute("value");
 			assertEquals("+", res);
 			driver.findElement(By.id("txt1")).clear();
-			
+
 			driver.findElement(By.id("btnminus")).click();
 			res = driver.findElement(By.id("action")).getAttribute("value");
 			assertEquals("-", res);
-			
+
 			driver.findElement(By.id("btnumnog")).click();
 			res = driver.findElement(By.id("action")).getAttribute("value");
 			assertEquals("*", res);
-			
+
 			driver.findElement(By.id("btncount")).click();
 			res = driver.findElement(By.id("action")).getAttribute("value");
 			assertEquals("=", res);
-			
+
 			driver.findElement(By.id("btndevide")).click();
 			res = driver.findElement(By.id("action")).getAttribute("value");
 			assertEquals("/", res);
-			
+
 		} catch (NoSuchElementException e) {
 			System.out.println(e);
 			driver.quit();
 		}
 		driver.quit();
 	}	
-	
+
 	@Test
 	public void testPlusMozilla() 
 	{
@@ -142,7 +166,7 @@ public class HHCalcTes
 		assertEquals("108", res);
 		driver.quit();
 	}
-	
+
 	@Test
 	public void testMinusMozilla() 
 	{
@@ -158,7 +182,7 @@ public class HHCalcTes
 		assertEquals("-84", res);
 		driver.quit();
 	}
-	
+
 	@Test
 	public void testUmnogMozilla() 
 	{
@@ -173,7 +197,7 @@ public class HHCalcTes
 		assertEquals("60", res);
 		driver.quit();
 	}
-	
+
 	@Test
 	public void testDevideMozilla() 
 	{

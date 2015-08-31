@@ -19,7 +19,7 @@
 	<input type="button" value=" 0 " id="btn0" onclick="fNum(this)">
 	<input type="button" value=" = " id="btncount" onclick="fOp(this)">
 	<input type="button" value=" / " id="btndevide" onclick="fOp(this)"><p>
-	
+	<input type="hidden" value="" id="action"><p>
 	</body>
 	
 	<script >
@@ -33,6 +33,7 @@
 		
 		function fOp(p)
 		{
+			action.value=p.value.trim();
 			if(p.value.trim() == "=")
 			{
 				var bNum = parseInt(txt1.value);
