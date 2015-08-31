@@ -3,10 +3,18 @@ package edu.hillel.hw13.painter;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.TreeSet;
 
+import javax.imageio.ImageIO;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class ToolPanel extends JPanel {
@@ -17,7 +25,7 @@ public class ToolPanel extends JPanel {
 	public ToolPanel() {
 		setPreferredSize(new Dimension(100,100));
 		setLayout(new FlowLayout());
-		
+
 		String[] selectWidth={
 				"1px",
 				"2px",
@@ -51,7 +59,7 @@ public class ToolPanel extends JPanel {
 			}
 		});
 		add(boxSelectWidth);
-		
+
 		String[] selectColor={
 				"BLACK",
 				"BLUE",
@@ -60,7 +68,7 @@ public class ToolPanel extends JPanel {
 				"RED",
 				"DARK_GRAY",
 				"GRAY"
-				};
+		};
 
 		JComboBox boxSelectColor=new JComboBox(selectColor);
 		boxSelectColor.addActionListener(new ActionListener() 
@@ -97,6 +105,39 @@ public class ToolPanel extends JPanel {
 				}
 			}
 		});
-		add(boxSelectColor);		
+		add(boxSelectColor);
+
+		JComboBox formats = new JComboBox(getFormats());
+		formats.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JComboBox cb = (JComboBox)e.getSource();
+				String format = (String)cb.getSelectedItem();
+				File saveFile = new File("savedimage."+format);
+				JFileChooser chooser = new JFileChooser();
+				chooser.setSelectedFile(saveFile);
+				int rval = chooser.showSaveDialog(cb);
+//				if (rval == JFileChooser.APPROVE_OPTION) {
+//					saveFile = chooser.getSelectedFile();
+//					try {
+//						ImageIO.write(PPanel.getbImg(), format, saveFile);
+//					} catch (IOException ex) {
+//					}
+//				}
+			}
+		});
+
+		add(new JLabel("Save As"));
+		add(formats);
+
+	}
+	public String[] getFormats() {
+		String[] formats = ImageIO.getWriterFormatNames();
+		TreeSet<String> formatSet = new TreeSet<String>();
+		for (String s : formats) {
+			formatSet.add(s.toLowerCase());
+		}
+		return formatSet.toArray(new String[0]);
 	}
 }

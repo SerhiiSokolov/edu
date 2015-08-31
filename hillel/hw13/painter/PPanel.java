@@ -7,7 +7,6 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-
 import javax.swing.JPanel;
 
 public class PPanel extends JPanel implements MouseListener, MouseMotionListener {
@@ -17,8 +16,7 @@ public class PPanel extends JPanel implements MouseListener, MouseMotionListener
 	int y=0;
 	private static int lineWidth=1;
 	private static Color c=Color.BLACK;
-	
-	
+
 	public PPanel() {
 		setPreferredSize(new Dimension(400, 500));
 		setBackground(Color.WHITE);
@@ -28,7 +26,7 @@ public class PPanel extends JPanel implements MouseListener, MouseMotionListener
 
 	@Override
 	public void mouseDragged(MouseEvent e) 
-	{
+	{		
 		Graphics2D gg = (Graphics2D) this.getGraphics();
 		gg.setColor(c);
 		gg.setStroke(new BasicStroke(lineWidth));
@@ -37,7 +35,7 @@ public class PPanel extends JPanel implements MouseListener, MouseMotionListener
 		y = e.getY();
 	}
 
-	
+
 	@Override
 	public void mousePressed(MouseEvent e) 
 	{
@@ -50,7 +48,7 @@ public class PPanel extends JPanel implements MouseListener, MouseMotionListener
 	{
 		flag = false;
 	}
-	
+
 	public static void setWidth(int width)
 	{
 		PPanel.lineWidth=width;
@@ -58,7 +56,7 @@ public class PPanel extends JPanel implements MouseListener, MouseMotionListener
 	public static void setColor(Color c) {
 		PPanel.c = c;
 	}
-	
+
 	@Override
 	public void mouseMoved(MouseEvent arg0) {}
 	@Override
